@@ -53,9 +53,9 @@ export default function Home() {
   return (
     <section id="home" className="hero-section" >
       
-      <h1>Clareny</h1>
+      <h1>¿Por donde empezamos?</h1>
       <p className="intro">
-        Soy productor, editor y diseñador de sonido enfocado en crear canciones que suenen claras, profesionales y con identidad.
+        Marca tu identidad no trates de imitar algo.
       </p>
 
       <div className="hero-actions">
