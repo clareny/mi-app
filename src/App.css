@@ -399,6 +399,67 @@
   color: #c9c9c9;
 }
 
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .page-content {
+    padding: 1rem;
+    max-width: 720px;
+  }
+
+  .navbar {
+    padding: 0.6rem 1rem;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    gap: 0.5rem;
+  }
+
+  .hero-section h1,
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .portfolio-tiles,
+  .portfolio-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-content {
+    padding: 0.8rem;
+    max-width: 100%;
+  }
+
+  .hero-section h1,
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .portfolio-tiles,
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio-tiles .portfolio-tile,
+  .portfolio-card,
+  .service-card {
+    padding: 0.8rem;
+  }
+
+  .spotify-card--compact iframe {
+    min-height: 120px;
+  }
+}
+
 .notice-box {
   margin-top: 1rem;
   padding: 1rem 1.2rem;

@@ -8,8 +8,7 @@ export default function About() {
           de lo esperado asi que con estos 6 años en este rubro. A menudo Trabajo con artistas nacionales e internacionales 
           tambien colabore con productores de alto nivel, y Mi foco principal está en traducir ideas en sonidos que conecten.
           
-          Ya que sabes un poco de mi tambien me gustaria conocer un poco de ti y tu proyecto, y seamos socios en esto
-          porque acuerdate que si lo somos te abrira oportunidades de eclusividad como descuento o regalos por ser clientes
+          Ya que sabes un poco de mi tambien me gustaria conocer un poco de ti y tu proyecto, seamos socios en esto, te abrire a puertas de oportunidades de exclusividad como descuento o regalos por ser clientes e inclusive feeedbacks.
           exclusivos.
         </p>
 
