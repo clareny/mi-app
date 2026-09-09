@@ -1,3 +1,5 @@
+import React from 'react';
+
 const spotifyEmbeds = [
   {
     title: 'Album principal',
@@ -49,6 +51,8 @@ function SpotifyEmbed({ title, src, height, compact }) {
   );
 }
 
+const BookingLazy = React.lazy(() => import('./Booking'));
+
 export default function Home() {
   return (
     <section id="home" className="hero-section" >
@@ -67,7 +71,6 @@ export default function Home() {
         <div className="portfolio-header">
           <div>
             <h3>Mi portfolio</h3>
-            <p>Escuchá referencias reales de mi trabajo, mis beats y mis canciones.</p>
           </div>
           <a className="portfolio-link" href="#contact">Contactar</a>
         </div>
@@ -99,6 +102,12 @@ export default function Home() {
             <SpotifyEmbed key={item.src} {...item} />
           ))}
         </div>
+      </div>
+
+      <div style={{ marginTop: 18 }}>
+        <React.Suspense fallback={<div style={{color:'#cfcfcf'}}>Cargando disponibilidad...</div>}>
+          <BookingLazy />
+        </React.Suspense>
       </div>
     </section>
   );
