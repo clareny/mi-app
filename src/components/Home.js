@@ -59,8 +59,8 @@ export default function Home() {
       </p>
 
       <div className="hero-actions">
-        <a className="btn btn-primary btn-large" href="#services">Enfoque de mezcla</a>
-        <a className="btn btn-secondary btn-large" href="#services">Enfoque beats</a>
+        <a className="btn btn-primary btn-large" href="#services">contratar mezcla</a>
+        <a className="btn btn-secondary btn-large" href="#services">contratar beats</a>
       </div>
 
       <div className="portfolio-block">
