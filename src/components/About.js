@@ -1,23 +1,28 @@
 export default function About() {
+  const publicUrl = process.env.PUBLIC_URL;
+
   return (
     <section id="about" className="about-section">
       <h2 className="section-title">Clareny</h2>
-      <div className="about-grid">
-        <p className="about-copy">
-          Hola soy clareny te cuento un poco mi, siempre me gusto trabajar y conectar ideas profundas donde vayen mas allá
-          de lo esperado asi que con estos 6 años en este rubro. A menudo Trabajo con artistas nacionales e internacionales 
-          tambien colabore con productores de alto nivel, y Mi foco principal está en traducir ideas en sonidos que conecten.
-          
-          Ya que sabes un poco de mi tambien me gustaria conocer un poco de ti y tu proyecto, seamos socios en esto, te abrire a puertas de oportunidades de exclusividad como descuento o regalos por ser clientes e inclusive feeedbacks.
-          exclusivos.
-        </p>
 
-        
-        <ul className="highlight-list">
-          <li>Producción y edición vocal</li>
-          <li>Mezcla y enfoque sonoro profesional</li>
-          <li>Trabajo con artistas y proyectos propios</li>
-        </ul>
+      <div className="about-showcase">
+        <div className="about-visual">
+          <img src="/fotoclarenyabout.jpg" alt="Clareny" className="about-photo" />
+        </div>
+
+        <div className="about-copy-wrap">
+          <p className="about-copy about-copy--1">
+            Hola, soy Clareny. Me gusta trabajar en ideas profundas, con una intención clara y un sonido que conecte más allá de lo superficial.
+          </p>
+
+          <p className="about-copy about-copy--2">
+            Llevo años acompañando artistas y proyectos con una mirada creativa y técnica, cuidando cada detalle para que la música se sienta auténtica, clara y memorable.
+          </p>
+
+          <p className="about-copy about-copy--3">
+            Me interesa transformar ideas en experiencias sonoras con identidad propia, con sensibilidad, rigor y una visión más grande que el simple resultado final.
+          </p>
+        </div>
       </div>
     </section>
   );

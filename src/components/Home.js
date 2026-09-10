@@ -1,113 +1,119 @@
-import React from 'react';
+import { useMemo, useState } from 'react';
 
-const spotifyEmbeds = [
+const discographyItems = [
   {
-    title: 'Album principal',
-    src: 'https://open.spotify.com/embed/album/5vMJPhQN90lnUIwozXoY5s?utm_source=generator&si=7dcaa506bb744441',
-    height: 152,
-    compact: true,
+    title: 'NOKIA',
+    artist: 'Clareny',
+    cover: 'linear-gradient(135deg, rgba(13, 75, 80, 0.92), rgba(37, 117, 133, 0.82), rgba(9, 12, 20, 0.88))',
+    spotifyUrl: 'https://open.spotify.com/track/6TZy5Wa9sz2bpZD0PmPOAP',
+    embedUrl: 'https://open.spotify.com/embed/track/6TZy5Wa9sz2bpZD0PmPOAP?utm_source=generator&si=87abfe7172df490d',
   },
   {
-    title: 'Perfil de artista',
-    src: 'https://open.spotify.com/embed/artist/1kS2GOJRVZeWbgeuNrdpaE?utm_source=generator&si=9bbd7f8fc9a4478f',
-    height: 152,
-    compact: true,
+    title: 'UNHAPPY',
+    artist: 'Clareny',
+    cover: 'linear-gradient(135deg, rgba(32, 32, 32, 1), rgba(94, 94, 94, 0.86), rgba(17, 17, 17, 0.94))',
+    spotifyUrl: 'https://open.spotify.com/track/228rNWpp6djyqw5LPkK7Vc',
+    embedUrl: 'https://open.spotify.com/embed/track/228rNWpp6djyqw5LPkK7Vc?utm_source=generator&theme=0&si=5eaa3afc56084d64',
   },
   {
-    title: 'Track 1',
-    src: 'https://open.spotify.com/embed/track/1FzwjIJtUwq1ocVNncQxAQ?utm_source=generator&si=47c26abea41441ce',
-    height: 152,
-    compact: true,
+    title: 'JAIA SON WBDS',
+    artist: 'Clareny, Bment',
+    cover: 'linear-gradient(135deg, rgba(39, 39, 39, 1), rgba(108, 108, 108, 0.9), rgba(14, 14, 14, 0.88))',
+    spotifyUrl: 'https://open.spotify.com/track/4lxg4xDUZHzoN3hLBwnnPd',
+    embedUrl: 'https://open.spotify.com/embed/track/4lxg4xDUZHzoN3hLBwnnPd?utm_source=generator&si=1d78968b9cf544a5',
   },
   {
-    title: 'Track 2',
-    src: 'https://open.spotify.com/embed/track/4lxg4xDUZHzoN3hLBwnnPd?utm_source=generator&si=871f72d62a13460b',
-    height: 152,
-    compact: true,
+    title: 'BABYGIRL',
+    artist: 'Easy Mo, Clareny, kodsay',
+    cover: 'linear-gradient(135deg, rgba(156, 74, 132, 1), rgba(107, 58, 118, 0.94), rgba(28, 12, 28, 0.92))',
+    spotifyUrl: 'https://open.spotify.com/album/7eXyJAT0uk4gSSiCEoP3at',
+    embedUrl: 'https://open.spotify.com/embed/album/7eXyJAT0uk4gSSiCEoP3at?utm_source=generator&theme=0&si=45e10ba002f04f88',
   },
   {
-    title: 'Track 3',
-    src: 'https://open.spotify.com/embed/track/7oebyDcVPIl5Gucgvx2hRE?utm_source=generator&si=3daaf1feca944b74',
-    height: 152,
-    compact: true,
+    title: 'PQMC',
+    artist: 'Red 21',
+    cover: 'linear-gradient(135deg, rgba(177, 28, 26, 0.96), rgba(98, 11, 11, 0.92), rgba(28, 5, 5, 0.96))',
+    spotifyUrl: 'https://open.spotify.com/album/3U2j60f0viLvsVlGPNUFi2',
+    embedUrl: 'https://open.spotify.com/embed/album/3U2j60f0viLvsVlGPNUFi2?utm_source=generator&theme=0&si=82b96d50425d4ca9',
+  },
+  {
+    title: 'LUCY',
+    artist: 'Clareny',
+    cover: 'linear-gradient(135deg, rgba(29, 36, 58, 1), rgba(52, 79, 104, 0.8), rgba(10, 10, 16, 0.94))',
+    spotifyUrl: 'https://open.spotify.com/track/7oebyDcVPIl5Gucgvx2hRE',
+    embedUrl: 'https://open.spotify.com/embed/track/7oebyDcVPIl5Gucgvx2hRE?utm_source=generator&theme=0&si=35ca133be6624743',
+  },
+  {
+    title: 'HONEY',
+    artist: 'Clareny',
+    cover: 'linear-gradient(135deg, rgba(120, 38, 58, 1), rgba(231, 107, 112, 0.9), rgba(39, 12, 20, 0.94))',
+    spotifyUrl: 'https://open.spotify.com/track/1JLkS0IisitvLtqB8fJgkq',
+    embedUrl: 'https://open.spotify.com/embed/track/1JLkS0IisitvLtqB8fJgkq?utm_source=generator&si=ef8d11b7edcd4fc8',
   },
 ];
 
-function SpotifyEmbed({ title, src, height, compact }) {
-  return (
-    <div className={`spotify-card ${compact ? 'spotify-card--compact' : ''}`}>
-      <iframe
-        title={title}
-        style={{ borderRadius: '12px' }}
-        src={src}
-        width="100%"
-        height={height}
-        frameBorder="0"
-        allowFullScreen=""
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy"
-      ></iframe>
-    </div>
-  );
-}
-
-const BookingLazy = React.lazy(() => import('./Booking'));
-
 export default function Home() {
-  return (
-    <section id="home" className="hero-section" >
-      
-      <h1>¿Por donde empezamos?</h1>
-      <p className="intro">
-        Marca tu identidad no trates de imitar algo.
-      </p>
+  const [activeIndex, setActiveIndex] = useState(0);
 
-      <div className="hero-actions">
-        <a className="btn btn-primary btn-large" href="#services">contratar mezcla</a>
-        <a className="btn btn-secondary btn-large" href="#services">contratar beats</a>
+  const activeTrack = useMemo(() => discographyItems[activeIndex], [activeIndex]);
+
+  const moveTrack = (direction) => {
+    setActiveIndex((prev) => {
+      const total = discographyItems.length;
+      return (prev + direction + total) % total;
+    });
+  };
+
+  return (
+    <section id="home" className="hero-section">
+      <div className="home-top">
+        <div className="home-brand-block">
+          <h1>EMPECEMOS...</h1>
+        </div>
+
+        <div className="hero-actions" aria-label="Acciones principales">
+          <a className="pill-btn pill-btn--primary" href="#services">contratar mezcla</a>
+          <a className="pill-btn pill-btn--secondary" href="#services">contratar beats</a>
+        </div>
       </div>
 
-      <div className="portfolio-block">
+      <p className="intro">
+        Diseña tu sonido...
+      </p>
+
+      <div className="portfolio-block regular-portfolio">
         <div className="portfolio-header">
           <div>
-            <h3>Mi portfolio</h3>
+            <h3>Discography</h3>
           </div>
           <a className="portfolio-link" href="#contact">Contactar</a>
         </div>
 
-        <div className="portfolio-tiles">
-          <div className="portfolio-tile">
-            <h4>Spotify</h4>
-            <p>Reproducciones y referencias musicales.</p>
+        <div className="arcade-player arcade-player--normal">
+          <button type="button" className="slider-arrow" onClick={() => moveTrack(-1)} aria-label="Tema anterior">
+            ‹
+          </button>
+
+          <div className="spotify-embed-shell">
+            <iframe
+              key={`${activeTrack.title}-${activeIndex}`}
+              title={activeTrack.title}
+              src={activeTrack.embedUrl}
+              width="100%"
+              height="352"
+              frameBorder="0"
+              allowFullScreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              style={{ borderRadius: '12px', display: 'block' }}
+            />
           </div>
-          <div className="portfolio-tile">
-            <h4>Beats</h4>
-            <p>Producción y desarrollo de ideas sonoras.</p>
-          </div>
-          <div className="portfolio-tile">
-            <h4>Mezcla</h4>
-            <p>Detalle, claridad y presencia en cada track.</p>
-          </div>
+
+          <button type="button" className="slider-arrow" onClick={() => moveTrack(1)} aria-label="Tema siguiente">
+            ›
+          </button>
         </div>
 
-        <div className="portfolio-links">
-          <a href="https://open.spotify.com/artist/1kS2GOJRVZeWbgeuNrdpaE" target="_blank" rel="noreferrer">Spotify</a>
-          <a href="https://www.youtube.com/c/clareny" target="_blank" rel="noreferrer">YouTube</a>
-          <a href="https://www.youtube.com/@clarenyonthetrack" target="_blank" rel="noreferrer">Beats</a>
-          <a href="https://www.instagram.com/clarenymusic" target="_blank" rel="noreferrer">Instagram</a>
-        </div>
-
-        <div className="spotify-stack">
-          {spotifyEmbeds.map((item) => (
-            <SpotifyEmbed key={item.src} {...item} />
-          ))}
-        </div>
-      </div>
-
-      <div style={{ marginTop: 18 }}>
-        <React.Suspense fallback={<div style={{color:'#cfcfcf'}}>Cargando disponibilidad...</div>}>
-          <BookingLazy />
-        </React.Suspense>
       </div>
     </section>
   );

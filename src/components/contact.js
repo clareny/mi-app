@@ -35,19 +35,7 @@ export default function Contact() {
         <a className="btn btn-outline-light btn-lg" href="https://discord.gg/gN4dTZ2rJ" target="_blank" rel="noreferrer">Entrar a Discord</a>
       </div>
 
-      <div className="calendar-card">
-        <p className="calendar-label">Disponibilidad</p>
-        <p className="calendar-copy">Podés ver mis espacios disponibles y reservar una llamada de forma sencilla.</p>
-        <iframe
-          title="Calendario de disponibilidad"
-          src="https://calendar.google.com/calendar/embed?src=d58w7kzfTmrHnQ8z9&ctz=America%2FMontevideo"
-          style={{ border: 0, borderRadius: '16px' }}
-          width="100%"
-          height="420"
-          frameBorder="0"
-          scrolling="no"
-        ></iframe>
-      </div>
+      
 
       <div className="notice-box">
         <p className="notice-title">Aviso importante</p>
