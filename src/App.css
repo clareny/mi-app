@@ -468,6 +468,7 @@ body {
   box-shadow: 0 0 0 1px rgba(125, 245, 255, 0.15), 0 0 22px rgba(28, 218, 221, 0.15), inset 0 0 14px rgba(125, 245, 255, 0.06);
   text-shadow: 0 0 12px rgba(125, 245, 255, 0.4);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: transparent;
 }
 
 .slider-arrow:hover {
@@ -532,7 +533,7 @@ body {
   background: transparent;
   border: none;
   border-radius: 0;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .arcade-player iframe {
@@ -561,7 +562,7 @@ body {
 
 @media (max-width: 840px) {
   .arcade-player {
-    grid-template-columns: 34px minmax(0, 1fr) 34px;
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
     gap: 0.42rem;
     align-items: center;
   }
@@ -1751,12 +1752,13 @@ body {
   }
 
   .arcade-player {
-    grid-template-columns: 30px minmax(0, 1fr) 30px;
+    grid-template-columns: 20px minmax(0, 1fr) 20px;
+    
     gap: 0.3rem;
   }
 
   .spotify-embed-shell {
-    min-width: 0;
+    min-width: 0100;
     aspect-ratio: auto;
   }
 
