@@ -1,6 +1,4 @@
 export default function About() {
-  const publicUrl = process.env.PUBLIC_URL;
-
   return (
     <section id="about" className="about-section">
       <h2 className="section-title">Clareny</h2>
