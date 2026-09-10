@@ -1,11 +1,13 @@
 export default function About() {
+  const basePath = process.env.PUBLIC_URL || '';
+
   return (
     <section id="about" className="about-section">
       <h2 className="section-title">Clareny</h2>
 
       <div className="about-showcase">
         <div className="about-visual">
-          <img src="/fotoclarenyabout.jpg" alt="Clareny" className="about-photo" />
+          <img src={`${basePath}/fotoclarenyabout.jpg`} alt="Clareny" className="about-photo" />
         </div>
 
         <div className="about-copy-wrap">

@@ -10,6 +10,7 @@ function App() {
   const [isReady, setIsReady] = useState(false);
   const [peekBackground, setPeekBackground] = useState(false);
   const pageContentRef = useRef(null);
+  const basePath = process.env.PUBLIC_URL || '';
 
   const scrollToSection = (targetId) => {
     const container = document.querySelector('.page-content');
@@ -74,15 +75,15 @@ function App() {
   return (
     <div className={`app-shell ${isReady ? 'is-ready' : 'is-loading'}`}>
       <div className={`page-background ${peekBackground ? 'is-peeking' : ''}`} aria-hidden="true">
-        <img src="/Mesa_de_trabajo_1.png" alt="" className="page-bg-layer page-bg-layer--one" />
-        <img src="/Mesa_de_trabajo_2.png" alt="" className="page-bg-layer page-bg-layer--two" />
-        <img src="/Mesa_de_trabajo_3.png" alt="" className="page-bg-layer page-bg-layer--three" />
+        <img src={`${basePath}/Mesa_de_trabajo_1.png`} alt="" className="page-bg-layer page-bg-layer--one" />
+        <img src={`${basePath}/Mesa_de_trabajo_2.png`} alt="" className="page-bg-layer page-bg-layer--two" />
+        <img src={`${basePath}/Mesa_de_trabajo_3.png`} alt="" className="page-bg-layer page-bg-layer--three" />
       </div>
 
       {!isReady && (
         <div className="brand-loader" aria-live="polite">
           <div className="brand-loader__ring" />
-          <img src="/logo-clareny.png" alt="Clareny" className="brand-loader__logo" />
+          <img src={`${basePath}/logo-clareny.png`} alt="Clareny" className="brand-loader__logo" />
         </div>
       )}
 
