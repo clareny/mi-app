@@ -59,30 +59,30 @@ html, body, #root {
 }
 
 .page-bg-layer--one {
-  width: min(36vw, 820px);
-  height: min(72vh, 1100px);
+  width: min(38vw, 880px);
+  height: min(78vh, 1160px);
   left: 50%;
   top: 50%;
-  transform: translate(calc(-50% - 210px), calc(-50% - 16px)) rotate(-8deg);
+  transform: translate(calc(-50% - 175px), calc(-50% - 8px)) rotate(-4deg);
   animation-delay: 0s;
 }
 
 .page-bg-layer--two {
-  width: min(40vw, 900px);
-  height: min(80vh, 1200px);
+  width: min(42vw, 960px);
+  height: min(84vh, 1220px);
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%) scale(1.08);
+  transform: translate(-50%, -50%) scale(1.06);
   z-index: 2;
   animation-delay: 1.8s;
 }
 
 .page-bg-layer--three {
-  width: min(36vw, 820px);
-  height: min(72vh, 1100px);
+  width: min(38vw, 880px);
+  height: min(78vh, 1160px);
   left: 50%;
   top: 50%;
-  transform: translate(calc(-50% + 210px), calc(-50% + 12px)) rotate(8deg);
+  transform: translate(calc(-50% + 175px), calc(-50% + 8px)) rotate(4deg);
   animation-delay: 3.4s;
 }
 
@@ -1047,20 +1047,20 @@ body {
   }
 
   .page-bg-layer--one {
-    width: min(44vw, 270px);
-    height: min(50vh, 480px);
-    transform: translate(calc(-50% - 72px), calc(-50% + 16px)) rotate(-9deg);
+    width: min(34vw, 220px);
+    height: min(48vh, 520px);
+    transform: translate(calc(-50% - 54px), calc(-50% + 4px)) rotate(-3deg);
   }
 
   .page-bg-layer--two {
-    width: min(52vw, 330px);
-    height: min(58vh, 560px);
+    width: min(38vw, 250px);
+    height: min(52vh, 560px);
   }
 
   .page-bg-layer--three {
-    width: min(44vw, 270px);
-    height: min(50vh, 480px);
-    transform: translate(calc(-50% + 72px), calc(-50% - 12px)) rotate(9deg);
+    width: min(34vw, 220px);
+    height: min(48vh, 520px);
+    transform: translate(calc(-50% + 54px), calc(-50% - 4px)) rotate(3deg);
   }
 }
 
