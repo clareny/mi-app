@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mi-app/static/css/main.bc92eaed.css",
-    "main.js": "/mi-app/static/js/main.cf8b6113.js",
-    "static/js/453.ab54ff28.chunk.js": "/mi-app/static/js/453.ab54ff28.chunk.js",
-    "index.html": "/mi-app/index.html",
-    "main.bc92eaed.css.map": "/mi-app/static/css/main.bc92eaed.css.map",
-    "main.cf8b6113.js.map": "/mi-app/static/js/main.cf8b6113.js.map",
-    "453.ab54ff28.chunk.js.map": "/mi-app/static/js/453.ab54ff28.chunk.js.map"
+    "main.css": "/clareny/mi-app.git/static/css/main.bc92eaed.css",
+    "main.js": "/clareny/mi-app.git/static/js/main.671aa60f.js",
+    "static/js/453.ab54ff28.chunk.js": "/clareny/mi-app.git/static/js/453.ab54ff28.chunk.js",
+    "index.html": "/clareny/mi-app.git/index.html",
+    "main.bc92eaed.css.map": "/clareny/mi-app.git/static/css/main.bc92eaed.css.map",
+    "main.671aa60f.js.map": "/clareny/mi-app.git/static/js/main.671aa60f.js.map",
+    "453.ab54ff28.chunk.js.map": "/clareny/mi-app.git/static/js/453.ab54ff28.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bc92eaed.css",
-    "static/js/main.cf8b6113.js"
+    "static/js/main.671aa60f.js"
   ]
 }
