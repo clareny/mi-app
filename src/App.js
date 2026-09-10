@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import About from './components/About';
 import Contact from './components/contact';
-import Home from './components/Home';
 import Navbar from './components/Navbar';
+import Home from './components/Portfolio';
 import Services from './components/Services';
 
 function App() {

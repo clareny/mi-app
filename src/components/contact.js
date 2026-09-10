@@ -39,11 +39,11 @@ export default function Contact() {
 
       <div className="notice-box">
         <p className="notice-title">Aviso importante</p>
-        <p>Toda sesión de trabajo se realizará por Discord en una videollamada de uno a uno, para mantener el proceso claro, directo y profesional.</p>
+        <p style={{ fontSize: '0.875rem' }}>Toda sesión de trabajo se realizará por Discord en una videollamada de uno a uno, para mantener el proceso claro, directo y profesional.</p>
       </div>
 
       <div className="teaser-box">
-        <p>Los precios se ajustan según el proyecto, la complejidad y el alcance del trabajo. Escribime y te paso una propuesta acorde a lo que necesitás.</p>
+        <p style={{ fontSize: '0.875rem' }}>Los precios se ajustan según el proyecto, la complejidad y el alcance del trabajo. Escribime y te paso una propuesta acorde a lo que necesitás.</p>
       </div>
     </section>
   );
