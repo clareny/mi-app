@@ -63,7 +63,7 @@ html, body, #root {
   height: min(78vh, 1160px);
   left: 50%;
   top: 50%;
-  transform: translate(calc(-50% - 175px), calc(-50% - 8px)) rotate(-4deg);
+  transform: translate(calc(-50% - 210px), calc(-50% - 8px)) rotate(-4deg);
   animation-delay: 0s;
 }
 
@@ -82,7 +82,7 @@ html, body, #root {
   height: min(78vh, 1160px);
   left: 50%;
   top: 50%;
-  transform: translate(calc(-50% + 175px), calc(-50% + 8px)) rotate(4deg);
+  transform: translate(calc(-50% + 210px), calc(-50% + 8px)) rotate(4deg);
   animation-delay: 3.4s;
 }
 
@@ -137,20 +137,10 @@ body {
 }
 
 .brand-loader__logo {
-  width: min(30vw, 220px);
-  max-width: 220px;
-  filter: brightness(0) invert(1) drop-shadow(0 0 22px rgba(28, 218, 221, 0.5));
+  width: min(28vw, 200px);
+  max-width: 200px;
+  filter: drop-shadow(0 0 18px rgba(28, 218, 221, 0.35));
   animation: pulseGlow 1.5s ease-in-out infinite alternate;
-}
-
-.brand-loader__ring {
-  position: absolute;
-  width: min(42vw, 320px);
-  height: min(42vw, 320px);
-  border-radius: 50%;
-  border: 1px solid rgba(28, 218, 221, 0.4);
-  box-shadow: 0 0 22px rgba(28, 218, 221, 0.18);
-  animation: spinLogo 2.8s linear infinite;
 }
 
 .content-shell {
@@ -1049,7 +1039,7 @@ body {
   .page-bg-layer--one {
     width: min(34vw, 220px);
     height: min(48vh, 520px);
-    transform: translate(calc(-50% - 54px), calc(-50% + 4px)) rotate(-3deg);
+    transform: translate(calc(-50% - 62px), calc(-50% + 4px)) rotate(-3deg);
   }
 
   .page-bg-layer--two {
@@ -1060,7 +1050,7 @@ body {
   .page-bg-layer--three {
     width: min(34vw, 220px);
     height: min(48vh, 520px);
-    transform: translate(calc(-50% + 54px), calc(-50% - 4px)) rotate(3deg);
+    transform: translate(calc(-50% + 62px), calc(-50% - 4px)) rotate(3deg);
   }
 }
 

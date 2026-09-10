@@ -82,8 +82,7 @@ function App() {
 
       {!isReady && (
         <div className="brand-loader" aria-live="polite">
-          <div className="brand-loader__ring" />
-          <img src={`${basePath}/logo-clareny.png`} alt="Clareny" className="brand-loader__logo" />
+          <img src={`${basePath}/logocarga.png`} alt="Clareny" className="brand-loader__logo" />
         </div>
       )}
 
