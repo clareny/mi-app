@@ -1,7 +1,7 @@
 {
   "name": "mi-app",
   "version": "0.1.0",
-  "homepage": "https://github.com/clareny/mi-app.git",
+  "homepage": "https://clareny.github.io/mi-app",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",

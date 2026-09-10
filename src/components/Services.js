@@ -55,7 +55,7 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="services-section">
+    <section id="services" className={`services-section services-section--${activeTab}`}>
       <div className="service-segmented" aria-label="Selecciona entre vocal o beats">
         {serviceTabs.map((tab) => (
           <button

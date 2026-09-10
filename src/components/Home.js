@@ -85,7 +85,7 @@ export default function Home() {
         </div>
 
         <div className="arcade-player arcade-player--normal">
-          <button type="button" className="slider-arrow" onClick={() => moveTrack(-1)} aria-label="Tema anterior">
+          <button type="button" className="slider-arrow" onClick={() => moveTrack(-1)} aria-label="Tema anterior" >
             ‹
           </button>
 
