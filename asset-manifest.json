@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "./static/css/main.e407fa39.css",
-    "main.js": "./static/js/main.be426575.js",
-    "static/js/453.ab54ff28.chunk.js": "./static/js/453.ab54ff28.chunk.js",
-    "index.html": "./index.html",
-    "main.e407fa39.css.map": "./static/css/main.e407fa39.css.map",
-    "main.be426575.js.map": "./static/js/main.be426575.js.map",
-    "453.ab54ff28.chunk.js.map": "./static/js/453.ab54ff28.chunk.js.map"
+    "main.css": "/mi-app/static/css/main.14782671.css",
+    "main.js": "/mi-app/static/js/main.25b5081d.js",
+    "static/js/453.ab54ff28.chunk.js": "/mi-app/static/js/453.ab54ff28.chunk.js",
+    "index.html": "/mi-app/index.html",
+    "main.14782671.css.map": "/mi-app/static/css/main.14782671.css.map",
+    "main.25b5081d.js.map": "/mi-app/static/js/main.25b5081d.js.map",
+    "453.ab54ff28.chunk.js.map": "/mi-app/static/js/453.ab54ff28.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e407fa39.css",
-    "static/js/main.be426575.js"
+    "static/css/main.14782671.css",
+    "static/js/main.25b5081d.js"
   ]
 }
