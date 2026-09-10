@@ -355,7 +355,7 @@ body {
 
 .home-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
   margin-bottom: 0.6rem;
@@ -368,19 +368,21 @@ body {
 
 .hero-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   gap: 0.6rem;
   flex-wrap: wrap;
-  margin-left: auto;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .pill-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.5rem;
-  padding: 0.6rem 1rem;
+  min-height: 2.7rem;
+  padding: 0.7rem 1.2rem;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.12);
   text-decoration: none;
@@ -388,24 +390,72 @@ body {
   font-size: 0.72rem;
   letter-spacing: 0.06em;
   text-transform: lowercase;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, filter 0.22s ease;
+  overflow: hidden;
+}
+
+.pill-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.2), transparent 35%, rgba(255,255,255,0.08));
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 .pill-btn:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.01);
+  filter: brightness(1.08);
+}
+
+.pill-btn:hover::before {
+  opacity: 1;
+}
+
+.pill-btn:active {
+  transform: scale(0.98);
+}
+
+.pill-btn:active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255,255,255,0.12);
+  animation: btnPulse 0.5s ease-out;
+}
+
+@keyframes btnPulse {
+  0% {
+    transform: scaleX(0.7);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scaleX(1.08);
+    opacity: 0;
+  }
 }
 
 .pill-btn--primary {
-  background: linear-gradient(135deg, rgba(28, 218, 221, 0.18), rgba(28, 218, 221, 0.08));
-  border-color: rgba(28, 218, 221, 0.4);
-  color: #dffcff;
-  box-shadow: 0 0 18px rgba(28, 218, 221, 0.12);
+  background: linear-gradient(135deg, rgba(17, 28, 29, 0.96), rgba(22, 35, 36, 0.94));
+  border-color: rgba(145, 245, 238, 0.45);
+  color: #eafdfd;
+  box-shadow: 0 0 0 1px rgba(145, 245, 238, 0.18), 0 0 14px rgba(28, 218, 221, 0.12);
+}
+
+.pill-btn--primary:hover {
+  box-shadow: 0 0 0 1px rgba(145, 245, 238, 0.26), 0 0 18px rgba(28, 218, 221, 0.18);
 }
 
 .pill-btn--secondary {
-  background: rgba(255,255,255,0.04);
-  color: #f5f7f7;
-  border-color: rgba(255,255,255,0.15);
+  background: rgba(26, 18, 31, 0.9);
+  color: #f2e9ff;
+  border-color: rgba(181, 120, 255, 0.65);
+  box-shadow: 0 0 0 1px rgba(181, 120, 255, 0.2), 0 0 12px rgba(181, 120, 255, 0.12);
+}
+
+.pill-btn--secondary:hover {
+  box-shadow: 0 0 0 1px rgba(181, 120, 255, 0.34), 0 0 18px rgba(181, 120, 255, 0.18);
 }
 
 .slider-arrow {
@@ -444,15 +494,18 @@ body {
 
 .portfolio-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
   margin-bottom: 0.35rem;
+  width: 100%;
+  text-align: center;
 }
 
 .portfolio-header h3 {
   margin: 0;
   font-size: 1rem;
+  text-align: center;
 }
 
 .portfolio-header p {
@@ -512,11 +565,32 @@ body {
 
 @media (max-width: 840px) {
   .arcade-player {
-    grid-template-columns: 1fr;
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+    gap: 0.42rem;
+    align-items: center;
+  }
+
+  .spotify-embed-shell {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .arcade-player iframe {
+    height: 100%;
+    min-height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    object-fit: cover;
   }
 
   .slider-arrow {
-    display: none;
+    display: grid;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    opacity: 0.85;
   }
 }
 
@@ -525,6 +599,48 @@ body {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
   margin-top: 0.2rem;
+}
+
+.service-segmented {
+  display: none;
+  width: min(100%, 180px);
+  margin: -0.28rem auto 0.35rem;
+  padding: 0.1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(28, 218, 221, 0.08);
+  overflow-x: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.08rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.service-segmented::-webkit-scrollbar {
+  display: none;
+}
+
+.service-segmented__button {
+  flex: 1 0 78px;
+  min-width: 78px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #dfeaf5;
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.36rem 0.45rem;
+  cursor: pointer;
+  transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.service-segmented__button.is-active {
+  background: linear-gradient(135deg, rgba(28, 218, 221, 0.08), rgba(28, 218, 221, 0.03));
+  color: #f4ffff;
+  box-shadow: inset 0 0 0 1px rgba(28, 218, 221, 0.12);
 }
 
 .service-card {
@@ -809,9 +925,67 @@ body {
 }
 
 @media (max-width: 640px) {
+  .reveal-section {
+    margin-top: -0.7rem;
+  }
+
+  .panel-panel > * {
+    transform: translateY(-0.42rem);
+  }
+
+  .slider-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    opacity: 0.9;
+  }
+
+  .service-segmented {
+    display: flex;
+  }
+
+  .services-grid {
+    display: block;
+    overflow: visible;
+  }
+
+  .services-section {
+    overflow: visible;
+  }
+
+  .service-panel {
+    display: none;
+    overflow: visible;
+  }
+
+  .service-panel.is-active {
+    display: block;
+  }
+
+  .service-card {
+    padding: 0.8rem 0.75rem;
+    overflow: visible;
+  }
+
+  .mini-service-list {
+    gap: 0.2rem;
+  }
+
+  .mini-service-item {
+    padding: 0.3rem 0.38rem;
+  }
+
+  .compact-grid {
+    grid-template-columns: 1fr;
+  }
+
   .page-content {
     padding: 0.7rem;
     max-width: 100%;
+    height: auto;
+    min-height: calc(100vh - 62px);
+    overflow-y: visible;
   }
 
   .navbar {

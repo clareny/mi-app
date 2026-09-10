@@ -67,9 +67,7 @@ export default function Home() {
   return (
     <section id="home" className="hero-section">
       <div className="home-top">
-        <div className="home-brand-block">
-          <h1>EMPECEMOS...</h1>
-        </div>
+        
 
         <div className="hero-actions" aria-label="Acciones principales">
           <a className="pill-btn pill-btn--primary" href="#services">contratar mezcla</a>
@@ -77,16 +75,13 @@ export default function Home() {
         </div>
       </div>
 
-      <p className="intro">
-        Diseña tu sonido...
-      </p>
+      
 
       <div className="portfolio-block regular-portfolio">
         <div className="portfolio-header">
           <div>
             <h3>Discography</h3>
           </div>
-          <a className="portfolio-link" href="#contact">Contactar</a>
         </div>
 
         <div className="arcade-player arcade-player--normal">

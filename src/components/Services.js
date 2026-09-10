@@ -16,6 +16,12 @@ export default function Services() {
   const [beatSelections, setBeatSelections] = useState([]);
   const [vocalNeed, setVocalNeed] = useState('');
   const [beatNeed, setBeatNeed] = useState('');
+  const [activeTab, setActiveTab] = useState('vocal');
+
+  const serviceTabs = [
+    { id: 'vocal', label: 'Vocal' },
+    { id: 'beats', label: 'Beats' },
+  ];
 
   const stripSelectionPrefix = (value) => value.replace(/^Enfoque seleccionado: .*?(?:\.|$)\s*/, '').trim();
 
@@ -50,9 +56,22 @@ export default function Services() {
 
   return (
     <section id="services" className="services-section">
+      <div className="service-segmented" aria-label="Selecciona entre vocal o beats">
+        {serviceTabs.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            className={`service-segmented__button ${activeTab === tab.id ? 'is-active' : ''}`}
+            onClick={() => setActiveTab(tab.id)}
+            aria-pressed={activeTab === tab.id}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
 
       <div className="services-grid compact-services-grid">
-        <div className="service-card service-card--vocal">
+        <div className={`service-card service-card--vocal service-panel ${activeTab === 'vocal' ? 'is-active' : ''}`}>
           <div className="service-card__header">
             <span className="service-badge">Vocal</span>
             <h3>Grabación + mezcla</h3>
@@ -112,7 +131,7 @@ export default function Services() {
           </div>
         </div>
 
-        <div className="service-card service-card--beats">
+        <div className={`service-card service-card--beats service-panel ${activeTab === 'beats' ? 'is-active' : ''}`}>
           <div className="service-card__header">
             <span className="service-badge">Beats</span>
             <h3>Remake + custom beat</h3>
