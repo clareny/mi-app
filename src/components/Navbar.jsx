@@ -1,3 +1,4 @@
+// React component source.
 export default function Navbar({ onNavClick = () => {} }) {
   const links = [
     { label: 'portfolio', href: '#portfolio' },

@@ -1,3 +1,4 @@
+// React component source.
 export default function Contact() {
   const links = [
     { label: 'Facebook', url: 'https://www.facebook.com/clareny', icon: '📘' },

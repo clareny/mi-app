@@ -1,3 +1,4 @@
+// React component source.
 import { useMemo, useState } from 'react';
 
 const discographyItems = [

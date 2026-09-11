@@ -1,3 +1,4 @@
+// React component source.
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import About from './components/About';
@@ -10,7 +11,7 @@ function App() {
   const [isReady, setIsReady] = useState(false);
   const [peekBackground, setPeekBackground] = useState(false);
   const pageContentRef = useRef(null);
-  const basePath = process.env.PUBLIC_URL || '';
+  const basePath = import.meta.env.BASE_URL;
 
   const scrollToSection = (targetId) => {
     const container = document.querySelector('.page-content');

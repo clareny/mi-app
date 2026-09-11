@@ -1,5 +1,6 @@
+// React component source.
 export default function About() {
-  const basePath = process.env.PUBLIC_URL || '';
+  const basePath = import.meta.env.BASE_URL;
 
   return (
     <section id="about" className="about-section">

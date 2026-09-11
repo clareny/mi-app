@@ -1,3 +1,4 @@
+// React component source.
 export default function Welcome() {
   const services = [
     { name: 'Grabación de voces', description: 'Grabación vocal profesional con sonido limpio y listo para trabajar.', price: '$500 UYU' },
