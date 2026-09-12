@@ -76,9 +76,7 @@ function App() {
   return (
     <div className={`app-shell ${isReady ? 'is-ready' : 'is-loading'}`}>
       <div className={`page-background ${peekBackground ? 'is-peeking' : ''}`} aria-hidden="true">
-        <img src={`${basePath}/Mesa_de_trabajo_1.png`} alt="" className="page-bg-layer page-bg-layer--one" />
-        <img src={`${basePath}/Mesa_de_trabajo_2.png`} alt="" className="page-bg-layer page-bg-layer--two" />
-        <img src={`${basePath}/Mesa_de_trabajo_3.png`} alt="" className="page-bg-layer page-bg-layer--three" />
+        <img src={`${basePath}/Backgroundprincipal.png`} alt="" className="page-bg-main" />
       </div>
 
       {!isReady && (
@@ -96,7 +94,7 @@ function App() {
           onMouseLeave={() => setPeekBackground(false)}
         >
           <div id="portfolio" className="reveal-section panel-panel">
-            <Home />
+            <Home onNavClick={handleNavClick} />
           </div>
           <div id="servicios" className="reveal-section panel-panel">
             <Services />

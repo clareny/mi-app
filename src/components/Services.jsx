@@ -1,63 +1,96 @@
-// React component source.
 import { useState } from 'react';
 
+const WHATSAPP_NUMBER = '59897989368';
+
+const vocalServices = [
+  { name: 'Grabación', spec: 'Gain, HPF, Pro-DS / RX' },
+  { name: 'Edición', spec: 'Melodyne / Auto-Tune, RX' },
+  { name: 'Mezcla', spec: 'Pro-Q, CLA-76 / Pro-C' },
+];
+
+const beatServices = [
+  { name: 'Remake', spec: 'Tu referencia, en tu tono' },
+  { name: 'Custom beat', spec: 'Original para tu voz' },
+];
+
+const beatGenres = ['Trap', 'Rap', 'R&B', 'Reggaeton', 'Drill', 'Pop', 'Afrobeats', 'Lo-fi', 'Soul', 'House'];
+const beatKeys = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
+
+const comboRows = [
+  { label: 'Alcance', value: 'Canción completa' },
+  { label: 'Incluye', value: 'Vocal + instrumental' },
+  { label: 'Enfoque', value: 'Producción desde cero' },
+  { label: 'Entrega', value: 'Mezcla lista para subir' },
+];
+
+const AUTO_LINE = /^(Enfoque|Género|Tonalidad):/;
+
+const stripAutoLines = (value) =>
+  value
+    .split('\n')
+    .filter((line) => !AUTO_LINE.test(line.trim()))
+    .join('\n')
+    .replace(/^\n+/, '');
+
+const buildVocalMessage = (selections, extra) => {
+  const lines = [];
+  if (selections.length) lines.push(`Enfoque: ${selections.join(', ')}.`);
+  if (extra.trim()) lines.push(extra.trim());
+  return lines.join('\n');
+};
+
+const buildBeatMessage = (selections, genre, key, scale, extra) => {
+  const lines = [];
+  if (selections.length) lines.push(`Enfoque: ${selections.join(', ')}.`);
+  if (genre) lines.push(`Género: ${genre}.`);
+  if (key) lines.push(`Tonalidad: ${key} ${scale}.`);
+  if (extra.trim()) lines.push(extra.trim());
+  return lines.join('\n');
+};
+
 export default function Services() {
-  const vocalServices = [
-    { name: 'Grabación', description: 'Voz limpia y estable para grabar con claridad.' },
-    { name: 'Edición', description: 'Afinación, recorte y pulido para una entrega más sólida.' },
-    { name: 'Mezcla', description: 'Sonido más amplio, equilibrado y listo para lanzar.' },
-  ];
-
-  const beatServices = [
-    { name: 'Remake', description: 'Adaptación del estilo a la idea del proyecto.' },
-    { name: 'Custom beat', description: 'Beat original a medida según la referencia.' },
-  ];
-
   const [vocalSelections, setVocalSelections] = useState([]);
   const [beatSelections, setBeatSelections] = useState([]);
-  const [vocalNeed, setVocalNeed] = useState('');
-  const [beatNeed, setBeatNeed] = useState('');
-  const [activeTab, setActiveTab] = useState('vocal');
+  const [vocalExtra, setVocalExtra] = useState('');
+  const [beatExtra, setBeatExtra] = useState('');
+  const [beatGenre, setBeatGenre] = useState('');
+  const [beatKey, setBeatKey] = useState('');
+  const [beatScale, setBeatScale] = useState('menor');
+  const [activeTab, setActiveTab] = useState('combo');
+
+  const vocalNeed = buildVocalMessage(vocalSelections, vocalExtra);
+  const beatNeed = buildBeatMessage(beatSelections, beatGenre, beatKey, beatScale, beatExtra);
 
   const serviceTabs = [
+    { id: 'combo', label: 'Combo' },
     { id: 'vocal', label: 'Vocal' },
     { id: 'beats', label: 'Beats' },
   ];
 
-  const stripSelectionPrefix = (value) => value.replace(/^Enfoque seleccionado: .*?(?:\.|$)\s*/, '').trim();
-
-  const toggleSelection = (name, selectedItems, setSelectedItems, setNeed) => {
-    const nextSelection = selectedItems.includes(name)
-      ? selectedItems.filter((item) => item !== name)
-      : [...selectedItems, name];
-
-    setSelectedItems(nextSelection);
-    setNeed((prev) => {
-      const cleanedNeed = stripSelectionPrefix(prev);
-      const selectionText = nextSelection.length ? `Enfoque seleccionado: ${nextSelection.join(', ')}.` : '';
-      return selectionText ? `${selectionText} ${cleanedNeed}`.trim() : cleanedNeed;
-    });
+  const toggleSelection = (name, selectedItems, setSelectedItems) => {
+    setSelectedItems(
+      selectedItems.includes(name)
+        ? selectedItems.filter((item) => item !== name)
+        : [...selectedItems, name]
+    );
   };
 
-  const handleVocalSelect = (serviceName) => {
-    toggleSelection(serviceName, vocalSelections, setVocalSelections, setVocalNeed);
-  };
+  const buildWhatsAppLink = (type) => {
+    if (type === 'combo') {
+      const message = 'Hola, estoy interesado en Combo completo: una canción, vocal + instrumental, producción desde cero.';
+      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    }
 
-  const handleBeatSelect = (serviceName) => {
-    toggleSelection(serviceName, beatSelections, setBeatSelections, setBeatNeed);
-  };
-
-  const buildWhatsAppLink = (type, selections, need) => {
     const label = type === 'vocal' ? 'Producción vocal' : 'Beats';
-    const selectionText = selections.length ? `Enfoques seleccionados: ${selections.join(', ')}.` : '';
-    const detailText = need ? `Detalles: ${need}` : 'Quiero que me ayuden a definir el enfoque ideal.';
-    const message = `Hola, estoy interesado en ${label}. ${selectionText} ${detailText}`;
-    return `https://wa.me/59897989368?text=${encodeURIComponent(message)}`;
+    const need = type === 'vocal' ? vocalNeed : beatNeed;
+    const detailText = need.trim() ? `Detalles: ${need.trim()}` : 'Quiero que me ayuden a definir el enfoque ideal.';
+    const message = `Hola, estoy interesado en ${label}. ${detailText}`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   };
 
   return (
     <section id="services" className={`services-section services-section--${activeTab}`}>
-      <div className="service-segmented" aria-label="Selecciona entre vocal o beats">
+      <div className="service-segmented" aria-label="Elegí combo, vocal o beats">
         {serviceTabs.map((tab) => (
           <button
             key={tab.id}
@@ -71,116 +104,153 @@ export default function Services() {
         ))}
       </div>
 
-      <div className="services-grid compact-services-grid">
-        <div className={`service-card service-card--vocal service-panel ${activeTab === 'vocal' ? 'is-active' : ''}`}>
-          <div className="service-card__header">
-            <span className="service-badge">Vocal</span>
-            <h3>Grabación + mezcla</h3>
+      <div className="plan-grid">
+        <article className={`plan-card plan-card--combo service-panel ${activeTab === 'combo' ? 'is-active' : ''}`}>
+          <header className="plan-card__head">
+            <span className="plan-card__flag">Especial</span>
+            <h3>Combo</h3>
+            <p>Canción completa</p>
+          </header>
+          <div className="plan-card__body">
+            <p className="plan-card__hook">
+              Una canción, de cero a release. Voz e instrumental en la misma producción.
+            </p>
+            <ul className="plan-rows">
+              {comboRows.map((row) => (
+                <li key={row.label}>
+                  <span>{row.label}</span>
+                  <strong>{row.value}</strong>
+                </li>
+              ))}
+            </ul>
           </div>
-
-          <div className="mini-service-list">
-            {vocalServices.map((service) => (
-              <div key={service.name} className="mini-service-item">
-                <strong>{service.name}</strong>
-                <span>{service.description}</span>
-              </div>
-            ))}
+          <div className="plan-card__foot">
+            <a className="btn btn-primary" href={buildWhatsAppLink('combo')} target="_blank" rel="noreferrer">
+              contratar combo
+            </a>
           </div>
+        </article>
 
-          <div className="service-form compact-form">
-            <label className="service-form__label">Elegí el enfoque</label>
-            <div className="option-grid compact-grid">
+        <article className={`plan-card plan-card--vocal service-panel ${activeTab === 'vocal' ? 'is-active' : ''}`}>
+          <header className="plan-card__head">
+            <h3>Vocal</h3>
+            <p>Solo voces</p>
+          </header>
+          <div className="plan-card__body">
+            <p className="plan-card__hook">
+              Tu voz ya tiene la canción. Falta que se escuche como un release.
+            </p>
+            <div className="plan-options">
               {vocalServices.map((service) => {
                 const isActive = vocalSelections.includes(service.name);
-                const vocalAriaLabel =
-                  service.name === 'Grabación'
-                    ? 'Grabación de voces'
-                    : service.name === 'Edición'
-                      ? 'Edición vocal'
-                      : service.name === 'Mezcla'
-                        ? 'Mezcla vocal'
-                        : service.name;
-
                 return (
                   <button
                     key={service.name}
                     type="button"
-                    className={`option-card ${isActive ? 'option-card--active' : ''}`}
-                    onClick={() => handleVocalSelect(service.name)}
-                    aria-label={vocalAriaLabel}
+                    className={`plan-option ${isActive ? 'is-active' : ''}`}
+                    onClick={() => toggleSelection(service.name, vocalSelections, setVocalSelections)}
                     aria-pressed={isActive}
                   >
-                    <span className="option-card__check" aria-hidden="true">{isActive ? '✓' : '○'}</span>
-                    <span className="option-card__content">
+                    <span className="plan-option__check" aria-hidden="true">{isActive ? '✓' : '○'}</span>
+                    <span className="plan-option__text">
                       <strong>{service.name}</strong>
+                      <small>{service.spec}</small>
                     </span>
                   </button>
                 );
               })}
             </div>
-
             <textarea
               rows="2"
-              placeholder="Qué necesitás?"
+              placeholder="Contame el tema..."
               value={vocalNeed}
-              onChange={(e) => setVocalNeed(e.target.value)}
+              onChange={(e) => setVocalExtra(stripAutoLines(e.target.value))}
             />
-
-            <a className="btn btn-primary" href={buildWhatsAppLink('vocal', vocalSelections, vocalNeed)} target="_blank" rel="noreferrer">
+          </div>
+          <div className="plan-card__foot">
+            <a className="btn btn-primary" href={buildWhatsAppLink('vocal')} target="_blank" rel="noreferrer">
               contratar mezcla
             </a>
           </div>
-        </div>
+        </article>
 
-        <div className={`service-card service-card--beats service-panel ${activeTab === 'beats' ? 'is-active' : ''}`}>
-          <div className="service-card__header">
-            <span className="service-badge">Beats</span>
-            <h3>Remake + custom beat</h3>
-          </div>
-
-          <div className="mini-service-list">
-            {beatServices.map((service) => (
-              <div key={service.name} className="mini-service-item">
-                <strong>{service.name}</strong>
-                <span>{service.description}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="service-form compact-form">
-            <label className="service-form__label">Elegí el enfoque</label>
-            <div className="option-grid compact-grid">
+        <article className={`plan-card plan-card--beats service-panel ${activeTab === 'beats' ? 'is-active' : ''}`}>
+          <header className="plan-card__head">
+            <h3>Beats</h3>
+            <p>Solo instrumental</p>
+          </header>
+          <div className="plan-card__body">
+            <p className="plan-card__hook">
+              Si el beat no te empuja a grabar hoy, no es el beat.
+            </p>
+            <div className="plan-options">
               {beatServices.map((service) => {
                 const isActive = beatSelections.includes(service.name);
                 return (
                   <button
                     key={service.name}
                     type="button"
-                    className={`option-card ${isActive ? 'option-card--active' : ''}`}
-                    onClick={() => handleBeatSelect(service.name)}
+                    className={`plan-option ${isActive ? 'is-active' : ''}`}
+                    onClick={() => toggleSelection(service.name, beatSelections, setBeatSelections)}
                     aria-pressed={isActive}
                   >
-                    <span className="option-card__check" aria-hidden="true">{isActive ? '✓' : '○'}</span>
-                    <span className="option-card__content">
+                    <span className="plan-option__check" aria-hidden="true">{isActive ? '✓' : '○'}</span>
+                    <span className="plan-option__text">
                       <strong>{service.name}</strong>
+                      <small>{service.spec}</small>
                     </span>
                   </button>
                 );
               })}
             </div>
-
+            <div className="beat-spec beat-spec--compact">
+              <label className="beat-spec__field">
+                <span className="service-form__label">Género</span>
+                <select value={beatGenre} onChange={(e) => setBeatGenre(e.target.value)} aria-label="Género del beat">
+                  <option value="">Elegí el género</option>
+                  {beatGenres.map((genre) => (
+                    <option key={genre} value={genre}>{genre}</option>
+                  ))}
+                </select>
+              </label>
+              <label className="beat-spec__field">
+                <span className="service-form__label">Tonalidad</span>
+                <div className="beat-spec__key">
+                  <select value={beatKey} onChange={(e) => setBeatKey(e.target.value)} aria-label="Tonalidad del beat">
+                    <option value="">Nota</option>
+                    {beatKeys.map((keyName) => (
+                      <option key={keyName} value={keyName}>{keyName}</option>
+                    ))}
+                  </select>
+                  <div className="beat-scale" role="group" aria-label="Escala">
+                    {['menor', 'mayor'].map((scale) => (
+                      <button
+                        key={scale}
+                        type="button"
+                        className={`beat-scale__button ${beatScale === scale ? 'is-active' : ''}`}
+                        onClick={() => setBeatScale(scale)}
+                        aria-pressed={beatScale === scale}
+                      >
+                        {scale}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </label>
+            </div>
             <textarea
               rows="2"
-              placeholder="Qué estilo buscas?"
+              placeholder="Referencias, mood..."
               value={beatNeed}
-              onChange={(e) => setBeatNeed(e.target.value)}
+              onChange={(e) => setBeatExtra(stripAutoLines(e.target.value))}
             />
-
-            <a className="btn btn-primary" href={buildWhatsAppLink('beat', beatSelections, beatNeed)} target="_blank" rel="noreferrer">
+          </div>
+          <div className="plan-card__foot">
+            <a className="btn btn-primary" href={buildWhatsAppLink('beat')} target="_blank" rel="noreferrer">
               contratar beat
             </a>
           </div>
-        </div>
+        </article>
       </div>
     </section>
   );

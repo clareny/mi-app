@@ -1,16 +1,20 @@
 // React component source.
 export default function Navbar({ onNavClick = () => {} }) {
+  const basePath = import.meta.env.BASE_URL;
+  
   const links = [
-    { label: 'portfolio', href: '#portfolio' },
+    { label: 'discografía', href: '#portfolio' },
     { label: 'servicios', href: '#servicios' },
-    { label: 'sobre mi', href: '#sobre-mi' },
+    { label: 'bio', href: '#sobre-mi' },
     { label: 'contacto', href: '#contacto' },
   ];
 
   return (
     <nav className="navbar">
       <div className="nav-inner">
-        <a className="brand" href="#portfolio" onClick={(event) => onNavClick(event, 'portfolio')}>Clareny</a>
+        <a className="brand" href="#portfolio" onClick={(event) => onNavClick(event, 'portfolio')}>
+          <img src={`${basePath}/logoblanco.png`} alt="Clareny" className="brand-logo" />
+        </a>
         <div className="nav-links">
           {links.map((link) => (
             <a
@@ -23,6 +27,7 @@ export default function Navbar({ onNavClick = () => {} }) {
             </a>
           ))}
         </div>
+        <div id="google_translate_element"></div>
       </div>
     </nav>
   );

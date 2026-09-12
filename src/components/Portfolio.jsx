@@ -1,5 +1,5 @@
-// React component source.
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import MixCompare from './MixCompare';
 
 const discographyItems = [
   {
@@ -53,63 +53,173 @@ const discographyItems = [
   },
 ];
 
-export default function Home() {
+const wrapIndex = (index, total = discographyItems.length) => ((index % total) + total) % total;
+
+function NoteFace({ track, withPlayer = false, activeIndex = 0, overlay = null }) {
+  return (
+    <>
+      <div className="note-bind" aria-hidden="true">
+        <span className="note-bind__dots" />
+        <span className="note-bind__title">{track.title}</span>
+      </div>
+      {withPlayer ? (
+        <div className="spotify-embed-shell">
+          <iframe
+            key={`${track.title}-${activeIndex}`}
+            title={track.title}
+            src={track.embedUrl}
+            width="100%"
+            height="352"
+            frameBorder="0"
+            allowFullScreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            style={{ borderRadius: '12px', display: 'block' }}
+          />
+          {overlay}
+        </div>
+      ) : (
+        <div className="note-preview" style={{ background: track.cover }}>
+          <strong>{track.title}</strong>
+          <span>{track.artist}</span>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default function Home({ onNavClick = () => {} }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [motion, setMotion] = useState(null);
+  const [hintOn, setHintOn] = useState(true);
+  const lockRef = useRef(false);
+  const touchRef = useRef({ x: 0, y: 0 });
+  const scrollZoneRef = useRef(null);
+  const idleTimerRef = useRef(0);
 
-  const activeTrack = useMemo(() => discographyItems[activeIndex], [activeIndex]);
+  const activeTrack = discographyItems[activeIndex];
+  const nextTrack = discographyItems[wrapIndex(activeIndex + 1)];
+  const prevTrack = discographyItems[wrapIndex(activeIndex - 1)];
+  const stackedTrack = discographyItems[wrapIndex(activeIndex + 2)];
 
-  const moveTrack = (direction) => {
-    setActiveIndex((prev) => {
-      const total = discographyItems.length;
-      return (prev + direction + total) % total;
-    });
+  const hideHint = useCallback(() => {
+    setHintOn(false);
+    window.clearTimeout(idleTimerRef.current);
+    idleTimerRef.current = window.setTimeout(() => setHintOn(true), 1200);
+  }, []);
+
+  const moveTrack = useCallback((direction) => {
+    if (lockRef.current || !direction) return;
+    lockRef.current = true;
+    hideHint();
+    setMotion(direction > 0 ? 'next' : 'prev');
+
+    window.setTimeout(() => {
+      setActiveIndex((current) => wrapIndex(current + direction));
+      setMotion(null);
+      lockRef.current = false;
+    }, 560);
+  }, [hideHint]);
+
+  useEffect(() => () => window.clearTimeout(idleTimerRef.current), []);
+
+  useEffect(() => {
+    const zone = scrollZoneRef.current;
+    if (!zone) return undefined;
+
+    const onWheel = (event) => {
+      if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      hideHint();
+      if (Math.abs(event.deltaY) < 16) return;
+      moveTrack(event.deltaY < 0 ? 1 : -1);
+    };
+
+    zone.addEventListener('wheel', onWheel, { passive: false });
+    return () => zone.removeEventListener('wheel', onWheel);
+  }, [activeIndex, hideHint, moveTrack]);
+
+  const onTouchStart = (event) => {
+    const touch = event.changedTouches[0];
+    touchRef.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const onTouchEnd = (event) => {
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - touchRef.current.x;
+    const dy = touchRef.current.y - touch.clientY;
+    if (Math.abs(dy) < 28 || Math.abs(dy) < Math.abs(dx)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    moveTrack(dy > 0 ? 1 : -1);
   };
 
   return (
     <section id="home" className="hero-section">
       <div className="home-top">
-        
-
-        <div className="hero-actions" aria-label="Acciones principales">
-          <a className="pill-btn pill-btn--primary" href="#services">contratar mezcla</a>
-          <a className="pill-btn pill-btn--secondary" href="#services">contratar beats</a>
-        </div>
+        <a
+          className="hire-line notranslate"
+          href="#servicios"
+          translate="no"
+          onClick={(event) => onNavClick(event, 'servicios')}
+          aria-label="Ir a servicios: contratá un beat, una mezcla o una canción"
+        >
+          <span className="hire-line__lead" />
+          <span className="hire-line__cycle">
+            <span className="hire-line__word hire-line__word--beat" />
+            <span className="hire-line__word hire-line__word--mix" />
+            <span className="hire-line__word hire-line__word--song" />
+          </span>
+        </a>
       </div>
 
-      
-
       <div className="portfolio-block regular-portfolio">
-        <div className="portfolio-header">
-          <div>
-            <h3>Discography</h3>
+        <div className={`note-deck ${motion ? `note-deck--${motion}` : ''}`}>
+          <div className="note-sheet note-sheet--depth-2" aria-hidden="true">
+            <NoteFace track={stackedTrack} />
           </div>
-        </div>
+          <div className="note-sheet note-sheet--depth-1" aria-hidden="true">
+            <NoteFace track={nextTrack} />
+          </div>
+          <div className="note-sheet note-sheet--under" aria-hidden="true">
+            <NoteFace track={nextTrack} />
+          </div>
 
-        <div className="arcade-player arcade-player--normal">
-          <button type="button" className="slider-arrow" onClick={() => moveTrack(-1)} aria-label="Tema anterior" >
-            ‹
-          </button>
+          {motion === 'prev' && (
+            <div className="note-sheet note-sheet--incoming">
+              <NoteFace track={prevTrack} />
+            </div>
+          )}
 
-          <div className="spotify-embed-shell">
-            <iframe
-              key={`${activeTrack.title}-${activeIndex}`}
-              title={activeTrack.title}
-              src={activeTrack.embedUrl}
-              width="100%"
-              height="352"
-              frameBorder="0"
-              allowFullScreen=""
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-              style={{ borderRadius: '12px', display: 'block' }}
+          <div className={`note-sheet note-sheet--front ${motion === 'next' ? 'is-peeling' : ''}`}>
+            <NoteFace
+              track={activeTrack}
+              withPlayer
+              activeIndex={activeIndex}
+              overlay={(
+                <>
+                  <div className={`note-scroll-mark ${hintOn ? 'is-hinting' : ''}`} aria-hidden="true">
+                    <span className="note-scroll-mark__chevron note-scroll-mark__chevron--up" />
+                    <span className="note-scroll-mark__wheel">
+                      <i />
+                    </span>
+                    <span className="note-scroll-mark__chevron note-scroll-mark__chevron--down" />
+                  </div>
+                  <div
+                    ref={scrollZoneRef}
+                    className="note-scroll-zone"
+                    onTouchStart={onTouchStart}
+                    onTouchEnd={onTouchEnd}
+                    aria-label="Scrolleá o deslizá sobre la canción para cambiar de tema"
+                  />
+                </>
+              )}
             />
           </div>
-
-          <button type="button" className="slider-arrow" onClick={() => moveTrack(1)} aria-label="Tema siguiente">
-            ›
-          </button>
         </div>
 
+        <MixCompare />
       </div>
     </section>
   );
