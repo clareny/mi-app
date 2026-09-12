@@ -1510,22 +1510,23 @@ body {
   }
 
   #servicios .services-section {
-    min-height: 0;
-    height: 100%;
+    min-height: calc(100vh - 95px);
+    height: calc(100vh - 95px);
+    max-height: calc(100vh - 95px);
     margin-bottom: 0;
-    margin-top: 0.45rem;
-    padding: 0.75rem 0.4rem 1.2rem;
+    margin-top: 0;
+    padding: 0;
     justify-content: flex-start;
     align-items: center;
   }
 
   #servicios .plan-grid {
-    flex: 0 1 auto;
+    flex: 1 1 auto;
     width: 100%;
     max-width: 1240px;
-    margin-top: calc(2.15rem + 0.85rem);
-    height: min(calc(296px + 0.85rem + 374px), calc(100% - 1.7rem));
-    max-height: calc(100% - 1.7rem);
+    margin-top: 0;
+    height: 100%;
+    max-height: 100%;
     gap: 1.15rem;
   }
 
@@ -1553,6 +1554,39 @@ body {
     font-size: 0.7rem;
     padding: 0.3rem 0.85rem;
   }
+
+  #servicios .plan-card__head {
+    min-height: 0;
+    padding: 0.95rem 1rem 0.75rem;
+  }
+
+  #servicios .plan-card__head h3 {
+    font-size: 1.45rem;
+  }
+
+  #servicios .plan-card__head p {
+    font-size: 0.8rem;
+  }
+
+  #servicios .plan-card__body {
+    padding: 0.7rem 1rem 0.2rem;
+    overflow: hidden;
+  }
+
+  #servicios .plan-card__hook {
+    display: block;
+    font-size: 0.86rem;
+    margin-bottom: 0.55rem;
+  }
+
+  #servicios .plan-card textarea {
+    min-height: 64px;
+  }
+
+  #servicios .plan-card__foot {
+    flex-shrink: 0;
+    padding: 0.7rem 1rem 0.95rem;
+  }
 }
 
 @media (min-width: 1025px) {
@@ -1568,6 +1602,23 @@ body {
   .plan-card__head {
     min-height: 5.2rem;
     padding: 1.15rem 1.15rem 1rem;
+  }
+
+  #servicios .plan-card__head {
+    min-height: 0;
+    padding: 0.95rem 1rem 0.75rem;
+  }
+
+  #servicios .plan-card__head h3 {
+    font-size: 1.45rem;
+  }
+
+  #servicios .plan-card__head p {
+    font-size: 0.8rem;
+  }
+
+  #servicios .plan-card textarea {
+    min-height: 64px;
   }
 
   .plan-card__head h3 {
