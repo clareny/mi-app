@@ -1,27 +1,10 @@
 import { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const WHATSAPP_NUMBER = '59897989368';
 
-const vocalServices = [
-  { name: 'Grabación', spec: 'Gain, HPF, Pro-DS / RX' },
-  { name: 'Edición', spec: 'Melodyne / Auto-Tune, RX' },
-  { name: 'Mezcla', spec: 'Pro-Q, CLA-76 / Pro-C' },
-];
-
-const beatServices = [
-  { name: 'Remake', spec: 'Tu referencia, en tu tono' },
-  { name: 'Custom beat', spec: 'Original para tu voz' },
-];
-
 const beatGenres = ['Trap', 'Rap', 'R&B', 'Reggaeton', 'Drill', 'Pop', 'Afrobeats', 'Lo-fi', 'Soul', 'House'];
 const beatKeys = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
-
-const comboRows = [
-  { label: 'Alcance', value: 'Canción completa' },
-  { label: 'Incluye', value: 'Vocal + instrumental' },
-  { label: 'Enfoque', value: 'Producción desde cero' },
-  { label: 'Entrega', value: 'Mezcla lista para subir' },
-];
 
 const AUTO_LINE = /^(Enfoque|Género|Tonalidad):/;
 
@@ -49,6 +32,7 @@ const buildBeatMessage = (selections, genre, key, scale, extra) => {
 };
 
 export default function Services() {
+  const { t } = useLanguage();
   const [vocalSelections, setVocalSelections] = useState([]);
   const [beatSelections, setBeatSelections] = useState([]);
   const [vocalExtra, setVocalExtra] = useState('');
@@ -61,10 +45,28 @@ export default function Services() {
   const vocalNeed = buildVocalMessage(vocalSelections, vocalExtra);
   const beatNeed = buildBeatMessage(beatSelections, beatGenre, beatKey, beatScale, beatExtra);
 
+  const vocalServices = [
+    { id: 'rec', spec: 'Gain, HPF, Pro-DS / RX' },
+    { id: 'edit', spec: 'Melodyne / Auto-Tune, RX' },
+    { id: 'mix', spec: 'Pro-Q, CLA-76 / Pro-C' },
+  ];
+
+  const beatServices = [
+    { id: 'remake', spec: t('services.remakeSpec') },
+    { id: 'custom', spec: t('services.customSpec') },
+  ];
+
+  const comboRows = [
+    { label: t('services.scope'), value: t('services.scopeVal') },
+    { label: t('services.includes'), value: t('services.includesVal') },
+    { label: t('services.focus'), value: t('services.focusVal') },
+    { label: t('services.delivery'), value: t('services.deliveryVal') },
+  ];
+
   const serviceTabs = [
-    { id: 'combo', label: 'Combo' },
-    { id: 'vocal', label: 'Vocal' },
-    { id: 'beats', label: 'Beats' },
+    { id: 'combo', label: t('services.combo') },
+    { id: 'vocal', label: t('services.vocal') },
+    { id: 'beats', label: t('services.beats') },
   ];
 
   const toggleSelection = (name, selectedItems, setSelectedItems) => {
@@ -77,7 +79,7 @@ export default function Services() {
 
   const buildWhatsAppLink = (type) => {
     if (type === 'combo') {
-      const message = 'Hola, estoy interesado en Combo completo: una canción, vocal + instrumental, producción desde cero.';
+      const message = 'Hola, estoy interesado en Combo: canción íntima, producción completa, virtual o presencial.';
       return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     }
 
@@ -107,13 +109,13 @@ export default function Services() {
       <div className="plan-grid">
         <article className={`plan-card plan-card--combo service-panel ${activeTab === 'combo' ? 'is-active' : ''}`}>
           <header className="plan-card__head">
-            <span className="plan-card__flag">Especial</span>
-            <h3>Combo</h3>
-            <p>Canción completa</p>
+            <span className="plan-card__flag">{t('services.flag')}</span>
+            <h3>{t('services.combo')}</h3>
+            <p>{t('services.comboTag')}</p>
           </header>
           <div className="plan-card__body">
             <p className="plan-card__hook">
-              Una canción, de cero a release. Voz e instrumental en la misma producción.
+              {t('services.comboHook')}
             </p>
             <ul className="plan-rows">
               {comboRows.map((row) => (
@@ -125,35 +127,35 @@ export default function Services() {
             </ul>
           </div>
           <div className="plan-card__foot">
-            <a className="btn btn-primary" href={buildWhatsAppLink('combo')} target="_blank" rel="noreferrer">
-              contratar combo
+            <a className="btn btn-primary" href={buildWhatsAppLink('combo')} target="_blank" rel="noopener noreferrer">
+              {t('services.hireCombo')}
             </a>
           </div>
         </article>
 
         <article className={`plan-card plan-card--vocal service-panel ${activeTab === 'vocal' ? 'is-active' : ''}`}>
           <header className="plan-card__head">
-            <h3>Vocal</h3>
-            <p>Solo voces</p>
+            <h3>{t('services.vocal')}</h3>
+            <p>{t('services.vocalTag')}</p>
           </header>
           <div className="plan-card__body">
             <p className="plan-card__hook">
-              Tu voz ya tiene la canción. Falta que se escuche como un release.
+              {t('services.vocalHook')}
             </p>
             <div className="plan-options">
               {vocalServices.map((service) => {
-                const isActive = vocalSelections.includes(service.name);
+                const isActive = vocalSelections.includes(service.id);
                 return (
                   <button
-                    key={service.name}
+                    key={service.id}
                     type="button"
                     className={`plan-option ${isActive ? 'is-active' : ''}`}
-                    onClick={() => toggleSelection(service.name, vocalSelections, setVocalSelections)}
+                    onClick={() => toggleSelection(service.id, vocalSelections, setVocalSelections)}
                     aria-pressed={isActive}
                   >
                     <span className="plan-option__check" aria-hidden="true">{isActive ? '✓' : '○'}</span>
                     <span className="plan-option__text">
-                      <strong>{service.name}</strong>
+                      <strong>{t(`services.${service.id}`)}</strong>
                       <small>{service.spec}</small>
                     </span>
                   </button>
@@ -162,41 +164,41 @@ export default function Services() {
             </div>
             <textarea
               rows="2"
-              placeholder="Contame el tema..."
+              placeholder={t('services.vocalPh')}
               value={vocalNeed}
               onChange={(e) => setVocalExtra(stripAutoLines(e.target.value))}
             />
           </div>
           <div className="plan-card__foot">
-            <a className="btn btn-primary" href={buildWhatsAppLink('vocal')} target="_blank" rel="noreferrer">
-              contratar mezcla
+            <a className="btn btn-primary" href={buildWhatsAppLink('vocal')} target="_blank" rel="noopener noreferrer">
+              {t('services.hireMix')}
             </a>
           </div>
         </article>
 
         <article className={`plan-card plan-card--beats service-panel ${activeTab === 'beats' ? 'is-active' : ''}`}>
           <header className="plan-card__head">
-            <h3>Beats</h3>
-            <p>Solo instrumental</p>
+            <h3>{t('services.beats')}</h3>
+            <p>{t('services.beatsTag')}</p>
           </header>
           <div className="plan-card__body">
             <p className="plan-card__hook">
-              Si el beat no te empuja a grabar hoy, no es el beat.
+              {t('services.beatsHook')}
             </p>
             <div className="plan-options">
               {beatServices.map((service) => {
-                const isActive = beatSelections.includes(service.name);
+                const isActive = beatSelections.includes(service.id);
                 return (
                   <button
-                    key={service.name}
+                    key={service.id}
                     type="button"
                     className={`plan-option ${isActive ? 'is-active' : ''}`}
-                    onClick={() => toggleSelection(service.name, beatSelections, setBeatSelections)}
+                    onClick={() => toggleSelection(service.id, beatSelections, setBeatSelections)}
                     aria-pressed={isActive}
                   >
                     <span className="plan-option__check" aria-hidden="true">{isActive ? '✓' : '○'}</span>
                     <span className="plan-option__text">
-                      <strong>{service.name}</strong>
+                      <strong>{t(`services.${service.id}`)}</strong>
                       <small>{service.spec}</small>
                     </span>
                   </button>
@@ -205,19 +207,19 @@ export default function Services() {
             </div>
             <div className="beat-spec beat-spec--compact">
               <label className="beat-spec__field">
-                <span className="service-form__label">Género</span>
-                <select value={beatGenre} onChange={(e) => setBeatGenre(e.target.value)} aria-label="Género del beat">
-                  <option value="">Elegí el género</option>
+                <span className="service-form__label">{t('services.genre')}</span>
+                <select value={beatGenre} onChange={(e) => setBeatGenre(e.target.value)} aria-label={t('services.genre')}>
+                  <option value="">{t('services.genrePh')}</option>
                   {beatGenres.map((genre) => (
                     <option key={genre} value={genre}>{genre}</option>
                   ))}
                 </select>
               </label>
               <label className="beat-spec__field">
-                <span className="service-form__label">Tonalidad</span>
+                <span className="service-form__label">{t('services.key')}</span>
                 <div className="beat-spec__key">
-                  <select value={beatKey} onChange={(e) => setBeatKey(e.target.value)} aria-label="Tonalidad del beat">
-                    <option value="">Nota</option>
+                  <select value={beatKey} onChange={(e) => setBeatKey(e.target.value)} aria-label={t('services.key')}>
+                    <option value="">{t('services.note')}</option>
                     {beatKeys.map((keyName) => (
                       <option key={keyName} value={keyName}>{keyName}</option>
                     ))}
@@ -231,7 +233,7 @@ export default function Services() {
                         onClick={() => setBeatScale(scale)}
                         aria-pressed={beatScale === scale}
                       >
-                        {scale}
+                        {scale === 'menor' ? t('services.minor') : t('services.major')}
                       </button>
                     ))}
                   </div>
@@ -240,14 +242,14 @@ export default function Services() {
             </div>
             <textarea
               rows="2"
-              placeholder="Referencias, mood..."
+              placeholder={t('services.beatPh')}
               value={beatNeed}
               onChange={(e) => setBeatExtra(stripAutoLines(e.target.value))}
             />
           </div>
           <div className="plan-card__foot">
-            <a className="btn btn-primary" href={buildWhatsAppLink('beat')} target="_blank" rel="noreferrer">
-              contratar beat
+            <a className="btn btn-primary" href={buildWhatsAppLink('beat')} target="_blank" rel="noopener noreferrer">
+              {t('services.hireBeat')}
             </a>
           </div>
         </article>

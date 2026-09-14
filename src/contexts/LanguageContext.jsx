@@ -1,144 +1,246 @@
-// Context para manejar el idioma en toda la aplicación
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-const LanguageContext = createContext();
+const LanguageContext = createContext({
+  language: 'es',
+  setLanguage: () => {},
+  t: (key) => key,
+});
 
-export const translations = {
+const translations = {
   es: {
-    // Navbar
     nav: {
       discography: 'discografía',
       services: 'servicios',
       bio: 'bio',
       contact: 'contacto',
+      lang: 'Idioma',
     },
-    // Home/Portfolio
     home: {
-      discography: 'Discography',
-      hireForMixing: 'contratar mezcla',
-      hireForBeats: 'contratar beats',
+      hireLead: 'hoy suena tu',
+      wordBeat: 'beat',
+      wordMix: 'mezcla',
+      wordSong: 'canción',
+      hireAria: 'Ir a servicios: contratá un beat, una mezcla o una canción',
     },
-    // Services
+    mix: {
+      eyebrow: 'Producción',
+      title: 'Antes y después',
+      copy: 'Remake del beat y mezcla de las voces.',
+      before: 'Antes',
+      after: 'Después',
+      beforeCap: 'Maqueta · idea original',
+      afterCap: 'Remake + voces mezcladas · hasta 2:07',
+    },
     services: {
+      combo: 'Combo',
       vocal: 'Vocal',
       beats: 'Beats',
-      recordingAndMixing: 'Grabación + mezcla',
-      remakeAndCustomBeat: 'Remake + custom beat',
-      chooseApproach: 'Elegí el enfoque',
-      recording: 'Grabación de voces',
-      recordingDesc: 'Voz limpia y estable para grabar con claridad.',
-      editing: 'Edición vocal',
-      editingDesc: 'Afinación, recorte y pulido para una entrega más sólida.',
-      mixing: 'Mezcla vocal',
-      mixingDesc: 'Sonido más amplio, equilibrado y listo para lanzar.',
+      flag: 'Especial',
+      comboTag: 'Enfoque íntimo',
+      comboHook: 'Una canción con conexión propia: el color del artista, no un molde. Producción completa, mezcla vocal creativa y un beat que se arma como un puzzle.',
+      scope: 'Sesión',
+      scopeVal: 'Virtual o presencial',
+      includes: 'Incluye',
+      includesVal: 'Producción + mezcla vocal',
+      focus: 'El beat',
+      focusVal: 'Modificable, como un puzzle',
+      delivery: 'Si es virtual',
+      deliveryVal: 'Grabás vos o en un estudio',
+      hireCombo: 'contratar combo',
+      vocalTag: 'Voces ya grabadas',
+      vocalHook: 'Si ya tenés las voces, contrato la mezcla vocal. Las dejo claras, con color, y bien sentadas sobre tu beat.',
+      rec: 'Grabación',
+      edit: 'Edición',
+      mix: 'Mezcla',
+      vocalPh: 'Contame el tema y cómo lo querés sentir...',
+      hireMix: 'contratar mezcla',
+      beatsTag: 'Remake o custom',
+      beatsHook: 'Remake: recreo el beat y le hago cambios ligeros. Custom: un instrumental nuevo, a tu estilo y a tu idea, para que suenes distinto.',
       remake: 'Remake',
-      remakeDesc: 'Adaptación del estilo a la idea del proyecto.',
-      customBeat: 'Custom beat',
-      customBeatDesc: 'Beat original a medida según la referencia.',
-      whatDoYouNeed: 'Qué necesitás?',
-      whatStyleLooking: 'Qué estilo buscas?',
-      hireMixing: 'contratar mezcla',
+      remakeSpec: 'Recreo el beat, cambios sutiles',
+      custom: 'Custom beat',
+      customSpec: 'Nuevo, a tu estilo e idea',
+      genre: 'Género',
+      genrePh: 'Elegí el género',
+      key: 'Tonalidad',
+      note: 'Nota',
+      minor: 'menor',
+      major: 'mayor',
+      beatPh: 'Referencias, mood...',
       hireBeat: 'contratar beat',
     },
-    // About
     about: {
-      title: 'Clareny',
-      description: 'Hola, soy Clareny. Me gusta trabajar en ideas profundas, con una intención clara y un sonido que conecte más allá de lo superficial. Llevo años acompañando artistas y proyectos con una mirada creativa y técnica, cuidando cada detalle para que la música se sienta auténtica, clara y memorable. Me interesa transformar ideas en experiencias sonoras con identidad propia, con sensibilidad, rigor y una visión más grande que el simple resultado final.',
+      kicker: 'Productor e ingeniero de mezcla',
+      role: 'GRAYKIDS',
+      p1: 'A lo largo de los años trabajé con artistas, compositores y escritores. Ahí aprendí a conectar las ideas del artista para que se hagan realidad y se sientan en cada creación.',
+      p2: 'Produzco canciones. No un molde: el color del artista, la conexión, el corte que hace que el tema se quede.',
+      p3: 'Como ingeniero de mezcla dejo la voz y el beat en el mismo mundo: claros, con peso, listos para streaming.',
+      credits: 'Producción y mezcla para',
     },
-    // Contact
     contact: {
       title: 'Contacto',
-      description: 'Si querés trabajar conmigo, mandame WhatsApp con lo que necesitás y te respondo con una propuesta acorde a la idea. También podés reservar una videollamada por Discord para hablar ideas, escuchar referencias y resolver dudas antes de arrancar.',
-      importantNotice: 'Aviso importante',
-      noticeText: 'Toda sesión de trabajo se realizará por Discord en una videollamada de uno a uno, para mantener el proceso claro, directo y profesional.',
-      pricesNotice: 'Los precios se ajustan según el proyecto, la complejidad y el alcance del trabajo. Escribime y te paso una propuesta acorde a lo que necesitás.',
-      sendWhatsApp: 'Enviar WhatsApp',
-      joinDiscord: 'Entrar a Discord',
+      copy: 'Escribime desde Montevideo o de afuera. Acá coordinamos. En Discord se escucha y se cierra.',
+      badge: 'Estudio en vivo',
+      discord: 'Entrar a Discord',
+      discordCopy: 'Videollamada uno a uno. Horario, referencias y arrancamos.',
+      join: 'Unirme',
+      name: 'Nombre',
+      namePh: 'Cómo te llamás',
+      email: 'Tu correo',
+      emailPh: 'para responderte',
+      message: 'Mensaje',
+      messagePh: 'Contame el proyecto, referencias, plazos o lo que haga falta...',
+      sendMail: 'Enviar correo',
+      sending: 'Enviando...',
+      sendWa: 'Enviar WhatsApp',
+      needMsg: 'Escribí un mensaje para enviarlo.',
+      needMail: 'Para el correo, dejame tu email así te puedo responder.',
+      badMail: 'Ese correo no se ve válido.',
+      wait: 'Esperá unos segundos y volvé a intentar.',
+      openingWa: 'Abriendo WhatsApp con tu mensaje...',
+      sent: 'Listo. El mensaje ya salió por correo.',
+      mailFallback: 'Abrí tu correo con el mensaje listo para enviar.',
+      note: 'Sesiones uno a uno por Discord. Atención en Montevideo y en remoto.',
+    },
+    footer: {
+      rights: '© 2026 GRAYKIDS. Todos los derechos reservados.',
+      meta: 'CEO Clareny · Certificado TLS',
     },
   },
   en: {
-    // Navbar
     nav: {
       discography: 'discography',
       services: 'services',
       bio: 'bio',
       contact: 'contact',
+      lang: 'Language',
     },
-    // Home/Portfolio
     home: {
-      discography: 'Discography',
-      hireForMixing: 'hire for mixing',
-      hireForBeats: 'hire for beats',
+      hireLead: 'today, your',
+      wordBeat: 'beat',
+      wordMix: 'mix',
+      wordSong: 'song',
+      hireAria: 'Go to services: book a beat, a mix or a song',
     },
-    // Services
+    mix: {
+      eyebrow: 'Production',
+      title: 'Before and after',
+      copy: 'Beat remake and vocal mix.',
+      before: 'Before',
+      after: 'After',
+      beforeCap: 'Demo · original idea',
+      afterCap: 'Remake + mixed vocals · until 2:07',
+    },
     services: {
+      combo: 'Combo',
       vocal: 'Vocal',
       beats: 'Beats',
-      recordingAndMixing: 'Recording + mixing',
-      remakeAndCustomBeat: 'Remake + custom beat',
-      chooseApproach: 'Choose your approach',
-      recording: 'Voice recording',
-      recordingDesc: 'Clean and stable voice for clear recording.',
-      editing: 'Vocal editing',
-      editingDesc: 'Tuning, trimming and polishing for a more solid delivery.',
-      mixing: 'Vocal mixing',
-      mixingDesc: 'Wider, balanced sound ready to release.',
+      flag: 'Featured',
+      comboTag: 'Intimate focus',
+      comboHook: 'A song with your own connection: the artist’s color, not a template. Full production, a creative vocal mix, and a beat you can reshape like a puzzle.',
+      scope: 'Session',
+      scopeVal: 'Online or in person',
+      includes: 'Includes',
+      includesVal: 'Production + vocal mix',
+      focus: 'The beat',
+      focusVal: 'Flexible, like a puzzle',
+      delivery: 'If online',
+      deliveryVal: 'You record, or a studio does',
+      hireCombo: 'book combo',
+      vocalTag: 'Vocals already recorded',
+      vocalHook: 'If you already have the vocals, you hire the vocal mix. I make them sit on your beat: clear, with color, ready to release.',
+      rec: 'Recording',
+      edit: 'Editing',
+      mix: 'Mixing',
+      vocalPh: 'Tell me about the track and how you want it to feel...',
+      hireMix: 'book mixing',
+      beatsTag: 'Remake or custom',
+      beatsHook: 'Remake: I rebuild the beat and make light changes. Custom: a new instrumental in your style and idea, so you sound like yourself.',
       remake: 'Remake',
-      remakeDesc: 'Style adaptation to the project idea.',
-      customBeat: 'Custom beat',
-      customBeatDesc: 'Original custom beat according to reference.',
-      whatDoYouNeed: 'What do you need?',
-      whatStyleLooking: 'What style are you looking for?',
-      hireMixing: 'hire mixing',
-      hireBeat: 'hire beat',
+      remakeSpec: 'Rebuild the beat, light changes',
+      custom: 'Custom beat',
+      customSpec: 'New, in your style and idea',
+      genre: 'Genre',
+      genrePh: 'Pick a genre',
+      key: 'Key',
+      note: 'Note',
+      minor: 'minor',
+      major: 'major',
+      beatPh: 'References, mood...',
+      hireBeat: 'book beat',
     },
-    // About
     about: {
-      title: 'Clareny',
-      description: "Hi, I'm Clareny. I like working on deep ideas, with clear intention and a sound that connects beyond the superficial. I've been accompanying artists and projects for years with a creative and technical perspective, taking care of every detail so that the music feels authentic, clear and memorable. I'm interested in transforming ideas into sound experiences with their own identity, with sensitivity, rigor and a vision greater than the simple final result.",
+      kicker: 'Producer and mix engineer',
+      role: 'GRAYKIDS',
+      p1: 'Over the years I have worked with artists, composers and writers. That is how I learned to connect an artist’s ideas so they can become real, and live inside every record.',
+      p2: 'I produce songs. Not a template: the artist’s color, the connection, the cut that makes the track stay.',
+      p3: 'As a mix engineer I put the vocal and the beat in the same world: clear, with weight, ready for streaming.',
+      credits: 'Production and mix for',
     },
-    // Contact
     contact: {
       title: 'Contact',
-      description: 'If you want to work with me, send me a WhatsApp with what you need and I\'ll respond with a proposal according to the idea. You can also book a video call on Discord to discuss ideas, listen to references and resolve doubts before starting.',
-      importantNotice: 'Important notice',
-      noticeText: 'All work sessions will be conducted via Discord in a one-on-one video call, to keep the process clear, direct and professional.',
-      pricesNotice: 'Prices are adjusted according to the project, complexity and scope of work. Write me and I\'ll send you a proposal according to what you need.',
-      sendWhatsApp: 'Send WhatsApp',
-      joinDiscord: 'Join Discord',
+      copy: 'Write from Montevideo or abroad. We coordinate here. On Discord we listen and lock it in.',
+      badge: 'Live session',
+      discord: 'Join Discord',
+      discordCopy: 'One-to-one video call. Time, references, and we start.',
+      join: 'Join',
+      name: 'Name',
+      namePh: 'What should I call you',
+      email: 'Your email',
+      emailPh: 'so I can reply',
+      message: 'Message',
+      messagePh: 'Tell me about the project, references, deadlines or whatever you need...',
+      sendMail: 'Send email',
+      sending: 'Sending...',
+      sendWa: 'Send WhatsApp',
+      needMsg: 'Write a message to send it.',
+      needMail: 'For email, leave your address so I can reply.',
+      badMail: 'That email does not look valid.',
+      wait: 'Wait a few seconds and try again.',
+      openingWa: 'Opening WhatsApp with your message...',
+      sent: 'Done. The message went out by email.',
+      mailFallback: 'I opened your mail app with the message ready to send.',
+      note: 'One-to-one sessions on Discord. Work from Montevideo and remotely.',
+    },
+    footer: {
+      rights: '© 2026 GRAYKIDS. All rights reserved.',
+      meta: 'CEO Clareny · TLS secured',
     },
   },
 };
 
+const readText = (tree, key) => {
+  const value = key.split('.').reduce((acc, part) => acc?.[part], tree);
+  return typeof value === 'string' ? value : key;
+};
+
 export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState('es');
-
-  const toggleLanguage = () => {
-    setLanguage(prev => prev === 'es' ? 'en' : 'es');
-  };
-
-  const t = (key) => {
-    const keys = key.split('.');
-    let value = translations[language];
-    
-    for (const k of keys) {
-      value = value?.[k];
+  const [language, setLanguage] = useState(() => {
+    try {
+      return localStorage.getItem('clareny-lang') === 'en' ? 'en' : 'es';
+    } catch {
+      return 'es';
     }
-    
-    return value || key;
-  };
+  });
+
+  useEffect(() => {
+    document.documentElement.lang = language === 'en' ? 'en' : 'es';
+    try {
+      localStorage.setItem('clareny-lang', language);
+    } catch {
+      /* ignore */
+    }
+  }, [language]);
+
+  const t = (key) => readText(translations[language], key);
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
 }
 
 export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
+  return useContext(LanguageContext);
 }

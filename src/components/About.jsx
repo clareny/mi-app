@@ -1,6 +1,8 @@
 import { useRef } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export default function About() {
+  const { t } = useLanguage();
   const basePath = import.meta.env.BASE_URL;
   const socialsRef = useRef(null);
 
@@ -11,6 +13,19 @@ export default function About() {
     { label: 'YouTube', url: 'https://www.youtube.com/c/clareny', icon: 'youtube.svg' },
     { label: 'Beats YouTube', url: 'https://www.youtube.com/@clarenyonthetrack', icon: 'youtubemusic.svg' },
     { label: 'Spotify', url: 'https://open.spotify.com/artist/1kS2GOJRVZeWbgeuNrdpaE', icon: 'spotify.svg' },
+  ];
+
+  const credits = [
+    'Red21',
+    'Easy Mo',
+    'Snokblaze',
+    'Bment',
+    'Darkxox',
+    'BA',
+    'Miserable',
+    'Laika',
+    'Parimyos',
+    'Kodsay',
   ];
 
   const resetSocialMotion = () => {
@@ -38,19 +53,23 @@ export default function About() {
 
   return (
     <section id="about" className="about-section">
-      <h2 className="section-title">Clareny</h2>
+      <header className="about-head">
+        <p className="about-kicker">{t('about.kicker')}</p>
+        <h2 className="section-title">Clareny</h2>
+        <p className="about-role">{t('about.role')}</p>
+      </header>
 
       <div className="about-showcase">
         <div className="about-visual">
-          <img src={`${basePath}/fotoclarenyabout.jpg`} alt="Clareny" className="about-photo" />
+          <img src={`${basePath}fotoclarenyabout.jpg`} alt="Clareny, productor e ingeniero de mezcla" className="about-photo" />
         </div>
 
         <div className="about-copy-wrap">
-          <p className="about-copy about-copy--3">
-            Hola, soy Clareny. Me gusta trabajar en ideas profundas, con una intención clara y un sonido que conecte más allá de lo superficial.
-            Llevo años acompañando artistas y proyectos con una mirada creativa y técnica, cuidando cada detalle para que la música se sienta auténtica, clara y memorable.
-            Me interesa transformar ideas en experiencias sonoras con identidad propia, con sensibilidad, rigor y una visión más grande que el simple resultado final.
-          </p>
+          <p className="about-copy">{t('about.p1')}</p>
+          <p className="about-copy">{t('about.p2')}</p>
+          <p className="about-credits-label">{t('about.credits')}</p>
+          <p className="about-credits">{credits.join('  ·  ')}</p>
+          <p className="about-copy about-copy--line">{t('about.p3')}</p>
 
           <div
             className="bio-socials"
@@ -64,13 +83,13 @@ export default function About() {
                 key={link.label}
                 href={link.url}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="bio-social"
                 aria-label={link.label}
                 data-label={link.label}
               >
                 <span className="bio-social__ring" aria-hidden="true" />
-                <img src={`${basePath}/icons/${link.icon}`} alt="" className="bio-social__icon" />
+                <img src={`${basePath}icons/${link.icon}`} alt="" className="bio-social__icon" />
               </a>
             ))}
           </div>

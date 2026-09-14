@@ -1,14 +1,23 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const CONTACT_EMAIL = 'spieronilton@gmail.com';
 const WHATSAPP_NUMBER = '59897989368';
+const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const LIMITS = { name: 80, email: 120, message: 2000 };
+const SEND_COOLDOWN_MS = 12000;
+
+const clip = (value, max) => value.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').slice(0, max);
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [name, setName] = useState('');
   const [senderEmail, setSenderEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [honeypot, setHoneypot] = useState('');
   const [status, setStatus] = useState('');
   const [sending, setSending] = useState(false);
+  const lastSendRef = useRef(0);
 
   const composedMessage = () => {
     const intro = name.trim() ? `Hola, soy ${name.trim()}.` : 'Hola, te escribo desde la web.';
@@ -30,22 +39,32 @@ export default function Contact() {
 
   const handleWhatsApp = (event) => {
     event.preventDefault();
+    if (honeypot.trim()) return;
     if (!message.trim()) {
-      setStatus('Escribí un mensaje para enviarlo.');
+      setStatus(t('contact.needMsg'));
       return;
     }
-    setStatus('Abriendo WhatsApp con tu mensaje...');
+    setStatus(t('contact.openingWa'));
     window.open(buildWhatsAppLink(), '_blank', 'noopener,noreferrer');
   };
 
   const handleEmail = async (event) => {
     event.preventDefault();
     if (!message.trim()) {
-      setStatus('Escribí un mensaje para enviarlo.');
+      setStatus(t('contact.needMsg'));
       return;
     }
+    if (honeypot.trim()) return;
     if (!senderEmail.trim()) {
-      setStatus('Para el correo, dejame tu email así te puedo responder.');
+      setStatus(t('contact.needMail'));
+      return;
+    }
+    if (!EMAIL_OK.test(senderEmail.trim())) {
+      setStatus(t('contact.badMail'));
+      return;
+    }
+    if (Date.now() - lastSendRef.current < SEND_COOLDOWN_MS) {
+      setStatus(t('contact.wait'));
       return;
     }
 
@@ -64,6 +83,8 @@ export default function Contact() {
           email: senderEmail.trim(),
           message: composedMessage(),
           _subject: 'Contacto desde la web — Clareny',
+          _honey: honeypot,
+          _captcha: 'false',
         }),
       });
 
@@ -71,11 +92,12 @@ export default function Contact() {
         throw new Error('formsubmit');
       }
 
-      setStatus('Listo. El mensaje ya salió por correo.');
+      lastSendRef.current = Date.now();
+      setStatus(t('contact.sent'));
       setMessage('');
     } catch {
       openMailto();
-      setStatus('Abrí tu correo con el mensaje listo para enviar.');
+      setStatus(t('contact.mailFallback'));
     } finally {
       setSending(false);
     }
@@ -83,21 +105,21 @@ export default function Contact() {
 
   return (
     <section id="contact" className="contact-section">
-      <h2 className="section-title">Contacto</h2>
+      <h2 className="section-title">{t('contact.title')}</h2>
       <p className="contact-copy">
-        Escribime lo que necesitás por correo o WhatsApp. La sesión de trabajo, después, es en Discord: ahí se escucha, se habla y se cierra.
+        {t('contact.copy')}
       </p>
 
       <a
         className="discord-cta"
         href="https://discord.gg/8zuG68qvvv"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
       >
-        <span className="discord-cta__badge">Acá se trabaja</span>
+        <span className="discord-cta__badge">{t('contact.badge')}</span>
         <div className="discord-cta__copy">
-          <strong>Entrar a Discord</strong>
-          <p>Videollamada uno a uno. Entrá, coordinamos horarios y arrancamos el tema.</p>
+          <strong>{t('contact.discord')}</strong>
+          <p>{t('contact.discordCopy')}</p>
         </div>
         <span className="discord-cta__button">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -106,46 +128,61 @@ export default function Contact() {
               d="M19.27 5.33A17.2 17.2 0 0 0 15.07 4c-.18.32-.39.76-.53 1.1a16.1 16.1 0 0 0-5.08 0A10 10 0 0 0 8.93 4a17.3 17.3 0 0 0-4.22 1.34C1.78 9.05 1.17 12.66 1.48 16.22A17.4 17.4 0 0 0 6.9 18.5c.36-.49.68-1.01.96-1.56-.53-.2-1.04-.44-1.52-.72.13-.1.25-.2.37-.3 2.92 1.36 6.08 1.36 8.97 0 .12.1.24.2.37.3-.48.28-.99.52-1.52.72.28.55.6 1.07.96 1.56a17.3 17.3 0 0 0 5.42-2.28c.37-4.14-.63-7.72-2.64-10.89ZM8.68 14.33c-.88 0-1.6-.82-1.6-1.82s.71-1.82 1.6-1.82 1.61.82 1.61 1.82-.72 1.82-1.61 1.82Zm6.64 0c-.88 0-1.6-.82-1.6-1.82s.71-1.82 1.6-1.82 1.61.82 1.61 1.82-.73 1.82-1.61 1.82Z"
             />
           </svg>
-          Unirme
+          {t('contact.join')}
         </span>
       </a>
 
       <form className="contact-form" onSubmit={handleEmail}>
         <div className="contact-form__row">
           <label className="contact-form__field">
-            <span>Nombre</span>
+            <span>{t('contact.name')}</span>
             <input
               type="text"
               name="name"
               autoComplete="name"
-              placeholder="Cómo te llamás"
+              placeholder={t('contact.namePh')}
+              maxLength={LIMITS.name}
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(clip(e.target.value, LIMITS.name))}
             />
           </label>
           <label className="contact-form__field">
-            <span>Tu correo</span>
+            <span>{t('contact.email')}</span>
             <input
               type="email"
               name="email"
               autoComplete="email"
-              placeholder="para responderte"
+              placeholder={t('contact.emailPh')}
+              maxLength={LIMITS.email}
               value={senderEmail}
-              onChange={(e) => setSenderEmail(e.target.value)}
+              onChange={(e) => setSenderEmail(clip(e.target.value, LIMITS.email))}
             />
           </label>
         </div>
 
+        <label className="contact-form__honeypot" aria-hidden="true">
+          <span>Empresa</span>
+          <input
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+          />
+        </label>
+
         <label className="contact-form__field">
-          <span>Mensaje</span>
+          <span>{t('contact.message')}</span>
           <textarea
             name="message"
             rows="4"
             required
-            placeholder="Contame el proyecto, referencias, plazos o lo que haga falta..."
+            maxLength={LIMITS.message}
+            placeholder={t('contact.messagePh')}
             value={message}
             onChange={(e) => {
-              setMessage(e.target.value);
+              setMessage(clip(e.target.value, LIMITS.message));
               if (status) setStatus('');
             }}
           />
@@ -153,23 +190,23 @@ export default function Contact() {
 
         <div className="contact-form__actions">
           <button className="btn btn-outline-light btn-lg" type="submit" disabled={sending}>
-            {sending ? 'Enviando...' : 'Enviar correo'}
+            {sending ? t('contact.sending') : t('contact.sendMail')}
           </button>
           <a
             className="btn btn-primary btn-lg"
             href={message.trim() ? buildWhatsAppLink() : `https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             onClick={handleWhatsApp}
           >
-            Enviar WhatsApp
+            {t('contact.sendWa')}
           </a>
         </div>
 
         {status ? <p className="contact-form__status" role="status">{status}</p> : null}
       </form>
 
-      <p className="contact-note">Toda sesión de trabajo es por Discord, en una videollamada de uno a uno.</p>
+      <p className="contact-note">{t('contact.note')}</p>
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 import MixCompare from './MixCompare';
 
 const discographyItems = [
@@ -89,6 +90,7 @@ function NoteFace({ track, withPlayer = false, activeIndex = 0, overlay = null }
 }
 
 export default function Home({ onNavClick = () => {} }) {
+  const { t } = useLanguage();
   const [activeIndex, setActiveIndex] = useState(0);
   const [motion, setMotion] = useState(null);
   const [hintOn, setHintOn] = useState(true);
@@ -159,17 +161,16 @@ export default function Home({ onNavClick = () => {} }) {
     <section id="home" className="hero-section">
       <div className="home-top">
         <a
-          className="hire-line notranslate"
+          className="hire-line"
           href="#servicios"
-          translate="no"
           onClick={(event) => onNavClick(event, 'servicios')}
-          aria-label="Ir a servicios: contratá un beat, una mezcla o una canción"
+          aria-label={t('home.hireAria')}
         >
-          <span className="hire-line__lead" />
+          <span className="hire-line__lead">{t('home.hireLead')}</span>
           <span className="hire-line__cycle">
-            <span className="hire-line__word hire-line__word--beat" />
-            <span className="hire-line__word hire-line__word--mix" />
-            <span className="hire-line__word hire-line__word--song" />
+            <span className="hire-line__word hire-line__word--beat">{t('home.wordBeat')}</span>
+            <span className="hire-line__word hire-line__word--mix">{t('home.wordMix')}</span>
+            <span className="hire-line__word hire-line__word--song">{t('home.wordSong')}</span>
           </span>
         </a>
       </div>

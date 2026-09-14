@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import About from './components/About';
 import Contact from './components/contact';
+import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Home from './components/Portfolio';
 import Services from './components/Services';
@@ -76,12 +77,12 @@ function App() {
   return (
     <div className={`app-shell ${isReady ? 'is-ready' : 'is-loading'}`}>
       <div className={`page-background ${peekBackground ? 'is-peeking' : ''}`} aria-hidden="true">
-        <img src={`${basePath}/Backgroundprincipal.png`} alt="" className="page-bg-main" />
+        <img src={`${basePath}Backgroundprincipal.png`} alt="" className="page-bg-main" />
       </div>
 
       {!isReady && (
         <div className="brand-loader" aria-live="polite">
-          <img src={`${basePath}/logocarga.png`} alt="Clareny" className="brand-loader__logo" />
+          <img src={`${basePath}logoblanco.png`} alt="Clareny" className="brand-loader__logo" />
         </div>
       )}
 
@@ -106,6 +107,7 @@ function App() {
             <Contact />
           </div>
         </main>
+        <Footer />
       </div>
     </div>
   );

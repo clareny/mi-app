@@ -2,15 +2,94 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/mi-app/logo-clareny.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#111827" />
-    <meta name="description" content="Clareny — Producción, grabación y mezcla vocal" />
-    <link rel="manifest" href="/mi-app/manifest.json" />
-    <title>Clareny</title>
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Clareny | Productor y mezcla en Montevideo</title>
+    <meta
+      name="description"
+      content="Clareny produce, graba y mezcla en Montevideo y en remoto. CEO de GRAYKIDS. Urbano, pop, R&amp;B y alternativas listos para Spotify y Apple Music."
+    />
+    <meta
+      name="keywords"
+      content="Clareny, productor musical Montevideo, ingeniero de mezcla Uruguay, producción vocal, beats, GRAYKIDS, SoundBetter, BeatStars"
+    />
+    <meta name="author" content="Clareny" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://clareny.com/" />
+    <meta name="geo.region" content="UY-MO" />
+    <meta name="geo.placename" content="Montevideo" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_UY" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:site_name" content="Clareny" />
+    <meta property="og:url" content="https://clareny.com/" />
+    <meta property="og:title" content="Clareny | Productor y mezcla en Montevideo" />
+    <meta
+      property="og:description"
+      content="Producción, grabación y mezcla para artistas de Montevideo y del exterior. Sesiones uno a uno. Sello GRAYKIDS."
+    />
+    <meta property="og:image" content="https://clareny.com/fotoclarenyabout.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Clareny | Productor y mezcla en Montevideo" />
+    <meta
+      name="twitter:description"
+      content="Producción y mezcla en Montevideo y en remoto. CEO de GRAYKIDS."
+    />
+    <meta name="twitter:image" content="https://clareny.com/fotoclarenyabout.jpg" />
+    <link rel="manifest" href="/manifest.json" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://clareny.com/#clareny",
+            "name": "Clareny",
+            "jobTitle": "Productor musical e ingeniero de mezcla",
+            "description": "Productor, compositor e ingeniero de mezcla. CEO de GRAYKIDS. Atiende en Montevideo y en remoto.",
+            "birthPlace": { "@type": "Place", "name": "Lima, Perú" },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Montevideo",
+              "addressCountry": "UY"
+            },
+            "email": "spieronilton@gmail.com",
+            "url": "https://clareny.com/",
+            "image": "https://clareny.com/fotoclarenyabout.jpg",
+            "worksFor": { "@type": "Organization", "name": "GRAYKIDS" },
+            "knowsLanguage": ["es", "en"],
+            "sameAs": [
+              "https://open.spotify.com/artist/1kS2GOJRVZeWbgeuNrdpaE",
+              "https://www.instagram.com/clarenymusic",
+              "https://www.facebook.com/clarenymusic/",
+              "https://www.tiktok.com/@clarenymusic",
+              "https://www.youtube.com/c/clareny",
+              "https://soundbetter.com/profiles/265231-clareny"
+            ]
+          },
+          {
+            "@type": "ProfessionalService",
+            "name": "Clareny",
+            "image": "https://clareny.com/fotoclarenyabout.jpg",
+            "logo": "https://clareny.com/logo-clareny.png",
+            "url": "https://clareny.com/",
+            "email": "spieronilton@gmail.com",
+            "areaServed": ["Montevideo", "Uruguay", "Worldwide"],
+            "serviceType": ["Producción musical", "Mezcla", "Composición", "Beats"],
+            "availableLanguage": ["Spanish", "English"],
+            "founder": { "@id": "https://clareny.com/#clareny" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <noscript>Necesitas activar JavaScript para utilizar esta aplicación.</noscript>
+    <noscript>Clareny — productor y mezcla en Montevideo. Activá JavaScript para ver la web.</noscript>
     <div id="root"></div>
     <script type="module" src="/src/index.jsx"></script>
   </body>

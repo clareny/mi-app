@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const RESULTADO_LIMIT_MS = (2 * 60 + 7) * 1000;
 
@@ -24,21 +25,22 @@ function loadSoundCloudApi() {
 }
 
 export default function MixCompare() {
+  const { t } = useLanguage();
   const resultadoRef = useRef(null);
 
   const clips = [
     {
       id: 'antes',
-      label: 'Antes',
-      caption: 'Maqueta · idea original',
+      label: t('mix.before'),
+      caption: t('mix.beforeCap'),
       title: 'MAQUETA',
       href: 'https://soundcloud.com/clarenymusic/maqueta/s-wD5zXGeNnjz',
       src: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%3Atracks%3A2398921599%3Fsecret_token%3Ds-wD5zXGeNnjz&color=%23a65ee3&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false',
     },
     {
       id: 'despues',
-      label: 'Después',
-      caption: 'Remake + voces mezcladas · hasta 2:07',
+      label: t('mix.after'),
+      caption: t('mix.afterCap'),
       title: 'RESULTADO',
       href: 'https://soundcloud.com/clarenymusic/resultado',
       src: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2398922043&color=%2325cfde&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false',
@@ -73,9 +75,9 @@ export default function MixCompare() {
   return (
     <div className="mix-compare">
       <div className="mix-compare__header">
-        <p className="eyebrow">Producción</p>
-        <h3>Antes y después</h3>
-        <p>Remake del beat y mezcla de las voces.</p>
+        <p className="eyebrow">{t('mix.eyebrow')}</p>
+        <h3>{t('mix.title')}</h3>
+        <p>{t('mix.copy')}</p>
       </div>
 
       <div className="mix-compare__list">
@@ -83,7 +85,7 @@ export default function MixCompare() {
           <article key={clip.id} className={`mix-sc mix-sc--${clip.id}`}>
             <div className="mix-sc__meta">
               <strong>{clip.label}</strong>
-              <a href={clip.href} target="_blank" rel="noreferrer">{clip.caption}</a>
+              <a href={clip.href} target="_blank" rel="noopener noreferrer">{clip.caption}</a>
             </div>
             <iframe
               ref={clip.id === 'despues' ? resultadoRef : undefined}

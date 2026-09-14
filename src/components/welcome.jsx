@@ -58,7 +58,7 @@ export default function Welcome() {
           <h2>Conectá conmigo</h2>
           <div className="social-links">
             {links.map((link) => (
-              <a key={link.label} href={link.url} target="_blank" rel="noreferrer">
+              <a key={link.label} href={link.url} target="_blank" rel="noopener noreferrer">
                 {link.label}
               </a>
             ))}
