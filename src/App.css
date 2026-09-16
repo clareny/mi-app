@@ -1752,9 +1752,14 @@ body {
     justify-content: space-between;
     align-items: stretch;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(10, 14, 16, 0.65), rgba(6, 8, 10, 0.55));
+    background: linear-gradient(135deg, rgba(12, 18, 22, 0.85), rgba(8, 12, 16, 0.75));
     border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    box-shadow: 
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+      0 20px 50px rgba(0, 0, 0, 0.5), 
+      0 8px 20px rgba(0, 0, 0, 0.35),
+      0 4px 10px rgba(0, 0, 0, 0.25),
+      0 1px 3px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
   }
