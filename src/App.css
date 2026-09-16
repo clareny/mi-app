@@ -1737,6 +1737,7 @@ body {
   #sobre-mi .about-section,
   #contacto .contact-section {
     --panel-side: min(620px, calc(100vh - 96px), 92%);
+    position: relative;
     width: var(--panel-side);
     height: var(--panel-side);
     min-width: 0;
@@ -1750,11 +1751,30 @@ body {
     align-items: stretch;
     gap: 0.45rem;
     overflow: hidden;
-    background: rgba(10, 10, 12, 0.58);
+    background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px) saturate(140%);
-    -webkit-backdrop-filter: blur(12px) saturate(140%);
+  }
+
+  /* El blur va en esta capa, no en el recuadro recortado: así Chrome no lo apaga. */
+  #sobre-mi .about-section::before,
+  #contacto .contact-section::before {
+    display: block;
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: rgba(10, 12, 16, 0.42);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+  }
+
+  #sobre-mi .about-section > *,
+  #contacto .contact-section > * {
+    position: relative;
+    z-index: 1;
   }
 
   #sobre-mi .about-head {
