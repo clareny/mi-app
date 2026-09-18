@@ -1,4 +1,27 @@
-/* ===== Base, colores y estructura global ===== */
+/*
+  GUÍA de App.css
+  ---------------
+  Textos de la web (Combo, Producción, botones): LanguageContext.jsx
+  Este archivo solo cambia tamaños, colores y layout.
+
+  Cómo leerlo:
+  - Sin @media = se aplica a todo
+  - min-width: 901px = desktop
+  - max-width: 900px / 768px / 430px = celular y tablet
+
+  Secciones:
+  1. Colores, fondo y página
+  2. Navegación (logo, menú, ES/EN)
+  3. Layout horizontal (discografía, servicios, bio, contacto)
+  4. Discografía y recuadro SoundCloud (Producción)
+  5. Servicios (Combo, mezcla, Beats) + formularios
+  6. Contacto y botones
+  7. Bio y foto
+  8. Redes sociales
+  9. Ajustes tablet / celular
+*/
+
+/* ===== 1. Colores, fondo y página ===== */
 :root {
   --negro: #050505;
   --negro-2: #0b0f0d;
@@ -59,7 +82,7 @@ html, body, #root {
   mix-blend-mode: screen;
 }
 
-/* Nuevo background principal */
+/* Fondo de la página */
 .page-bg-main {
   position: absolute;
   width: 100vw;
@@ -180,7 +203,7 @@ body {
   display: none;
 }
 
-/* ===== Navegacion ===== */
+/* ===== 2. Navegación: logo, menú, ES/EN ===== */
 .navbar,
 nav.navbar,
 .nav-inner {
@@ -216,6 +239,7 @@ nav.navbar,
 }
 
 @media (min-width: 901px) {
+  /* Desktop: menú más grande */
   .navbar,
   nav.navbar,
   .nav-inner {
@@ -228,16 +252,38 @@ nav.navbar,
   }
 
   .navbar {
-    padding: 0.32rem 1rem 0.1rem;
+    padding: 0.4rem 1rem 0.18rem;
   }
 
   .nav-inner {
-    padding: 0.55rem 1.6rem 0.4rem;
-    gap: 0.75rem;
+    padding: 0.62rem 1.8rem 0.48rem;
+    gap: 0.9rem;
+  }
+
+  .brand-logo {
+    height: 2.9rem;
+    filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.32));
+  }
+
+  .nav-links {
+    gap: 0.7rem;
   }
 
   .nav-link {
-    padding: 0.4rem 0.8rem;
+    padding: 0.5rem 1.2rem;
+    font-size: 1.08rem;
+    letter-spacing: 0.18em;
+  }
+
+  .lang-switch {
+    padding: 0.16rem;
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.22);
+  }
+
+  .lang-switch__btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.62rem;
   }
 }
 
@@ -255,10 +301,10 @@ nav.navbar,
 }
 
 .brand-logo {
-  height: 2.2rem;
+  height: 2.45rem;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.28));
 }
 
 .nav-links {
@@ -267,7 +313,7 @@ nav.navbar,
   flex-direction: row !important;
   justify-content: center !important;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.55rem;
   flex-wrap: nowrap;
 }
 
@@ -311,7 +357,7 @@ nav.navbar,
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.4);
 }
 
-/* Ocultar elementos no deseados del widget */
+/* Restos del widget de Google Translate (el idioma de la web es ES/EN en LanguageContext) */
 .goog-te-banner-frame,
 .goog-te-balloon-frame,
 iframe.goog-te-banner-frame,
@@ -342,17 +388,17 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 0.9rem;
+  padding: 0.52rem 1.05rem;
   text-decoration: none;
-  color: var(--blanco);
-  font-size: 0.92rem;  /* Tamaño para ESCRITORIO (desktop) */
-  font-weight: 400;
-  letter-spacing: 0.08em;
+  color: #ffffff;
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
-  transition: all 0.25s ease;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.08);
+  transition: color 0.22s ease, transform 0.22s ease, text-shadow 0.22s ease, background 0.22s ease;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.28), 0 0 22px rgba(28, 218, 221, 0.2);
 }
 
 .nav-link::before {
@@ -372,10 +418,10 @@ body {
 
 .nav-link:hover,
 .nav-link:active {
-  color: var(--blanco);
+  color: #ffffff;
   transform: translateY(-2px);
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.08);
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.75), 0 0 26px rgba(28, 218, 221, 0.5);
+  background: rgba(28, 218, 221, 0.12);
 }
 
 .nav-link:hover::before,
@@ -383,11 +429,7 @@ body {
   transform: translateX(0);
 }
 
-.nav-link:hover::before {
-  transform: translateX(0);
-}
-
-/* ===== Contenedor horizontal de secciones ===== */
+/* ===== 3. Layout horizontal de secciones ===== */
 .page-content {
   width: 100%;
   margin: 0 auto;
@@ -447,7 +489,7 @@ body {
   border-radius: 20px;
 }
 
-/* ===== Paneles principales compartidos ===== */
+/* ===== 3b. Paneles (discografía, servicios, bio, contacto) ===== */
 .hero-section,
 .services-section,
 .about-section,
@@ -533,20 +575,20 @@ body {
 .about-kicker,
 .about-role {
   margin: 0;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  text-transform: none;
 }
 
 .about-kicker {
-  color: #8feff2;
-  font-size: 0.62rem;
-  font-weight: 700;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+  font-weight: 500;
 }
 
 .about-role {
-  color: rgba(231, 238, 244, 0.58);
-  font-size: 0.68rem;
-  font-weight: 600;
+  color: #9aa4ad;
+  font-size: 0.78rem;
+  font-weight: 500;
 }
 
 .about-copy--line {
@@ -554,21 +596,96 @@ body {
 }
 
 .about-credits-label {
-  margin: 0.15rem 0 0.28rem;
-  color: #8feff2;
+  margin: 0.28rem 0 0.32rem;
+  color: rgba(255, 255, 255, 0.55);
   font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
 }
 
 .about-credits {
   margin: 0 0 0.7rem;
-  color: rgba(244, 247, 250, 0.9);
-  font-size: 0.78rem;
-  font-weight: 600;
+  color: #9aa4ad;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+}
+
+.about-roster {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.28rem;
+  margin: 0 0 0.45rem;
+  padding: 0;
+  width: 100%;
+}
+
+.about-credit {
+  position: relative;
+  z-index: 0;
+  margin: 0;
+  padding: 0.16rem 0.48rem;
+  border-radius: 999px;
+  border: 0;
+  background-image: linear-gradient(
+    105deg,
+    #f3f6f8 0%,
+    #b7eef0 42%,
+    #e4d2fb 78%,
+    #f3f6f8 100%
+  );
+  background-size: 240% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 0.68rem;
+  font-weight: 700;
   letter-spacing: 0.04em;
-  line-height: 1.7;
+  line-height: 1.3;
+  white-space: nowrap;
+  animation: aboutCreditShift 14s ease-in-out infinite alternate;
+}
+
+.about-credit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.about-credit:nth-child(odd) {
+  animation-duration: 16s;
+  animation-delay: -4s;
+}
+
+.about-credit:nth-child(3n) {
+  animation-duration: 18s;
+  animation-delay: -8s;
+}
+
+@keyframes aboutCreditShift {
+  0% {
+    background-position: 8% 50%;
+  }
+  100% {
+    background-position: 92% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-credit,
+  .bio-socials::before,
+  .bio-social::before {
+    animation: none;
+    background-position: 40% 50%;
+  }
 }
 
 .about-facts {
@@ -600,7 +717,7 @@ body {
   font-weight: 650;
 }
 
-/* ===== Portfolio y reproductor ===== */
+/* ===== 4. Discografía y recuadro SoundCloud ===== */
 .home-top {
   display: flex;
   justify-content: center;
@@ -937,6 +1054,12 @@ body {
 
   .mix-compare {
     margin-top: 0.85rem;
+  }
+
+  /* Desktop: tamaño de la palabra Producción */
+  .mix-compare__header .eyebrow {
+    font-size: 1.18rem;
+    letter-spacing: 0.14em;
   }
 
   .note-sheet--front {
@@ -1348,7 +1471,7 @@ body {
   }
 }
 
-/* ===== Servicios y formularios ===== */
+/* ===== 5. Servicios: Combo, mezcla, Beats ===== */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1385,16 +1508,21 @@ body {
 
 .plan-card__head h3 {
   margin: 0;
-  font-size: 1.35rem;
-  letter-spacing: 0.04em;
-  line-height: 1.1;
+  color: #ffffff;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
 }
 
 .plan-card__head p {
-  margin: 0.2rem 0 0;
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
-  opacity: 0.86;
+  margin: 0.22rem 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  opacity: 1;
 }
 
 .plan-card__flag {
@@ -1420,8 +1548,9 @@ body {
 
 .plan-card__hook {
   margin: 0 0 0.55rem;
-  color: #edf3f8;
+  color: #c8d4de;
   font-size: 0.84rem;
+  font-weight: 400;
   line-height: 1.45;
 }
 
@@ -1460,46 +1589,64 @@ body {
 
 .plan-options {
   display: grid;
-  gap: 0.35rem;
+  gap: 0.08rem;
   margin: 0 0 0.65rem;
 }
 
 .plan-option {
+  position: relative;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  align-items: flex-start;
   width: 100%;
-  padding: 0.42rem 0.55rem;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  min-height: 0;
+  padding: 0.55rem 0.72rem 0.58rem 0.78rem;
+  border-radius: 6px;
+  border: 0;
+  background: transparent;
+  box-shadow: inset 3px 0 0 transparent;
   color: #f5f5f5;
   text-align: left;
   cursor: pointer;
+  transition: background 0.18s ease, box-shadow 0.18s ease;
 }
 
-.plan-option__check {
-  width: 1rem;
-  color: inherit;
-  font-size: 0.82rem;
+.plan-option:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 2px;
 }
 
 .plan-option__text {
   display: grid;
-  gap: 0.08rem;
+  gap: 0.2rem;
+  min-width: 0;
+  flex: 1;
 }
 
 .plan-option__text strong {
-  font-size: 0.82rem;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
 }
 
-.plan-option__text small {
-  color: #b7c4d0;
-  font-size: 0.68rem;
+.plan-option__text small,
+.plan-option__copy {
+  display: block;
+  color: #9aa4ad;
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.plan-option.is-open,
+.plan-card--vocal .plan-option {
+  align-items: flex-start;
 }
 
 .plan-card textarea {
   width: 100%;
+  flex: 0 0 auto;
   margin-top: auto;
   min-height: 58px;
   padding: 0.48rem 0.58rem;
@@ -1553,10 +1700,15 @@ body {
   background: linear-gradient(135deg, #13787c, #0b3d42);
 }
 
-.plan-card--vocal .plan-option.is-active,
 .plan-card--vocal .plan-option:hover {
-  border-color: rgba(28, 218, 221, 0.55);
-  background: rgba(28, 218, 221, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 3px 0 0 rgba(28, 218, 221, 0.55);
+}
+
+.plan-card--vocal .plan-option.is-active {
+  background: rgba(28, 218, 221, 0.08);
+  box-shadow: inset 3px 0 0 #1cdadd;
+  color: #ffffff;
 }
 
 .plan-card--vocal .btn-primary {
@@ -1572,10 +1724,15 @@ body {
   background: linear-gradient(135deg, #7a3db8, #3d1d5c);
 }
 
-.plan-card--beats .plan-option.is-active,
 .plan-card--beats .plan-option:hover {
-  border-color: rgba(190, 117, 255, 0.55);
-  background: rgba(190, 117, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 3px 0 0 rgba(190, 117, 255, 0.6);
+}
+
+.plan-card--beats .plan-option.is-active {
+  background: rgba(190, 117, 255, 0.1);
+  box-shadow: inset 3px 0 0 #c084fc;
+  color: #ffffff;
 }
 
 .plan-card--beats .btn-primary {
@@ -1603,6 +1760,7 @@ body {
 }
 
 @media (min-width: 901px) {
+  /* Desktop: las 3 tarjetas de servicios juntas */
   #servicios {
     overflow: hidden;
     height: 100%;
@@ -1667,16 +1825,31 @@ body {
   }
 
   #servicios .plan-card__head h3 {
-    font-size: 1.45rem;
+    font-size: 1.82rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
   }
 
   #servicios .plan-card__head p {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 500;
   }
 
   #servicios .plan-card__body {
     padding: 0.52rem 1rem 0.15rem;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+  }
+
+  #servicios .plan-card__body::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  #servicios .plan-card__body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 99px;
   }
 
   #servicios .plan-card__hook {
@@ -1685,8 +1858,80 @@ body {
     margin-bottom: 0.55rem;
   }
 
+  #servicios .plan-options {
+    gap: 0.06rem;
+    margin: 0 0 0.5rem;
+  }
+
+  /* Filas tipo catálogo: título + explicación completa, sin recuadro ni recorte */
+  #servicios .plan-option,
+  #servicios .plan-card--combo .plan-rows li {
+    box-sizing: border-box;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 0.5rem 0.62rem 0.52rem 0.72rem;
+    align-items: flex-start;
+    border: 0;
+    background: transparent;
+  }
+
+  #servicios .plan-option__text strong,
+  #servicios .plan-card--combo .plan-rows span {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+
+  #servicios .plan-option__text small,
+  #servicios .plan-option__copy,
+  #servicios .plan-card--combo .plan-rows strong {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 400;
+    line-height: 1.45;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
+    white-space: normal;
+  }
+
+  #servicios .plan-card--combo .plan-rows {
+    display: grid;
+    gap: 0.06rem;
+    margin: 0 0 0.5rem;
+  }
+
+  #servicios .plan-card--combo .plan-rows li {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.12rem;
+    border-radius: 6px;
+    border: 0;
+    background: transparent;
+    box-shadow: inset 3px 0 0 rgba(28, 218, 221, 0.42);
+  }
+
+  #servicios .plan-card--combo .plan-rows span {
+    color: #ffffff;
+  }
+
+  #servicios .plan-card--combo .plan-rows strong {
+    color: #9aa4ad;
+    text-align: left;
+  }
+
+  /* Recuadros de texto: misma altura, abajo de cada tarjeta */
   #servicios .plan-card textarea {
-    min-height: 54px;
+    flex: 0 0 7.6rem;
+    height: 7.6rem;
+    min-height: 7.6rem;
+    max-height: 7.6rem;
+    resize: none;
+    margin-top: auto;
   }
 
   #servicios .plan-card__foot {
@@ -1696,6 +1941,7 @@ body {
 }
 
 @media (min-width: 901px) {
+  /* Desktop: alto de ventana, bio y contacto */
   .content-shell {
     display: flex;
     flex-direction: column;
@@ -1720,6 +1966,7 @@ body {
 
   #sobre-mi.panel-panel,
   #contacto.panel-panel {
+    display: flex;
     align-items: center;
     justify-content: center;
     padding-left: 0;
@@ -1731,39 +1978,41 @@ body {
     width: auto;
     height: auto;
     min-height: 0;
-    margin: 0;
+    max-height: 100%;
+    margin: auto;
     flex: 0 0 auto;
     display: flex;
+    align-self: center;
   }
 
   #sobre-mi .about-section,
   #contacto .contact-section {
-    --panel-side: min(560px, calc(100vh - 88px), 84%);
+    --panel-side: min(560px, calc(100vh - 96px), 84%);
     width: var(--panel-side);
-    min-width: var(--panel-side);
+    min-width: 0;
     max-width: var(--panel-side);
-    min-height: var(--panel-side);
-    height: auto;
-    max-height: none;
+    height: var(--panel-side);
+    min-height: 0;
+    max-height: 100%;
     aspect-ratio: 1 / 1;
-    margin: 0 auto;
+    margin: auto;
     padding: 1rem 1.2rem 1.25rem;
     justify-content: space-between;
-    align-items: stretch;
-    gap: 0.4rem;
-    overflow: visible;
+    align-items: center;
+    gap: 0.22rem;
+    overflow: hidden;
     border-radius: 22px;
     background: rgba(10, 10, 12, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
   }
 
-  #sobre-mi .about-kicker {
-    font-size: 0.78rem;
-  }
-
+  #sobre-mi .about-kicker,
   #sobre-mi .about-role {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: none;
   }
 
   #sobre-mi .about-copy {
@@ -1772,28 +2021,21 @@ body {
     font-family: inherit;
     font-style: normal;
     font-size: 0.86rem;
+    font-weight: 400;
     line-height: 1.45;
     letter-spacing: 0.01em;
     width: 100%;
     max-width: 100%;
-    margin: 0 0 0.32rem;
+    margin: 0 0 0.2rem;
     text-align: center;
-    color: #edf3f8;
+    color: #c8d4de;
   }
 
   #sobre-mi .about-copy--line {
-    color: #edf3f8;
+    color: #c8d4de;
     font-size: 0.86rem;
-    margin-bottom: 0.35rem;
-    opacity: 0.9;
-  }
-
-  #sobre-mi .about-credits-label {
-    font-size: 0.78rem;
-  }
-
-  #sobre-mi .about-credits {
-    font-size: 0.8rem;
+    margin-bottom: 0.18rem;
+    opacity: 1;
   }
 
   #sobre-mi .about-head {
@@ -1801,7 +2043,7 @@ body {
     align-items: center;
     text-align: center;
     margin: 0;
-    gap: 0.18rem;
+    gap: 0.1rem;
   }
 
   #sobre-mi .about-head .section-title,
@@ -1809,15 +2051,38 @@ body {
     display: block;
     width: 100%;
     text-align: center;
-    font-size: 1.45rem;
     margin: 0 0 0.22rem;
+    padding-bottom: 0;
+    font-size: 1.82rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    text-transform: none;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+  }
+
+  #sobre-mi .about-credits-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0.22rem 0 0.28rem;
+  }
+
+  #sobre-mi .about-roster {
+    gap: 0.22rem;
+    margin: 0 0 0.18rem;
+  }
+
+  #sobre-mi .about-credit {
+    font-size: 0.66rem;
+    padding: 0.14rem 0.42rem;
   }
 
   #sobre-mi .about-head .section-title::after,
   #contacto .contact-section .section-title::after {
-    left: 50%;
-    transform: translateX(-50%);
-    width: 3.4rem;
+    display: none;
   }
 
   #sobre-mi .about-showcase {
@@ -1828,14 +2093,18 @@ body {
     width: 100%;
     margin: 0;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.28rem;
     overflow: visible;
   }
 
   #sobre-mi .about-visual {
     min-height: 104px;
     height: 104px;
+    width: 100%;
     flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: visible;
   }
 
@@ -1844,13 +2113,19 @@ body {
     height: 104px;
     max-width: 104px;
     max-height: 104px;
+    margin: 0 auto;
   }
 
   #sobre-mi .about-copy-wrap {
     align-items: center;
+    justify-content: flex-start;
     text-align: center;
     transform: none;
     width: 100%;
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   #sobre-mi .about-copy-wrap:hover {
@@ -1858,7 +2133,8 @@ body {
   }
 
   #sobre-mi .about-credits-label,
-  #sobre-mi .about-credits {
+  #sobre-mi .about-credits,
+  #sobre-mi .about-roster {
     width: 100%;
     max-width: 100%;
     text-align: center;
@@ -1871,9 +2147,10 @@ body {
     max-width: 100%;
     box-sizing: border-box;
     justify-content: center;
-    margin: 0.2rem auto 0.15rem;
-    padding: 0.38rem 0.5rem;
-    gap: 0.42rem;
+    margin: 0.08rem auto 0;
+    justify-content: center;
+    padding: 0.28rem 0.42rem;
+    gap: 0.32rem;
     flex: 0 0 auto;
     position: relative;
     z-index: 2;
@@ -1977,23 +2254,33 @@ body {
   }
 
   #servicios .plan-card__head h3 {
-    font-size: 1.45rem;
+    font-size: 1.82rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
   }
 
   #servicios .plan-card__head p {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 500;
   }
 
   #servicios .plan-card textarea {
-    min-height: 54px;
+    flex: 0 0 7.6rem;
+    height: 7.6rem;
+    min-height: 7.6rem;
+    max-height: 7.6rem;
+    resize: none;
+    margin-top: auto;
   }
 
   .plan-card__head h3 {
-    font-size: 1.7rem;
+    font-size: 1.82rem;
+    font-weight: 800;
   }
 
   .plan-card__head p {
-    font-size: 0.88rem;
+    font-size: 0.82rem;
+    font-weight: 500;
   }
 
   .plan-card__flag {
@@ -2023,19 +2310,22 @@ body {
   }
 
   .plan-option {
-    padding: 0.58rem 0.7rem;
+    min-height: 0;
+    padding: 0.52rem 0.72rem 0.55rem;
   }
 
   .plan-option__text strong {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
   }
 
   .plan-option__text small {
-    font-size: 0.74rem;
+    font-size: 0.76rem;
   }
 
   .plan-card textarea {
-    min-height: 72px;
+    height: 7.6rem;
+    min-height: 7.6rem;
+    max-height: 7.6rem;
     resize: none;
     font-size: 0.88rem;
   }
@@ -2210,44 +2500,56 @@ body {
 @media (min-width: 901px) {
   #contacto .contact-section .section-title {
     margin-bottom: 0.28rem;
-    font-size: 1.45rem;
+    font-size: 1.82rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    text-transform: none;
   }
 
   #contacto .contact-copy {
     font-size: 0.86rem;
+    font-weight: 400;
     line-height: 1.45;
-    margin-bottom: 0.4rem;
-    color: #edf3f8;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.28rem;
+    color: #c8d4de;
   }
 
   #contacto .discord-cta {
-    gap: 0.55rem;
+    gap: 0.45rem;
     margin-top: 0;
-    padding: 0.55rem 0.75rem;
+    padding: 0.42rem 0.65rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.04);
     box-shadow: none;
   }
 
   #contacto .discord-cta__copy strong {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
   }
 
   #contacto .discord-cta__copy p {
     margin: 0.1rem 0 0;
-    font-size: 0.78rem;
-    line-height: 1.35;
+    font-size: 0.72rem;
+    font-weight: 400;
+    line-height: 1.45;
+    color: #9aa4ad;
   }
 
   #contacto .discord-cta__button {
     min-height: 1.9rem;
-    font-size: 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
     padding: 0.3rem 0.85rem;
   }
 
   #contacto .contact-form {
-    gap: 0.42rem;
-    margin-top: 0.35rem;
+    gap: 0.32rem;
+    margin-top: 0.2rem;
     padding: 0;
     border-radius: 0;
     border: none;
@@ -2257,12 +2559,15 @@ body {
   }
 
   #contacto .contact-form__field span {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: #9aa4ad;
   }
 
   #contacto .contact-form input,
   #contacto .contact-form textarea {
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     padding: 0.5rem 0.65rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.04);
@@ -2270,7 +2575,7 @@ body {
   }
 
   #contacto .contact-form textarea {
-    min-height: 56px;
+    min-height: 48px;
     resize: none;
   }
 
@@ -2280,11 +2585,16 @@ body {
 
   #contacto .contact-form__actions .btn {
     min-height: 1.9rem;
-    font-size: 0.7rem;
+    font-size: 0.86rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
   }
 
   #contacto .contact-note {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
+    font-weight: 400;
+    line-height: 1.45;
+    color: #9aa4ad;
   }
 }
 
@@ -2814,7 +3124,7 @@ body {
   text-align: center;
 }
 
-/* ===== Contacto y botones ===== */
+/* ===== 6. Contacto y botones ===== */
 .contact-grid {
   display: flex;
   flex-wrap: wrap;
@@ -3420,7 +3730,7 @@ body {
   margin-top: 0.7rem;
 }
 
-/* ===== Biografia y foto de perfil ===== */
+/* ===== 7. Bio y foto ===== */
 .about-header-row {
   display: flex;
   align-items: center;
@@ -3584,14 +3894,14 @@ body {
 
 .about-copy {
   margin: 0 0 1.1rem;
-  color: rgba(234, 243, 255, 0.9);
-  line-height: 1.8;
-  font-size: clamp(0.82rem, 0.92vw, 1rem);
-  letter-spacing: 0.05em;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-style: italic;
+  color: #c8d4de;
+  line-height: 1.45;
+  font-size: 0.86rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-family: inherit;
+  font-style: normal;
   text-align: left;
-  text-shadow: 0 0 18px rgba(255, 255, 255, 0.04);
   display: block;
   width: min(100%, 560px);
   opacity: 0;
@@ -3619,14 +3929,9 @@ body {
   position: relative;
   isolation: isolate;
   border-radius: 999px;
-  background:
-    linear-gradient(180deg, rgba(18, 32, 36, 0.5), rgba(8, 12, 16, 0.34));
-  border: 2px solid rgba(145, 245, 238, 0.7);
-  box-shadow:
-    0 0 0 1px rgba(125, 245, 255, 0.18),
-    0 0 16px rgba(28, 218, 221, 0.18),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  border: 1px solid transparent;
+  background: linear-gradient(180deg, rgba(14, 16, 18, 0.58), rgba(8, 10, 12, 0.46));
+  box-shadow: none;
   overflow: visible;
 }
 
@@ -3635,20 +3940,26 @@ body {
   position: absolute;
   inset: 0;
   border-radius: inherit;
+  padding: 1px;
   pointer-events: none;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: linear-gradient(
-    115deg,
-    transparent 0%,
-    rgba(145, 245, 238, 0.14) 22%,
-    transparent 38%,
-    transparent 62%,
-    rgba(181, 120, 255, 0.1) 78%,
-    transparent 100%
+  background-image: linear-gradient(
+    105deg,
+    rgba(243, 246, 248, 0.2) 0%,
+    rgba(183, 238, 240, 0.26) 42%,
+    rgba(228, 210, 251, 0.22) 78%,
+    rgba(243, 246, 248, 0.2) 100%
   );
-  background-size: 220% 100%;
-  animation: bioHoloSweep 7s linear infinite;
-  opacity: 0.85;
+  background-size: 240% 100%;
+  animation: aboutCreditShift 18s ease-in-out infinite alternate;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0.55;
 }
 
 .bio-social {
@@ -3670,6 +3981,42 @@ body {
     filter 0.28s ease;
 }
 
+.bio-social::before {
+  content: '';
+  position: absolute;
+  width: 1.22rem;
+  height: 1.22rem;
+  pointer-events: none;
+  background-image: linear-gradient(
+    105deg,
+    #f3f6f8 0%,
+    #b7eef0 42%,
+    #e4d2fb 78%,
+    #f3f6f8 100%
+  );
+  background-size: 240% 100%;
+  animation: aboutCreditShift 16s ease-in-out infinite alternate;
+  -webkit-mask-image: var(--bio-icon);
+  mask-image: var(--bio-icon);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  opacity: 0.86;
+}
+
+.bio-social:nth-child(odd)::before {
+  animation-duration: 18s;
+  animation-delay: -5s;
+}
+
+.bio-social:nth-child(3n)::before {
+  animation-duration: 20s;
+  animation-delay: -9s;
+}
+
 .bio-social__ring {
   display: none;
 }
@@ -3679,7 +4026,8 @@ body {
   height: 1.2rem;
   display: block;
   object-fit: contain;
-  filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(145, 245, 238, 0.35));
+  opacity: 0;
+  pointer-events: none;
 }
 
 .bio-social::after {
@@ -3708,7 +4056,7 @@ body {
 
 .bio-socials .bio-social:hover {
   z-index: 3;
-  filter: drop-shadow(0 0 8px rgba(145, 245, 238, 0.35));
+  filter: drop-shadow(0 0 6px rgba(183, 238, 240, 0.18));
 }
 
 .bio-socials .bio-social:hover::after {
@@ -3780,7 +4128,7 @@ body {
   }
 }
 
-/* ===== Redes sociales y animaciones ===== */
+/* ===== 8. Redes sociales ===== */
 .social-links {
   display: flex;
   flex-wrap: wrap;
@@ -3849,7 +4197,7 @@ body {
   }
 }
 
-/* ===== Ajustes generales para tablet ===== */
+/* ===== 9. Tablet (hasta 768px) ===== */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -3925,7 +4273,7 @@ body {
   }
 }
 
-/* ===== Layout movil: paneles separados con scroll horizontal ===== */
+/* ===== 9b. Celular (hasta 900px): un panel a la vez ===== */
 @media (max-width: 900px) {
   html,
   body,
@@ -4169,10 +4517,40 @@ body {
   .about-copy {
     width: 80%;
     margin-bottom: 0.9rem;
-    font-size: 0.875rem;
-    line-height: 1.95;
-    letter-spacing: 0.020em;
-    text-align: justify;
+    font-size: 0.86rem;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #c8d4de;
+    font-family: inherit;
+    font-style: normal;
+  }
+
+  .about-roster {
+    width: 90%;
+    margin: 0 auto 0.45rem;
+    gap: 0.22rem;
+  }
+
+  .about-credit {
+    font-size: 0.64rem;
+    padding: 0.14rem 0.42rem;
+  }
+
+  #sobre-mi .about-head .section-title,
+  #contacto .contact-section .section-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    text-transform: none;
+    padding-bottom: 0;
+  }
+
+  #sobre-mi .about-head .section-title::after,
+  #contacto .contact-section .section-title::after {
+    display: none;
   }
 
   .bio-socials {
@@ -4287,10 +4665,10 @@ body {
   }
 
   .nav-link {
-    padding: 0.42rem 0.38rem;
-    font-size: clamp(0.58rem, 2.7vw, 0.68rem);
-    letter-spacing: 0.14em;
-    font-weight: 500;
+    padding: 0.46rem 0.48rem;
+    font-size: clamp(0.64rem, 2.9vw, 0.74rem);
+    letter-spacing: 0.16em;
+    font-weight: 800;
     border-radius: 999px;
     background: transparent;
   }
@@ -4358,7 +4736,13 @@ body {
   }
 
   #servicios .plan-option {
-    padding: 0.36rem 0.5rem;
+    min-height: 0;
+    padding: 0.5rem 0.55rem 0.52rem 0.62rem;
+    border: 0;
+  }
+
+  #servicios .plan-option__text strong {
+    font-size: 0.9rem;
   }
 
   #servicios .plan-card textarea {

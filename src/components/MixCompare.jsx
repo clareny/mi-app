@@ -76,7 +76,6 @@ export default function MixCompare() {
     <div className="mix-compare">
       <div className="mix-compare__header">
         <p className="eyebrow">{t('mix.eyebrow')}</p>
-        <h3>{t('mix.title')}</h3>
         <p>{t('mix.copy')}</p>
       </div>
 

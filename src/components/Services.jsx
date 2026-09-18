@@ -35,6 +35,7 @@ export default function Services() {
   const { t } = useLanguage();
   const [vocalSelections, setVocalSelections] = useState([]);
   const [beatSelections, setBeatSelections] = useState([]);
+  const [comboExtra, setComboExtra] = useState('');
   const [vocalExtra, setVocalExtra] = useState('');
   const [beatExtra, setBeatExtra] = useState('');
   const [beatGenre, setBeatGenre] = useState('');
@@ -42,13 +43,15 @@ export default function Services() {
   const [beatScale, setBeatScale] = useState('menor');
   const [activeTab, setActiveTab] = useState('combo');
 
-  const vocalNeed = buildVocalMessage(vocalSelections, vocalExtra);
+  const vocalLabels = vocalSelections.map((id) => t(`services.${id}`));
+  const vocalNeed = buildVocalMessage(vocalLabels, vocalExtra);
   const beatNeed = buildBeatMessage(beatSelections, beatGenre, beatKey, beatScale, beatExtra);
 
   const vocalServices = [
-    { id: 'rec', spec: 'Gain, HPF, Pro-DS / RX' },
-    { id: 'edit', spec: 'Melodyne / Auto-Tune, RX' },
-    { id: 'mix', spec: 'Pro-Q, CLA-76 / Pro-C' },
+    { id: 'rec', copyKey: 'recCopy' },
+    { id: 'edit', copyKey: 'editCopy' },
+    { id: 'mix', copyKey: 'mixCopy' },
+    { id: 'upgrade', copyKey: 'upgradeCopy' },
   ];
 
   const beatServices = [
@@ -79,7 +82,10 @@ export default function Services() {
 
   const buildWhatsAppLink = (type) => {
     if (type === 'combo') {
-      const message = 'Hola, estoy interesado en Combo: canción íntima, producción completa, virtual o presencial.';
+      const extra = comboExtra.trim();
+      const message = extra
+        ? `Hola, estoy interesado en Combo: canción íntima, producción completa, virtual o presencial. Detalles: ${extra}`
+        : 'Hola, estoy interesado en Combo: canción íntima, producción completa, virtual o presencial.';
       return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     }
 
@@ -125,6 +131,12 @@ export default function Services() {
                 </li>
               ))}
             </ul>
+            <textarea
+              rows="5"
+              placeholder={t('services.comboPh')}
+              value={comboExtra}
+              onChange={(e) => setComboExtra(e.target.value)}
+            />
           </div>
           <div className="plan-card__foot">
             <a className="btn btn-primary" href={buildWhatsAppLink('combo')} target="_blank" rel="noopener noreferrer">
@@ -145,6 +157,7 @@ export default function Services() {
             <div className="plan-options">
               {vocalServices.map((service) => {
                 const isActive = vocalSelections.includes(service.id);
+                const title = t(`services.${service.id}`);
                 return (
                   <button
                     key={service.id}
@@ -153,17 +166,16 @@ export default function Services() {
                     onClick={() => toggleSelection(service.id, vocalSelections, setVocalSelections)}
                     aria-pressed={isActive}
                   >
-                    <span className="plan-option__check" aria-hidden="true">{isActive ? '✓' : '○'}</span>
                     <span className="plan-option__text">
-                      <strong>{t(`services.${service.id}`)}</strong>
-                      <small>{service.spec}</small>
+                      <strong>{title}</strong>
+                      <small className="plan-option__copy">{t(`services.${service.copyKey}`)}</small>
                     </span>
                   </button>
                 );
               })}
             </div>
             <textarea
-              rows="2"
+              rows="5"
               placeholder={t('services.vocalPh')}
               value={vocalNeed}
               onChange={(e) => setVocalExtra(stripAutoLines(e.target.value))}
@@ -196,10 +208,9 @@ export default function Services() {
                     onClick={() => toggleSelection(service.id, beatSelections, setBeatSelections)}
                     aria-pressed={isActive}
                   >
-                    <span className="plan-option__check" aria-hidden="true">{isActive ? '✓' : '○'}</span>
                     <span className="plan-option__text">
                       <strong>{t(`services.${service.id}`)}</strong>
-                      <small>{service.spec}</small>
+                      <small className="plan-option__copy">{service.spec}</small>
                     </span>
                   </button>
                 );
@@ -241,7 +252,7 @@ export default function Services() {
               </label>
             </div>
             <textarea
-              rows="2"
+              rows="5"
               placeholder={t('services.beatPh')}
               value={beatNeed}
               onChange={(e) => setBeatExtra(stripAutoLines(e.target.value))}

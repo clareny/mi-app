@@ -26,6 +26,8 @@ export default function About() {
     'Laika',
     'Parimyos',
     'Kodsay',
+    'Antian rose',
+    'elie',
   ];
 
   const resetSocialMotion = () => {
@@ -67,9 +69,13 @@ export default function About() {
         <div className="about-copy-wrap">
           <p className="about-copy">{t('about.p1')}</p>
           <p className="about-copy">{t('about.p2')}</p>
-          <p className="about-credits-label">{t('about.credits')}</p>
-          <p className="about-credits">{credits.join('  ·  ')}</p>
           <p className="about-copy about-copy--line">{t('about.p3')}</p>
+          <p className="about-credits-label">{t('about.credits')}</p>
+          <ul className="about-roster">
+            {credits.map((name) => (
+              <li key={name} className="about-credit">{name}</li>
+            ))}
+          </ul>
 
           <div
             className="bio-socials"
@@ -87,6 +93,7 @@ export default function About() {
                 className="bio-social"
                 aria-label={link.label}
                 data-label={link.label}
+                style={{ '--bio-icon': `url("${basePath}icons/${link.icon}")` }}
               >
                 <span className="bio-social__ring" aria-hidden="true" />
                 <img src={`${basePath}icons/${link.icon}`} alt="" className="bio-social__icon" />
