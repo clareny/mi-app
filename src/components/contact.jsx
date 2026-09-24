@@ -2,6 +2,10 @@ import { useRef, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const CONTACT_EMAIL = 'spieronilton@gmail.com';
+// Pegá acá el código largo que FormSubmit manda al confirmar desde clareny.com.
+// Con el email a palo, cada origen nuevo (localhost, Pages, clareny.com) pide activar de nuevo.
+const FORMSUBMIT_ID = '';
+const formSubmitPath = FORMSUBMIT_ID || CONTACT_EMAIL;
 const WHATSAPP_NUMBER = '59897989368';
 const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const LIMITS = { name: 80, email: 120, message: 2000 };
@@ -69,10 +73,10 @@ export default function Contact() {
     }
 
     setSending(true);
-    setStatus('Enviando el correo...');
+    setStatus(t('contact.sending'));
 
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+      const response = await fetch(`https://formsubmit.co/ajax/${formSubmitPath}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,7 +92,17 @@ export default function Contact() {
         }),
       });
 
-      if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      const payload = `${data.message || ''} ${data.success || ''}`;
+      const needsConfirm = /activat|confirm|verif/i.test(payload);
+
+      if (needsConfirm) {
+        lastSendRef.current = Date.now();
+        setStatus(t('contact.confirmOnce'));
+        return;
+      }
+
+      if (!response.ok || data.success === 'false' || data.success === false) {
         throw new Error('formsubmit');
       }
 
@@ -132,7 +146,15 @@ export default function Contact() {
         </span>
       </a>
 
-      <form className="contact-form" onSubmit={handleEmail}>
+      <form
+        className="contact-form"
+        action={`https://formsubmit.co/${formSubmitPath}`}
+        method="POST"
+        onSubmit={handleEmail}
+      >
+        <input type="hidden" name="_subject" value="Contacto desde la web — Clareny" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_honey" value="" />
         <div className="contact-form__row">
           <label className="contact-form__field">
             <span>{t('contact.name')}</span>
