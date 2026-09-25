@@ -10,8 +10,24 @@ const WHATSAPP_NUMBER = '59897989368';
 const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const LIMITS = { name: 80, email: 120, message: 2000 };
 const SEND_COOLDOWN_MS = 12000;
+const MIN_FILL_MS = 2800;
+const MIN_MESSAGE = 12;
+const MAX_LINKS = 2;
+const FORMSUBMIT_BLACKLIST = 'crypto,bitcoin,casino,viagra,backlink,forex,préstamo,prestamo';
+const LINK_RE = /https?:\/\/[^\s]+|www\.[^\s]+|t\.me\/[^\s]+/gi;
+const BAD_LINK_RE = /bit\.ly|tinyurl|t\.co\/|rb\.gy|cutt\.ly|ow\.ly|is\.gd|javascript:|data:text|file:|\.exe\b|\.zip\b|\.apk\b/i;
+const PROMO_RE = /crypto|bitcoin|forex|casino|viagra|seo\s|backlink|work from home|gana dinero|préstamo|prestamo|inversion garantiz|followers cheap|buy now|limited offer|telegram\.me/i;
 
 const clip = (value, max) => value.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').slice(0, max);
+
+const screenMessage = (text) => {
+  const value = text.trim();
+  if (value.length < MIN_MESSAGE) return 'tooShort';
+  if (BAD_LINK_RE.test(value)) return 'blocked';
+  if ((value.match(LINK_RE) || []).length > MAX_LINKS) return 'blocked';
+  if (PROMO_RE.test(value)) return 'blocked';
+  return '';
+};
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -22,6 +38,7 @@ export default function Contact() {
   const [status, setStatus] = useState('');
   const [sending, setSending] = useState(false);
   const lastSendRef = useRef(0);
+  const openedAtRef = useRef(Date.now());
 
   const composedMessage = () => {
     const intro = name.trim() ? `Hola, soy ${name.trim()}.` : 'Hola, te escribo desde la web.';
@@ -48,6 +65,11 @@ export default function Contact() {
       setStatus(t('contact.needMsg'));
       return;
     }
+    const block = screenMessage(message);
+    if (block) {
+      setStatus(t(`contact.${block}`));
+      return;
+    }
     setStatus(t('contact.openingWa'));
     window.open(buildWhatsAppLink(), '_blank', 'noopener,noreferrer');
   };
@@ -65,6 +87,15 @@ export default function Contact() {
     }
     if (!EMAIL_OK.test(senderEmail.trim())) {
       setStatus(t('contact.badMail'));
+      return;
+    }
+    const block = screenMessage(message);
+    if (block) {
+      setStatus(t(`contact.${block}`));
+      return;
+    }
+    if (Date.now() - openedAtRef.current < MIN_FILL_MS) {
+      setStatus(t('contact.blocked'));
       return;
     }
     if (Date.now() - lastSendRef.current < SEND_COOLDOWN_MS) {
@@ -89,6 +120,7 @@ export default function Contact() {
           _subject: 'Contacto desde la web — Clareny',
           _honey: honeypot,
           _captcha: 'false',
+          _blacklist: FORMSUBMIT_BLACKLIST,
         }),
       });
 
@@ -155,6 +187,7 @@ export default function Contact() {
         <input type="hidden" name="_subject" value="Contacto desde la web — Clareny" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_honey" value="" />
+        <input type="hidden" name="_blacklist" value={FORMSUBMIT_BLACKLIST} />
         <div className="contact-form__row">
           <label className="contact-form__field">
             <span>{t('contact.name')}</span>

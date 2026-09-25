@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const WHATSAPP_NUMBER = '59897989368';
@@ -42,6 +42,18 @@ export default function Services() {
   const [beatKey, setBeatKey] = useState('');
   const [beatScale, setBeatScale] = useState('menor');
   const [activeTab, setActiveTab] = useState('combo');
+
+  useEffect(() => {
+    const openTab = (event) => {
+      const tab = event.detail;
+      if (tab === 'combo' || tab === 'vocal' || tab === 'beats') {
+        setActiveTab(tab);
+      }
+    };
+
+    window.addEventListener('clareny-service-tab', openTab);
+    return () => window.removeEventListener('clareny-service-tab', openTab);
+  }, []);
 
   const vocalLabels = vocalSelections.map((id) => t(`services.${id}`));
   const vocalNeed = buildVocalMessage(vocalLabels, vocalExtra);
@@ -139,8 +151,9 @@ export default function Services() {
             />
           </div>
           <div className="plan-card__foot">
-            <a className="btn btn-primary" href={buildWhatsAppLink('combo')} target="_blank" rel="noopener noreferrer">
-              {t('services.hireCombo')}
+            <a className="haste-pro" href={buildWhatsAppLink('combo')} target="_blank" rel="noopener noreferrer">
+              <span className="haste-pro__glow" aria-hidden="true" />
+              <span className="haste-pro__label">{t('services.hireCombo')}</span>
             </a>
           </div>
         </article>
@@ -182,8 +195,9 @@ export default function Services() {
             />
           </div>
           <div className="plan-card__foot">
-            <a className="btn btn-primary" href={buildWhatsAppLink('vocal')} target="_blank" rel="noopener noreferrer">
-              {t('services.hireMix')}
+            <a className="haste-pro" href={buildWhatsAppLink('vocal')} target="_blank" rel="noopener noreferrer">
+              <span className="haste-pro__glow" aria-hidden="true" />
+              <span className="haste-pro__label">{t('services.hireMix')}</span>
             </a>
           </div>
         </article>
@@ -259,8 +273,9 @@ export default function Services() {
             />
           </div>
           <div className="plan-card__foot">
-            <a className="btn btn-primary" href={buildWhatsAppLink('beat')} target="_blank" rel="noopener noreferrer">
-              {t('services.hireBeat')}
+            <a className="haste-pro" href={buildWhatsAppLink('beat')} target="_blank" rel="noopener noreferrer">
+              <span className="haste-pro__glow" aria-hidden="true" />
+              <span className="haste-pro__label">{t('services.hireBeat')}</span>
             </a>
           </div>
         </article>

@@ -11,7 +11,7 @@ const productionCsp = [
   "font-src 'self' https://fonts.gstatic.com data:",
   "img-src 'self' data: blob: https:",
   "media-src 'self'",
-  "connect-src 'self' https://formsubmit.co https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://api.soundcloud.com https://w.soundcloud.com",
+  "connect-src 'self' https://formsubmit.co https://translate.googleapis.com https://translate.google.com https://www.gstatic.com https://api.soundcloud.com https://w.soundcloud.com https://places.googleapis.com",
   "frame-src https://open.spotify.com https://embed.spotify.com https://w.soundcloud.com https://widget.sndcdn.com https://translate.google.com https://www.google.com",
   'upgrade-insecure-requests',
 ].join('; ');

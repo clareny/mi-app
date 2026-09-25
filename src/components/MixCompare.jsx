@@ -74,11 +74,6 @@ export default function MixCompare() {
 
   return (
     <div className="mix-compare">
-      <div className="mix-compare__header">
-        <p className="eyebrow">{t('mix.eyebrow')}</p>
-        <p>{t('mix.copy')}</p>
-      </div>
-
       <div className="mix-compare__list">
         {clips.map((clip) => (
           <article key={clip.id} className={`mix-sc mix-sc--${clip.id}`}>
