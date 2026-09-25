@@ -10,7 +10,7 @@ export default function Home({ onNavClick = () => {} }) {
 
   return (
     <section id="home" className="hero-section">
-      <div className="home-top">
+      <div className="home-top home-pitch-panel">
         <p className="home-pitch">
           {t('home.pitchBefore')}
           <a

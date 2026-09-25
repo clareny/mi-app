@@ -16,6 +16,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
+    "i18n:en": "node scripts/sync-english.mjs",
     "test": "echo \"Tests are not configured yet\""
   },
   "eslintConfig": {

@@ -63,7 +63,7 @@ export default function About() {
 
       <div className="about-showcase">
         <div className="about-visual">
-          <img src={`${basePath}fotoclarenyabout.jpg`} alt="Clareny, productor e ingeniero de mezcla" className="about-photo" />
+          <img src={`${basePath}fotoclarenyabout.jpg`} alt={t('about.photoAlt')} className="about-photo" />
         </div>
 
         <div className="about-copy-wrap">

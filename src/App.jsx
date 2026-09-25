@@ -11,6 +11,7 @@ import Services from './components/Services';
 function App() {
   const [isReady, setIsReady] = useState(false);
   const [peekBackground, setPeekBackground] = useState(false);
+  const [activeSection, setActiveSection] = useState('portfolio');
   const pageContentRef = useRef(null);
   const basePath = import.meta.env.BASE_URL;
 
@@ -29,6 +30,7 @@ function App() {
   const handleNavClick = (event, targetId) => {
     event.preventDefault();
     setPeekBackground(false);
+    setActiveSection(targetId);
     scrollToSection(targetId);
   };
 
@@ -74,6 +76,24 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const container = pageContentRef.current;
+    if (!container) return undefined;
+
+    const syncSection = () => {
+      const mid = container.scrollLeft + container.clientWidth / 2;
+      const ids = ['portfolio', 'servicios', 'sobre-mi', 'contacto'];
+      const current = ids.find((id) => {
+        const section = document.getElementById(id);
+        return section && mid >= section.offsetLeft && mid < section.offsetLeft + section.offsetWidth;
+      });
+      if (current) setActiveSection(current);
+    };
+
+    container.addEventListener('scroll', syncSection, { passive: true });
+    return () => container.removeEventListener('scroll', syncSection);
+  }, []);
+
   return (
     <div className={`app-shell ${isReady ? 'is-ready' : 'is-loading'}`}>
       <div className={`page-background ${peekBackground ? 'is-peeking' : ''}`} aria-hidden="true">
@@ -87,7 +107,7 @@ function App() {
       )}
 
       <div className="content-shell">
-        <Navbar onNavClick={handleNavClick} />
+        <Navbar onNavClick={handleNavClick} activeSection={activeSection} />
         <main
           ref={pageContentRef}
           className="page-content horizontal-scroll"

@@ -6,7 +6,7 @@ const WHATSAPP_NUMBER = '59897989368';
 const beatGenres = ['Trap', 'Rap', 'R&B', 'Reggaeton', 'Drill', 'Pop', 'Afrobeats', 'Lo-fi', 'Soul', 'House'];
 const beatKeys = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
 
-const AUTO_LINE = /^(Enfoque|Género|Tonalidad):/;
+const AUTO_LINE = /^(Enfoque|Focus|Género|Genre|Tonalidad|Key):/;
 
 const stripAutoLines = (value) =>
   value
@@ -15,18 +15,18 @@ const stripAutoLines = (value) =>
     .join('\n')
     .replace(/^\n+/, '');
 
-const buildVocalMessage = (selections, extra) => {
+const buildVocalMessage = (selections, extra, labels) => {
   const lines = [];
-  if (selections.length) lines.push(`Enfoque: ${selections.join(', ')}.`);
+  if (selections.length) lines.push(`${labels.focus}: ${selections.join(', ')}.`);
   if (extra.trim()) lines.push(extra.trim());
   return lines.join('\n');
 };
 
-const buildBeatMessage = (selections, genre, key, scale, extra) => {
+const buildBeatMessage = (selections, genre, key, scale, extra, labels) => {
   const lines = [];
-  if (selections.length) lines.push(`Enfoque: ${selections.join(', ')}.`);
-  if (genre) lines.push(`Género: ${genre}.`);
-  if (key) lines.push(`Tonalidad: ${key} ${scale}.`);
+  if (selections.length) lines.push(`${labels.focus}: ${selections.join(', ')}.`);
+  if (genre) lines.push(`${labels.genre}: ${genre}.`);
+  if (key) lines.push(`${labels.key}: ${key} ${scale}.`);
   if (extra.trim()) lines.push(extra.trim());
   return lines.join('\n');
 };
@@ -55,9 +55,21 @@ export default function Services() {
     return () => window.removeEventListener('clareny-service-tab', openTab);
   }, []);
 
+  const formLabels = {
+    focus: t('services.waFocus'),
+    genre: t('services.waGenre'),
+    key: t('services.waKey'),
+  };
   const vocalLabels = vocalSelections.map((id) => t(`services.${id}`));
-  const vocalNeed = buildVocalMessage(vocalLabels, vocalExtra);
-  const beatNeed = buildBeatMessage(beatSelections, beatGenre, beatKey, beatScale, beatExtra);
+  const vocalNeed = buildVocalMessage(vocalLabels, vocalExtra, formLabels);
+  const beatNeed = buildBeatMessage(
+    beatSelections,
+    beatGenre,
+    beatKey,
+    beatScale === 'mayor' ? t('services.major') : t('services.minor'),
+    beatExtra,
+    formLabels
+  );
 
   const vocalServices = [
     { id: 'rec', copyKey: 'recCopy' },
@@ -96,21 +108,23 @@ export default function Services() {
     if (type === 'combo') {
       const extra = comboExtra.trim();
       const message = extra
-        ? `Hola, estoy interesado en Combo: canción íntima, producción completa, virtual o presencial. Detalles: ${extra}`
-        : 'Hola, estoy interesado en Combo: canción íntima, producción completa, virtual o presencial.';
+        ? `${t('services.waHi')} ${t('services.waCombo')} ${t('services.waDetails')}: ${extra}`
+        : `${t('services.waHi')} ${t('services.waCombo')}`;
       return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     }
 
-    const label = type === 'vocal' ? 'Producción vocal' : 'Beats';
+    const label = type === 'vocal' ? t('services.waVocalLabel') : t('services.waBeatsLabel');
     const need = type === 'vocal' ? vocalNeed : beatNeed;
-    const detailText = need.trim() ? `Detalles: ${need.trim()}` : 'Quiero que me ayuden a definir el enfoque ideal.';
-    const message = `Hola, estoy interesado en ${label}. ${detailText}`;
+    const detailText = need.trim()
+      ? `${t('services.waDetails')}: ${need.trim()}`
+      : t('services.waDefine');
+    const message = `${t('services.waHi')} ${label}. ${detailText}`;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   };
 
   return (
     <section id="services" className={`services-section services-section--${activeTab}`}>
-      <div className="service-segmented" aria-label="Elegí combo, vocal o beats">
+      <div className="service-segmented" aria-label={t('services.tabsAria')}>
         {serviceTabs.map((tab) => (
           <button
             key={tab.id}
@@ -249,7 +263,7 @@ export default function Services() {
                       <option key={keyName} value={keyName}>{keyName}</option>
                     ))}
                   </select>
-                  <div className="beat-scale" role="group" aria-label="Escala">
+                  <div className="beat-scale" role="group" aria-label={t('services.scaleAria')}>
                     {['menor', 'mayor'].map((scale) => (
                       <button
                         key={scale}
