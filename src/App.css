@@ -873,8 +873,8 @@ body {
 
   .home-pitch {
     max-width: 40rem;
-    font-size: 0.86rem;
-    line-height: 1.45;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
   .portfolio-block {
@@ -970,12 +970,16 @@ body {
   max-width: 40rem;
   margin: 0 auto;
   padding: 0 0.4rem;
-  font-size: 0.86rem;
+  font-family: 'Pixelify Sans', 'Tektur', monospace;
+  font-size: 0.9rem;
   font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: 1.45;
+  letter-spacing: 0.03em;
+  line-height: 1.5;
   text-align: center;
   color: #ffffff;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  text-rendering: optimizeSpeed;
   transform-origin: center;
   transition: transform 0.28s ease;
 }
@@ -989,8 +993,8 @@ body {
   padding: 0;
   border: 0;
   font: inherit;
-  font-weight: 800;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   text-underline-offset: 0.18em;
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
@@ -3710,9 +3714,10 @@ body {
 
   .service-segmented {
     display: flex;
-    width: min(100%, 320px);
-    min-height: 48px;
-    padding: 0.2rem;
+    width: fit-content;
+    max-width: 92%;
+    min-height: 0;
+    padding: 0.1rem;
     margin: 0 auto 0.75rem;
   }
 
@@ -4632,9 +4637,9 @@ body {
   }
 
   .home-pitch {
-    font-size: 0.84rem;
+    font-size: 0.82rem;
     max-width: 34rem;
-    line-height: 1.45;
+    line-height: 1.5;
   }
 
   .pill-btn {
@@ -4940,8 +4945,8 @@ body {
   }
 
   .home-pitch {
-    font-size: 0.84rem;
-    line-height: 1.45;
+    font-size: 0.82rem;
+    line-height: 1.5;
   }
 
   .page-content {
@@ -4959,18 +4964,22 @@ body {
 
   #servicios .service-segmented {
     display: flex;
-    width: min(92%, 300px);
-    min-height: 42px;
-    padding: 0.16rem;
+    width: fit-content;
+    max-width: 92%;
+    min-height: 0;
+    padding: 0.08rem;
     margin: 0.1rem auto 0.15rem;
     flex: 0 0 auto;
+    gap: 0.06rem;
   }
 
   #servicios .service-segmented__button,
   .services-section .service-segmented__button {
-    padding: 0.52rem 0.4rem;
+    flex: 0 0 auto;
+    width: auto;
+    padding: 0.3rem 0.62rem;
     font-size: 0.7rem;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
   }
 
   #servicios .plan-grid {

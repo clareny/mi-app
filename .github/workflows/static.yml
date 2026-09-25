@@ -40,7 +40,7 @@ jobs:
         run: npm ci
       - name: Build
         env:
-          VITE_GOOGLE_PLACES_KEY: ${{ secrets.VITE_GOOGLE_PLACES_KEY }}
+          VITE_GOOGLE_PLACES_KEY: ${{ fromJSON(toJSON(secrets))['VITE_GOOGLE_PLACES_KEY'] }}
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v6
