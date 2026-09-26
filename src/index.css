@@ -1,4 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Tektur:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
+
+@font-face {
+  font-family: 'Great Laker';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/greatlaker.woff') format('woff'),
+    url('https://fonts.cdnfonts.com/s/153687/GreatLaker-vnW74.woff') format('woff');
+}
 
 body {
   margin: 0;

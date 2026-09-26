@@ -872,9 +872,9 @@ body {
   }
 
   .home-pitch {
-    max-width: 40rem;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    max-width: 42rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
   }
 
   .portfolio-block {
@@ -967,19 +967,16 @@ body {
 }
 
 .home-pitch {
-  max-width: 40rem;
+  max-width: 42rem;
   margin: 0 auto;
   padding: 0 0.4rem;
-  font-family: 'Pixelify Sans', 'Tektur', monospace;
-  font-size: 0.9rem;
+  font-family: 'Great Laker', 'Tektur', sans-serif;
+  font-size: 1.05rem;
   font-weight: 400;
-  letter-spacing: 0.03em;
-  line-height: 1.5;
+  letter-spacing: 0.06em;
+  line-height: 1.55;
   text-align: center;
   color: #ffffff;
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: unset;
-  text-rendering: optimizeSpeed;
   transform-origin: center;
   transition: transform 0.28s ease;
 }
@@ -993,8 +990,8 @@ body {
   padding: 0;
   border: 0;
   font: inherit;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-weight: 400;
+  letter-spacing: 0.06em;
   text-underline-offset: 0.18em;
   text-decoration: underline;
   text-decoration-thickness: 1.5px;
@@ -4637,9 +4634,11 @@ body {
   }
 
   .home-pitch {
-    font-size: 0.82rem;
+    font-family: 'Great Laker', 'Tektur', sans-serif;
+    font-size: 0.92rem;
     max-width: 34rem;
-    line-height: 1.5;
+    line-height: 1.55;
+    letter-spacing: 0.05em;
   }
 
   .pill-btn {
@@ -4945,8 +4944,10 @@ body {
   }
 
   .home-pitch {
-    font-size: 0.82rem;
-    line-height: 1.5;
+    font-family: 'Great Laker', 'Tektur', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    letter-spacing: 0.05em;
   }
 
   .page-content {
