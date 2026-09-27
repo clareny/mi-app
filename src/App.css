@@ -1457,6 +1457,7 @@ body {
   margin: 0 auto;
   border-radius: 12px;
   overflow: hidden;
+  background: #000;
 }
 
 .playlist-embed iframe {
@@ -1465,7 +1466,7 @@ body {
   height: 152px;
   border: 0;
   border-radius: 12px;
-  background: transparent;
+  background: #000;
 }
 
 .arcade-player iframe,
@@ -2434,7 +2435,8 @@ body {
   }
 
   #contacto .contact-section {
-    overflow: visible;
+    overflow: hidden;
+    justify-content: flex-start;
   }
 
   #contacto .contact-copy {
@@ -2446,6 +2448,7 @@ body {
   #contacto .contact-note {
     text-align: center;
     margin-top: 0.45rem;
+    flex-shrink: 0;
   }
 
   .site-footer {
@@ -2815,6 +2818,8 @@ body {
   }
 
   #contacto .contact-form {
+    display: flex;
+    flex-direction: column;
     gap: 0.32rem;
     margin-top: 0.2rem;
     padding: 0;
@@ -2823,11 +2828,12 @@ body {
     background: transparent;
     flex: 1 1 auto;
     min-height: 0;
-    align-content: start;
+    width: 100%;
   }
 
   #contacto .contact-form__row {
     align-items: start;
+    flex-shrink: 0;
   }
 
   #contacto .contact-form__field {
@@ -2855,13 +2861,24 @@ body {
     box-shadow: none;
   }
 
+  #contacto .contact-form__field--message {
+    flex: 1 1 auto;
+    min-height: 0;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+  }
+
   #contacto .contact-form textarea {
-    min-height: 48px;
+    flex: 1 1 auto;
+    min-height: 7.5rem;
+    height: 100%;
     resize: none;
   }
 
   #contacto .contact-form__actions {
     gap: 0.45rem;
+    flex-shrink: 0;
   }
 
   #contacto .contact-form__actions .btn {
@@ -4611,6 +4628,28 @@ body {
     margin-top: 0;
   }
 
+  .playlist-embed {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 352px;
+    padding: 0;
+    border-radius: 12px;
+    background: #000;
+    border: 0;
+    box-shadow: none;
+    overflow: hidden;
+  }
+
+  .playlist-embed iframe {
+    height: 352px;
+    min-height: 352px;
+    max-width: 100%;
+    border-radius: 12px;
+    background: #000;
+  }
+
   #portfolio.panel-panel > * {
     transform: none;
   }
@@ -4887,7 +4926,7 @@ body {
   }
 
   .brand-logo {
-    height: clamp(2.4rem, 8vw, 3.1rem);
+    height: clamp(2.6rem, 8vw, 3.2rem);
     filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.22));
   }
 

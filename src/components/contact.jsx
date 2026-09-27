@@ -227,7 +227,7 @@ export default function Contact() {
           />
         </label>
 
-        <label className="contact-form__field">
+        <label className="contact-form__field contact-form__field--message">
           <span>{t('contact.message')}</span>
           <textarea
             name="message"

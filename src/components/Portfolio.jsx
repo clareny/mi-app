@@ -3,7 +3,7 @@ import GoogleReviews from './GoogleReviews';
 import MixCompare from './MixCompare';
 
 const PLAYLIST_EMBED =
-  'https://open.spotify.com/embed/playlist/0kHxXnOwz121HvCttid3Qt?utm_source=generator&si=59ab99aafb3245dd';
+  'https://open.spotify.com/embed/playlist/0kHxXnOwz121HvCttid3Qt?utm_source=generator&theme=0';
 
 export default function Home({ onNavClick = () => {} }) {
   const { t } = useLanguage();
@@ -46,7 +46,7 @@ export default function Home({ onNavClick = () => {} }) {
             title="Playlist Clareny"
             src={PLAYLIST_EMBED}
             width="100%"
-            height="152"
+            height="352"
             frameBorder="0"
             allowFullScreen=""
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
