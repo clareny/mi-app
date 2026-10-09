@@ -8423,6 +8423,16 @@ html.is-menu-open {
   text-transform: uppercase;
 }
 
+.playlist-listen .playlist-play {
+  flex: 0 0 auto;
+  color: #000;
+}
+
+.playlist-play__spotify {
+  width: 26px;
+  height: 26px;
+}
+
 @media (max-width: 900px) {
   .mix-card__wave {
     justify-content: space-between;
