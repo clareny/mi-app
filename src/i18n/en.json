@@ -7,7 +7,9 @@
     "bio": "Bio",
     "contact": "Contact",
     "talk": "Let’s talk about your project",
-    "lang": "Language"
+    "lang": "Language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "home": {
     "role": "Music producer / mix engineer",
@@ -277,6 +279,11 @@
     "blocked": "That message cannot be sent. Remove promo text or shortened links and tell me about the track.",
     "openingWa": "Opening WhatsApp with your message...",
     "sent": "Done. The message went out by email.",
+    "sentKicker": "Message sent",
+    "sentTitle": "Thank you. Your idea is on its way.",
+    "sentCopy": "I’ll reply by email so we can talk about your project.",
+    "replyTo": "Reply to",
+    "writeAgain": "Write another message",
     "confirmOnce": "FormSubmit sent a confirmation email. Open it and confirm once. After that, messages arrive on their own — no need to send again.",
     "mailFallback": "I opened your mail app with the message ready to send.",
     "note": "Choose the channel you prefer to talk about your project."

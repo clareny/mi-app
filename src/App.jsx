@@ -83,7 +83,7 @@ function App() {
   return (
     <div className={`app-shell ${isReady ? 'is-ready' : 'is-loading'}`}>
       <div className="page-background" aria-hidden="true">
-        <img src={`${basePath}Backgroundprincipal.png`} alt="" className="page-bg-main" />
+        <img src={`${basePath}Backgroundprincipal.webp`} alt="" className="page-bg-main" />
       </div>
 
       {!isReady && (

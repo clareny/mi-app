@@ -1,9 +1,32 @@
-﻿import { useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Navbar({ onNavClick = () => {}, activeSection = 'portfolio' }) {
   const { language, setLanguage, t } = useLanguage();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const root = document.documentElement;
+    const close = () => setOpen(false);
+    const onKey = (event) => {
+      if (event.key === 'Escape') close();
+    };
+    const onResize = () => {
+      if (window.innerWidth > 900) close();
+    };
+
+    root.classList.add('is-menu-open');
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      root.classList.remove('is-menu-open');
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('resize', onResize);
+    };
+  }, [open]);
 
   const links = [
     { label: t('nav.discography'), href: '#portfolio', id: 'portfolio' },
@@ -28,7 +51,7 @@ export default function Navbar({ onNavClick = () => {}, activeSection = 'portfol
         CLARENY
       </a>
 
-      <div className="site-nav__links">
+      <div className="site-nav__links" id="site-nav-links">
         {links.map((link) => (
           <a
             key={link.id}
@@ -75,9 +98,11 @@ export default function Navbar({ onNavClick = () => {}, activeSection = 'portfol
           type="button"
           className="site-nav__menu"
           aria-expanded={open}
-          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+          aria-controls="site-nav-links"
+          aria-label={open ? t('nav.closeMenu') : t('nav.openMenu')}
           onClick={() => setOpen((value) => !value)}
         >
+          <span />
           <span />
           <span />
         </button>

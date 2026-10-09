@@ -37,6 +37,7 @@ export default function Contact() {
   const [honeypot, setHoneypot] = useState('');
   const [status, setStatus] = useState('');
   const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
   const lastSendRef = useRef(0);
   const openedAtRef = useRef(Date.now());
 
@@ -139,14 +140,20 @@ export default function Contact() {
       }
 
       lastSendRef.current = Date.now();
-      setStatus(t('contact.sent'));
+      setStatus('');
       setMessage('');
+      setSent(true);
     } catch {
       openMailto();
       setStatus(t('contact.mailFallback'));
     } finally {
       setSending(false);
     }
+  };
+
+  const writeAgain = () => {
+    openedAtRef.current = Date.now();
+    setSent(false);
   };
 
   return (
@@ -195,81 +202,100 @@ export default function Contact() {
         method="POST"
         onSubmit={handleEmail}
       >
-        <p className="contact-form__title">{t('contact.formTitle')}</p>
-        <input type="hidden" name="_subject" value="Contacto desde la web — Clareny" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_honey" value="" />
-        <input type="hidden" name="_blacklist" value={FORMSUBMIT_BLACKLIST} />
-        <div className="contact-form__row">
-          <label className="contact-form__field">
-            <span>{t('contact.name')}</span>
-            <input
-              type="text"
-              name="name"
-              autoComplete="name"
-              placeholder={t('contact.namePh')}
-              maxLength={LIMITS.name}
-              value={name}
-              onChange={(e) => setName(clip(e.target.value, LIMITS.name))}
-            />
-          </label>
-          <label className="contact-form__field">
-            <span>{t('contact.email')}</span>
-            <input
-              type="email"
-              name="email"
-              autoComplete="email"
-              placeholder={t('contact.emailPh')}
-              maxLength={LIMITS.email}
-              value={senderEmail}
-              onChange={(e) => setSenderEmail(clip(e.target.value, LIMITS.email))}
-            />
-          </label>
-        </div>
+        {sent ? (
+          <div className="contact-success" role="status">
+            <p className="ed-kicker">{t('contact.sentKicker')}</p>
+            <p className="contact-success__title">{t('contact.sentTitle')}</p>
+            <p className="contact-success__copy">{t('contact.sentCopy')}</p>
+            {senderEmail.trim() ? (
+              <p className="contact-success__reply">
+                <span>{t('contact.replyTo')}</span>
+                {senderEmail.trim()}
+              </p>
+            ) : null}
+            <button type="button" className="ed-btn ed-btn--line" onClick={writeAgain}>
+              {t('contact.writeAgain')}
+            </button>
+          </div>
+        ) : (
+          <>
+            <p className="contact-form__title">{t('contact.formTitle')}</p>
+            <input type="hidden" name="_subject" value="Contacto desde la web — Clareny" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_honey" value="" />
+            <input type="hidden" name="_blacklist" value={FORMSUBMIT_BLACKLIST} />
+            <div className="contact-form__row">
+              <label className="contact-form__field">
+                <span>{t('contact.name')}</span>
+                <input
+                  type="text"
+                  name="name"
+                  autoComplete="name"
+                  placeholder={t('contact.namePh')}
+                  maxLength={LIMITS.name}
+                  value={name}
+                  onChange={(e) => setName(clip(e.target.value, LIMITS.name))}
+                />
+              </label>
+              <label className="contact-form__field">
+                <span>{t('contact.email')}</span>
+                <input
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  placeholder={t('contact.emailPh')}
+                  maxLength={LIMITS.email}
+                  value={senderEmail}
+                  onChange={(e) => setSenderEmail(clip(e.target.value, LIMITS.email))}
+                />
+              </label>
+            </div>
 
-        <label className="contact-form__honeypot" aria-hidden="true">
-          <span>Empresa</span>
-          <input
-            type="text"
-            name="company"
-            tabIndex={-1}
-            autoComplete="off"
-            value={honeypot}
-            onChange={(e) => setHoneypot(e.target.value)}
-          />
-        </label>
+            <label className="contact-form__honeypot" aria-hidden="true">
+              <span>Empresa</span>
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+            </label>
 
-        <label className="contact-form__field contact-form__field--message">
-          <span>{t('contact.message')}</span>
-          <textarea
-            name="message"
-            rows="4"
-            required
-            maxLength={LIMITS.message}
-            placeholder={t('contact.messagePh')}
-            value={message}
-            onChange={(e) => {
-              setMessage(clip(e.target.value, LIMITS.message));
-              if (status) setStatus('');
-            }}
-          />
-        </label>
+            <label className="contact-form__field contact-form__field--message">
+              <span>{t('contact.message')}</span>
+              <textarea
+                name="message"
+                rows="4"
+                required
+                maxLength={LIMITS.message}
+                placeholder={t('contact.messagePh')}
+                value={message}
+                onChange={(e) => {
+                  setMessage(clip(e.target.value, LIMITS.message));
+                  if (status) setStatus('');
+                }}
+              />
+            </label>
 
-        <div className="contact-form__actions">
-          <button type="submit" className="ed-btn ed-btn--fill" disabled={sending}>
-            {sending ? t('contact.sending') : t('contact.sendMail')}
-          </button>
-          <a
-            className="ed-btn ed-btn--line"
-            href={message.trim() ? buildWhatsAppLink() : `https://wa.me/${WHATSAPP_NUMBER}`}
-            onClick={handleWhatsApp}
-          >
-            {t('contact.sendWa')}
-          </a>
-        </div>
+            <div className="contact-form__actions">
+              <button type="submit" className="ed-btn ed-btn--fill" disabled={sending}>
+                {sending ? t('contact.sending') : t('contact.sendMail')}
+              </button>
+              <a
+                className="ed-btn ed-btn--line"
+                href={message.trim() ? buildWhatsAppLink() : `https://wa.me/${WHATSAPP_NUMBER}`}
+                onClick={handleWhatsApp}
+              >
+                {t('contact.sendWa')}
+              </a>
+            </div>
 
-        {status ? <p className="contact-form__status" role="status">{status}</p> : null}
-        <p className="contact-note">{t('contact.note')}</p>
+            {status ? <p className="contact-form__status" role="status">{status}</p> : null}
+            <p className="contact-note">{t('contact.note')}</p>
+          </>
+        )}
       </form>
       </div>
     </section>

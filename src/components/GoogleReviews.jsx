@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { GOOGLE_PLACE_NAME, GOOGLE_REVIEWS_URL, GOOGLE_WRITE_URL, loadGoogleReviews } from '../data/googleReviews';
+import { GOOGLE_PLACE_NAME, GOOGLE_REVIEWS_URL, loadGoogleReviews } from '../data/googleReviews';
 
 const Stars = ({ value = 5 }) => (
   <span className="g-reviews__stars" aria-label={`${value} / 5`}>
@@ -42,6 +42,8 @@ export default function GoogleReviews() {
     return () => window.clearInterval(timer);
   }, [paused, total]);
 
+  if (total === 0) return null;
+
   return (
     <aside
       className="g-reviews"
@@ -61,48 +63,36 @@ export default function GoogleReviews() {
         </a>
       </header>
 
-      {total === 0 ? (
-        <p className="g-reviews__empty">
-          {t('reviews.empty')}
-          {' '}
-          <a href={GOOGLE_WRITE_URL} target="_blank" rel="noopener noreferrer">
-            {t('reviews.write')}
-          </a>
-        </p>
-      ) : (
-        <>
-          <div className="g-reviews__viewport">
-            <div
-              className="g-reviews__track"
-              style={{ transform: `translateX(-${index * 100}%)` }}
-            >
-              {reviews.map((review) => (
-                <article key={review.id} className="g-reviews__card">
-                  <div className="g-reviews__meta">
-                    <strong>{review.name}</strong>
-                    <Stars value={review.stars} />
-                  </div>
-                  <p>{review.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
+      <div className="g-reviews__viewport">
+        <div
+          className="g-reviews__track"
+          style={{ transform: `translateX(-${index * 100}%)` }}
+        >
+          {reviews.map((review) => (
+            <article key={review.id} className="g-reviews__card">
+              <div className="g-reviews__meta">
+                <strong>{review.name}</strong>
+                <Stars value={review.stars} />
+              </div>
+              <p>{review.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
 
-          {total > 1 && (
-            <div className="g-reviews__dots" role="tablist" aria-label={t('reviews.label')}>
-              {reviews.map((review, dotIndex) => (
-                <button
-                  key={review.id}
-                  type="button"
-                  className={`g-reviews__dot ${dotIndex === index ? 'is-active' : ''}`}
-                  aria-label={`${dotIndex + 1} / ${total}`}
-                  aria-current={dotIndex === index ? 'true' : undefined}
-                  onClick={() => setIndex(dotIndex)}
-                />
-              ))}
-            </div>
-          )}
-        </>
+      {total > 1 && (
+        <div className="g-reviews__dots" role="tablist" aria-label={t('reviews.label')}>
+          {reviews.map((review, dotIndex) => (
+            <button
+              key={review.id}
+              type="button"
+              className={`g-reviews__dot ${dotIndex === index ? 'is-active' : ''}`}
+              aria-label={`${dotIndex + 1} / ${total}`}
+              aria-current={dotIndex === index ? 'true' : undefined}
+              onClick={() => setIndex(dotIndex)}
+            />
+          ))}
+        </div>
       )}
     </aside>
   );
