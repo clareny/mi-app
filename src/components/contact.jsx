@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { WHATSAPP_NUMBER } from './planKit';
 
-const CONTACT_EMAIL = 'spieronilton@gmail.com';
+const CONTACT_EMAIL = 'contact@clareny.com';
 // Pegá acá el código largo que FormSubmit manda al confirmar desde clareny.com.
 // Con el email a palo, cada origen nuevo (localhost, Pages, clareny.com) pide activar de nuevo.
 const FORMSUBMIT_ID = '';
 const formSubmitPath = FORMSUBMIT_ID || CONTACT_EMAIL;
-const WHATSAPP_NUMBER = '59897989368';
 const EMAIL_OK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const LIMITS = { name: 80, email: 120, message: 2000 };
 const SEND_COOLDOWN_MS = 12000;
@@ -150,33 +150,44 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="contact-section">
-      <h2 className="section-title">{t('contact.title')}</h2>
-      <p className="contact-copy">
-        {t('contact.copy')}
-      </p>
-
-      <a
-        className="discord-cta"
-        href="https://discord.gg/8zuG68qvvv"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span className="discord-cta__badge">{t('contact.badge')}</span>
-        <div className="discord-cta__copy">
-          <strong>{t('contact.discord')}</strong>
+    <section id="contact" className="contact-section editorial-contact">
+      <section className="studio-band">
+        <div className="studio-band__copy">
+          <p className="ed-kicker">{t('contact.badge')}</p>
+          <h2>{t('contact.discordTitle')}</h2>
           <p>{t('contact.discordCopy')}</p>
+          <a
+            className="ed-btn ed-btn--fill"
+            href="https://discord.gg/8zuG68qvvv"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t('contact.discord')}
+          </a>
         </div>
-        <span className="discord-cta__button">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M19.27 5.33A17.2 17.2 0 0 0 15.07 4c-.18.32-.39.76-.53 1.1a16.1 16.1 0 0 0-5.08 0A10 10 0 0 0 8.93 4a17.3 17.3 0 0 0-4.22 1.34C1.78 9.05 1.17 12.66 1.48 16.22A17.4 17.4 0 0 0 6.9 18.5c.36-.49.68-1.01.96-1.56-.53-.2-1.04-.44-1.52-.72.13-.1.25-.2.37-.3 2.92 1.36 6.08 1.36 8.97 0 .12.1.24.2.37.3-.48.28-.99.52-1.52.72.28.55.6 1.07.96 1.56a17.3 17.3 0 0 0 5.42-2.28c.37-4.14-.63-7.72-2.64-10.89ZM8.68 14.33c-.88 0-1.6-.82-1.6-1.82s.71-1.82 1.6-1.82 1.61.82 1.61 1.82-.72 1.82-1.61 1.82Zm6.64 0c-.88 0-1.6-.82-1.6-1.82s.71-1.82 1.6-1.82 1.61.82 1.61 1.82-.73 1.82-1.61 1.82Z"
-            />
-          </svg>
-          {t('contact.join')}
-        </span>
-      </a>
+        <aside className="studio-band__side">
+          <strong>
+            <span>{t('contact.discordSide1')}</span>
+            <span>{t('contact.discordSide2')}</span>
+          </strong>
+          <p>{t('contact.discordMeta')}</p>
+        </aside>
+      </section>
+
+      <div className="contact-layout">
+      <div className="contact-invite">
+        <p className="ed-kicker">{t('contact.kicker')}</p>
+        <h2>
+          <span>{t('contact.title1')}</span>
+          <span>{t('contact.title2')}</span>
+          <span>{t('contact.title3')}</span>
+        </h2>
+        <p>{t('contact.copy')}</p>
+        <div className="contact-channels">
+          <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL} ↗</a>
+          <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer">WHATSAPP / +598 97 989 368</a>
+        </div>
+      </div>
 
       <form
         className="contact-form"
@@ -184,6 +195,7 @@ export default function Contact() {
         method="POST"
         onSubmit={handleEmail}
       >
+        <p className="contact-form__title">{t('contact.formTitle')}</p>
         <input type="hidden" name="_subject" value="Contacto desde la web — Clareny" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_honey" value="" />
@@ -244,14 +256,12 @@ export default function Contact() {
         </label>
 
         <div className="contact-form__actions">
-          <button className="btn btn-outline-light btn-lg" type="submit" disabled={sending}>
+          <button type="submit" className="ed-btn ed-btn--fill" disabled={sending}>
             {sending ? t('contact.sending') : t('contact.sendMail')}
           </button>
           <a
-            className="btn btn-primary btn-lg"
+            className="ed-btn ed-btn--line"
             href={message.trim() ? buildWhatsAppLink() : `https://wa.me/${WHATSAPP_NUMBER}`}
-            target="_blank"
-            rel="noopener noreferrer"
             onClick={handleWhatsApp}
           >
             {t('contact.sendWa')}
@@ -259,9 +269,9 @@ export default function Contact() {
         </div>
 
         {status ? <p className="contact-form__status" role="status">{status}</p> : null}
+        <p className="contact-note">{t('contact.note')}</p>
       </form>
-
-      <p className="contact-note">{t('contact.note')}</p>
+      </div>
     </section>
   );
 }

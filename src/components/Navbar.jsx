@@ -1,11 +1,9 @@
-import { useEffect, useRef } from 'react';
+﻿import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 export default function Navbar({ onNavClick = () => {}, activeSection = 'portfolio' }) {
-  const basePath = import.meta.env.BASE_URL;
   const { language, setLanguage, t } = useLanguage();
-  const gazeRef = useRef(null);
-  const coinRef = useRef(null);
+  const [open, setOpen] = useState(false);
 
   const links = [
     { label: t('nav.discography'), href: '#portfolio', id: 'portfolio' },
@@ -14,75 +12,40 @@ export default function Navbar({ onNavClick = () => {}, activeSection = 'portfol
     { label: t('nav.contact'), href: '#contacto', id: 'contacto' },
   ];
 
-  useEffect(() => {
-    const gaze = gazeRef.current;
-    const coin = coinRef.current;
-    if (!gaze || !coin) return undefined;
-
-    const desktop = window.matchMedia('(min-width: 901px) and (pointer: fine)');
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    const resetGaze = () => {
-      gaze.style.transform = '';
-    };
-
-    const followCursor = (event) => {
-      if (!desktop.matches || reduced.matches) {
-        resetGaze();
-        return;
-      }
-
-      const rect = coin.getBoundingClientRect();
-      const dx = (event.clientX - (rect.left + rect.width / 2)) / (window.innerWidth / 2);
-      const dy = (event.clientY - (rect.top + rect.height / 2)) / (window.innerHeight / 2);
-      const tiltY = Math.max(-16, Math.min(16, dx * 16));
-      const tiltX = Math.max(-10, Math.min(10, -dy * 10));
-      gaze.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-    };
-
-    window.addEventListener('pointermove', followCursor, { passive: true });
-    return () => {
-      window.removeEventListener('pointermove', followCursor);
-      resetGaze();
-    };
-  }, []);
+  const go = (event, id) => {
+    setOpen(false);
+    onNavClick(event, id);
+  };
 
   return (
-    <nav className="navbar">
-      <div className="nav-inner">
-        <div className="nav-links nav-links--left">
-          {links.slice(0, 2).map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`nav-link nav-link--${link.id}${activeSection === link.id ? ' is-active' : ''}`}
-              aria-current={activeSection === link.id ? 'page' : undefined}
-              onClick={(event) => onNavClick(event, link.id)}
-            >
-              <span>{link.label}</span>
-            </a>
-          ))}
-        </div>
-        <a className="brand" href="#portfolio" onClick={(event) => onNavClick(event, 'portfolio')}>
-          <span className="brand-gaze" ref={gazeRef}>
-            <span className="brand-coin" ref={coinRef}>
-              <img src={`${basePath}logoblanco.png`} alt="Clareny" className="brand-logo" />
-            </span>
-          </span>
+    <nav className={`site-nav ${open ? 'is-open' : ''}`}>
+      <a className="site-nav__brand" href="#portfolio" onClick={(event) => go(event, 'portfolio')}>
+        <img
+          className="site-nav__logo"
+          src={`${import.meta.env.BASE_URL}logo-clareny-white.png`}
+          alt=""
+        />
+        CLARENY
+      </a>
+
+      <div className="site-nav__links">
+        {links.map((link) => (
+          <a
+            key={link.id}
+            href={link.href}
+            className={activeSection === link.id ? 'is-active' : undefined}
+            aria-current={activeSection === link.id ? 'page' : undefined}
+            onClick={(event) => go(event, link.id)}
+          >
+            {link.label}
+          </a>
+        ))}
+        <a className="site-nav__talk site-nav__talk--menu" href="#contacto" onClick={(event) => go(event, 'contacto')}>
+          {t('nav.talk')}
         </a>
-        <div className="nav-links nav-links--right">
-          {links.slice(2).map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={`nav-link nav-link--${link.id}${activeSection === link.id ? ' is-active' : ''}`}
-              aria-current={activeSection === link.id ? 'page' : undefined}
-              onClick={(event) => onNavClick(event, link.id)}
-            >
-              <span>{link.label}</span>
-            </a>
-          ))}
-        </div>
+      </div>
+
+      <div className="site-nav__end">
         <div className="lang-switch" role="group" aria-label={t('nav.lang')}>
           <button
             type="button"
@@ -90,17 +53,34 @@ export default function Navbar({ onNavClick = () => {}, activeSection = 'portfol
             onClick={() => setLanguage('es')}
             aria-pressed={language === 'es'}
           >
-            <span>ES</span>
+            ES
           </button>
+          <span className="lang-switch__slash" aria-hidden="true">/</span>
           <button
             type="button"
             className={`lang-switch__btn ${language === 'en' ? 'is-active' : ''}`}
             onClick={() => setLanguage('en')}
             aria-pressed={language === 'en'}
           >
-            <span>EN</span>
+            EN
           </button>
         </div>
+        <a className="site-nav__talk" href="#contacto" onClick={(event) => go(event, 'contacto')}>
+          {t('nav.talk')}
+          <svg viewBox="0 0 18 18" aria-hidden="true">
+            <path d="M5 13 13 5M7.2 5H13v5.8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
+        <button
+          type="button"
+          className="site-nav__menu"
+          aria-expanded={open}
+          aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <span />
+          <span />
+        </button>
       </div>
     </nav>
   );

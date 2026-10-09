@@ -6,45 +6,30 @@ import Contact from './components/contact';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Home from './components/Portfolio';
+import Process from './components/Process';
 import Services from './components/Services';
 
 function App() {
   const [isReady, setIsReady] = useState(false);
-  const [peekBackground, setPeekBackground] = useState(false);
-  const [activeSection, setActiveSection] = useState('portfolio');
+  const [activeSection, setActiveSection] = useState(() => {
+    if (typeof window === 'undefined') return 'portfolio';
+    const hash = window.location.hash.replace('#', '');
+    return hash || 'portfolio';
+  });
   const pageContentRef = useRef(null);
   const basePath = import.meta.env.BASE_URL;
 
   const scrollToSection = (targetId) => {
-    const container = document.querySelector('.page-content');
     const section = document.getElementById(targetId);
-
-    if (container && section) {
-      container.scrollTo({
-        left: section.offsetLeft,
-        behavior: 'smooth',
-      });
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
   const handleNavClick = (event, targetId) => {
     event.preventDefault();
-    setPeekBackground(false);
     setActiveSection(targetId);
     scrollToSection(targetId);
-  };
-
-  const handlePagePointerMove = (event) => {
-    const container = pageContentRef.current;
-
-    if (!container) return;
-
-    const rect = container.getBoundingClientRect();
-    const threshold = 40;
-    const pointerOnLeftEdge = event.clientX <= rect.left + threshold;
-    const pointerOnRightEdge = event.clientX >= rect.right - threshold;
-
-    setPeekBackground(pointerOnLeftEdge || pointerOnRightEdge);
   };
 
   useEffect(() => {
@@ -77,26 +62,27 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const container = pageContentRef.current;
-    if (!container) return undefined;
-
+    const ids = ['portfolio', 'servicios', 'proceso', 'sobre-mi', 'contacto'];
     const syncSection = () => {
-      const mid = container.scrollLeft + container.clientWidth / 2;
-      const ids = ['portfolio', 'servicios', 'sobre-mi', 'contacto'];
-      const current = ids.find((id) => {
+      const marker = window.scrollY + 140;
+      let current = ids[0];
+      ids.forEach((id) => {
         const section = document.getElementById(id);
-        return section && mid >= section.offsetLeft && mid < section.offsetLeft + section.offsetWidth;
+        if (!section) return;
+        const top = section.getBoundingClientRect().top + window.scrollY;
+        if (top <= marker) current = id;
       });
-      if (current) setActiveSection(current);
+      setActiveSection(current);
     };
 
-    container.addEventListener('scroll', syncSection, { passive: true });
-    return () => container.removeEventListener('scroll', syncSection);
-  }, []);
+    syncSection();
+    window.addEventListener('scroll', syncSection, { passive: true });
+    return () => window.removeEventListener('scroll', syncSection);
+  }, [isReady]);
 
   return (
     <div className={`app-shell ${isReady ? 'is-ready' : 'is-loading'}`}>
-      <div className={`page-background ${peekBackground ? 'is-peeking' : ''}`} aria-hidden="true">
+      <div className="page-background" aria-hidden="true">
         <img src={`${basePath}Backgroundprincipal.png`} alt="" className="page-bg-main" />
       </div>
 
@@ -108,22 +94,20 @@ function App() {
 
       <div className="content-shell">
         <Navbar onNavClick={handleNavClick} activeSection={activeSection} />
-        <main
-          ref={pageContentRef}
-          className="page-content horizontal-scroll"
-          onMouseMove={handlePagePointerMove}
-          onMouseLeave={() => setPeekBackground(false)}
-        >
-          <div id="portfolio" className="reveal-section panel-panel">
+        <main ref={pageContentRef} className="page-content page-flow">
+          <div id="portfolio" className="flow-section">
             <Home onNavClick={handleNavClick} />
           </div>
-          <div id="servicios" className="reveal-section panel-panel">
+          <div id="servicios" className="flow-section">
             <Services />
           </div>
-          <div id="sobre-mi" className="reveal-section panel-panel">
+          <div id="proceso" className="flow-section">
+            <Process />
+          </div>
+          <div id="sobre-mi" className="flow-section">
             <About />
           </div>
-          <div id="contacto" className="reveal-section panel-panel">
+          <div id="contacto" className="flow-section">
             <Contact />
           </div>
         </main>
