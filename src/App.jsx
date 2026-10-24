@@ -1,6 +1,7 @@
 // React component source.
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
+import './interactive.css';
 import About from './components/About';
 import Contact from './components/contact';
 import Footer from './components/Footer';
@@ -8,6 +9,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Portfolio';
 import Process from './components/Process';
 import Services from './components/Services';
+import useInteractions from './hooks/useInteractions';
 
 function App() {
   const [isReady, setIsReady] = useState(false);
@@ -18,6 +20,8 @@ function App() {
   });
   const pageContentRef = useRef(null);
   const basePath = import.meta.env.BASE_URL;
+
+  useInteractions(isReady);
 
   const scrollToSection = (targetId) => {
     const section = document.getElementById(targetId);
@@ -82,6 +86,8 @@ function App() {
 
   return (
     <div className={`app-shell ${isReady ? 'is-ready' : 'is-loading'}`}>
+      <div className="scroll-progress" aria-hidden="true" />
+      <div className="cursor-glow" aria-hidden="true" />
       <div className="page-background" aria-hidden="true">
         <img src={`${basePath}Backgroundprincipal.webp`} alt="" className="page-bg-main" />
       </div>
@@ -113,6 +119,24 @@ function App() {
         </main>
         <Footer />
       </div>
+
+      <button
+        type="button"
+        className="back-to-top"
+        aria-label="Volver arriba"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        <svg viewBox="0 0 18 18" aria-hidden="true">
+          <path
+            d="M9 14.5v-11M4.5 7.8 9 3.5l4.5 4.3"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
     </div>
   );
 }
