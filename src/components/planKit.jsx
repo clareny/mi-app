@@ -1,9 +1,7 @@
 import { motion, useMotionValue, useSpring } from 'motion/react';
 import { useEffect, useState } from 'react';
 
-export const WHATSAPP_NUMBER = '59897989368';
-
-export const waLink = (message) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+export { WHATSAPP_NUMBER, waLink } from '../data/links';
 
 export const appleSpring = {
   type: 'spring',

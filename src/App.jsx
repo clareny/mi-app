@@ -5,6 +5,7 @@ import './interactive.css';
 import About from './components/About';
 import Contact from './components/contact';
 import Footer from './components/Footer';
+import Links, { SocialRail } from './components/Links';
 import Navbar from './components/Navbar';
 import Home from './components/Portfolio';
 import Process from './components/Process';
@@ -66,7 +67,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const ids = ['portfolio', 'servicios', 'proceso', 'sobre-mi', 'contacto'];
+    const ids = ['portfolio', 'servicios', 'proceso', 'sobre-mi', 'contacto', 'redes'];
     const syncSection = () => {
       const marker = window.scrollY + 140;
       let current = ids[0];
@@ -88,6 +89,7 @@ function App() {
     <div className={`app-shell ${isReady ? 'is-ready' : 'is-loading'}`}>
       <div className="scroll-progress" aria-hidden="true" />
       <div className="cursor-glow" aria-hidden="true" />
+      <SocialRail />
       <div className="page-background" aria-hidden="true">
         <img src={`${basePath}Backgroundprincipal.webp`} alt="" className="page-bg-main" />
       </div>
@@ -115,6 +117,9 @@ function App() {
           </div>
           <div id="contacto" className="flow-section">
             <Contact />
+          </div>
+          <div id="redes" className="flow-section">
+            <Links />
           </div>
         </main>
         <Footer />

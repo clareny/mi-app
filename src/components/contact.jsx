@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { WHATSAPP_NUMBER } from './planKit';
+import { WHATSAPP_DISPLAY, waLink } from '../data/links';
 
 const CONTACT_EMAIL = 'contact@clareny.com';
 // Pegá acá el código largo que FormSubmit manda al confirmar desde clareny.com.
@@ -46,10 +46,7 @@ export default function Contact() {
     return `${intro}\n\n${message.trim()}`;
   };
 
-  const buildWhatsAppLink = () => {
-    const text = encodeURIComponent(composedMessage());
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
-  };
+  const buildWhatsAppLink = () => waLink(composedMessage());
 
   const openMailto = () => {
     const subject = encodeURIComponent('Contacto desde la web — Clareny');
@@ -192,7 +189,7 @@ export default function Contact() {
         <p>{t('contact.copy')}</p>
         <div className="contact-channels">
           <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL} ↗</a>
-          <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer">WHATSAPP / +598 97 989 368</a>
+          <a href={waLink()} target="_blank" rel="noopener noreferrer">WHATSAPP / {WHATSAPP_DISPLAY}</a>
         </div>
       </div>
 
@@ -285,7 +282,7 @@ export default function Contact() {
               </button>
               <a
                 className="ed-btn ed-btn--line"
-                href={message.trim() ? buildWhatsAppLink() : `https://wa.me/${WHATSAPP_NUMBER}`}
+                href={message.trim() ? buildWhatsAppLink() : waLink()}
                 onClick={handleWhatsApp}
               >
                 {t('contact.sendWa')}

@@ -210,7 +210,7 @@ export default function MixCompare() {
       caption: t('mix.beforeCap'),
       title: t('mix.beforeTitle'),
       href: 'https://soundcloud.com/clarenymusic/maqueta/s-wD5zXGeNnjz',
-      src: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%3Atracks%3A2398921599%3Fsecret_token%3Ds-wD5zXGeNnjz&color=%231cdadd&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false',
+      src: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%3Atracks%3A2398921599%3Fsecret_token%3Ds-wD5zXGeNnjz&color=%239fe6ec&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false',
     },
     {
       id: 'despues',
@@ -219,7 +219,7 @@ export default function MixCompare() {
       title: t('mix.afterTitle'),
       href: 'https://soundcloud.com/clarenymusic/resultado',
       limit: RESULTADO_LIMIT_MS,
-      src: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2398922043&color=%231cdadd&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false',
+      src: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2398922043&color=%239fe6ec&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false',
     },
   ];
 

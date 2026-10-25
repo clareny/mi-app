@@ -8,27 +8,27 @@ import {
   itemVariants,
   listVariants,
   usePhone,
-  WHATSAPP_NUMBER,
+  waLink,
 } from './planKit';
 
 const tabTheme = {
   combo: {
-    pill: 'linear-gradient(135deg, #1cdadd, #c084fc)',
-    glow: '0 1px 4px rgba(0, 0, 0, 0.18), 0 0 16px rgba(28, 218, 221, 0.45), 0 0 18px rgba(166, 92, 255, 0.3)',
-    bloom: 'rgba(28, 218, 221, 0.5)',
-    bloom2: 'rgba(166, 92, 255, 0.38)',
+    pill: 'linear-gradient(135deg, #ffffff, #dfe2e5)',
+    glow: '0 1px 4px rgba(0, 0, 0, 0.18), 0 0 16px rgba(255, 255, 255, 0.45), 0 0 18px rgba(200, 205, 210, 0.3)',
+    bloom: 'rgba(255, 255, 255, 0.5)',
+    bloom2: 'rgba(200, 205, 210, 0.38)',
   },
   vocal: {
-    pill: 'linear-gradient(135deg, #1cdadd, #72f6d2)',
-    glow: '0 1px 4px rgba(0, 0, 0, 0.18), 0 0 18px rgba(28, 218, 221, 0.55)',
-    bloom: 'rgba(28, 218, 221, 0.55)',
-    bloom2: 'rgba(114, 246, 210, 0.28)',
+    pill: 'linear-gradient(135deg, #e3e6e9, #b9bec3)',
+    glow: '0 1px 4px rgba(0, 0, 0, 0.18), 0 0 18px rgba(255, 255, 255, 0.55)',
+    bloom: 'rgba(255, 255, 255, 0.55)',
+    bloom2: 'rgba(200, 205, 210, 0.28)',
   },
   beats: {
-    pill: 'linear-gradient(135deg, #b875ff, #e0a7ff)',
-    glow: '0 1px 4px rgba(0, 0, 0, 0.18), 0 0 18px rgba(184, 117, 255, 0.58)',
-    bloom: 'rgba(184, 117, 255, 0.55)',
-    bloom2: 'rgba(224, 167, 255, 0.32)',
+    pill: 'linear-gradient(135deg, #b3b9be, #8e959b)',
+    glow: '0 1px 4px rgba(0, 0, 0, 0.18), 0 0 18px rgba(200, 205, 210, 0.58)',
+    bloom: 'rgba(200, 205, 210, 0.55)',
+    bloom2: 'rgba(200, 205, 210, 0.32)',
   },
 };
 
@@ -142,7 +142,7 @@ export default function Services() {
       const message = extra
         ? `${t('services.waHi')} ${t('services.waCombo')} ${t('services.waDetails')}: ${extra}`
         : `${t('services.waHi')} ${t('services.waCombo')}`;
-      return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      return waLink(message);
     }
 
     const label = type === 'vocal' ? t('services.waVocalLabel') : t('services.waBeatsLabel');
@@ -151,7 +151,7 @@ export default function Services() {
       ? `${t('services.waDetails')}: ${need.trim()}`
       : t('services.waDefine');
     const message = `${t('services.waHi')} ${label}. ${detailText}`;
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    return waLink(message);
   };
 
   const briefType = beatSelections.length

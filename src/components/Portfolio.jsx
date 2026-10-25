@@ -1,9 +1,8 @@
 import { useLanguage } from '../contexts/LanguageContext';
 import GoogleReviews from './GoogleReviews';
+import { PLAYLIST_URL, SPOTIFY_ARTIST } from '../data/links';
+import { QuickLinks } from './Links';
 import MixCompare from './MixCompare';
-
-const PLAYLIST_URL = 'https://open.spotify.com/playlist/0kHxXnOwz121HvCttid3Qt';
-const SPOTIFY_ARTIST = 'https://open.spotify.com/artist/1kS2GOJRVZeWbgeuNrdpaE';
 
 function PlayIcon() {
   return (
@@ -77,6 +76,7 @@ export default function Home({ onNavClick = () => {} }) {
                 <ArrowIcon />
               </a>
             </div>
+            <QuickLinks />
           </div>
 
           <aside className="sound-card">

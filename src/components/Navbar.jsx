@@ -33,6 +33,7 @@ export default function Navbar({ onNavClick = () => {}, activeSection = 'portfol
     { label: t('nav.services'), href: '#servicios', id: 'servicios' },
     { label: t('nav.bio'), href: '#sobre-mi', id: 'sobre-mi' },
     { label: t('nav.contact'), href: '#contacto', id: 'contacto' },
+    { label: t('nav.links'), href: '#redes', id: 'redes' },
   ];
 
   const go = (event, id) => {
