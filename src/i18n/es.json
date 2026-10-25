@@ -320,5 +320,145 @@
     "ceo": "CEO Clareny",
     "top": "Volver arriba",
     "meta": "CEO Clareny"
+  },
+  "site": {
+    "nav": {
+      "inicio": "Inicio",
+      "musica": "Música",
+      "servicios": "Producción",
+      "formacion": "Formación",
+      "cta": "Escribime",
+      "back": "Volver al inicio"
+    },
+    "home": {
+      "kicker": "Productor musical · Ingeniero de mezcla · Montevideo",
+      "title1": "Tu sonido.",
+      "title2": "Sin moldes.",
+      "choose": "¿A dónde querés ir?"
+    },
+    "doors": {
+      "musica": {
+        "title": "Escuchá",
+        "copy": "Mi música, el antes y después de una mezcla y los artistas con los que trabajé."
+      },
+      "servicios": {
+        "title": "Producción",
+        "copy": "Custom beats, remakes, mezcla y producción completa para tu canción."
+      },
+      "formacion": {
+        "title": "Formación 1:1",
+        "copy": "Clases por videollamada conmigo: industria, regalías, mezcla y más."
+      },
+      "enter": "Entrar"
+    },
+    "soon": "Este mundo se rediseña en la próxima fase.",
+    "footer": "© 2026 GRAYKIDS · Clareny",
+    "music": {
+      "spotifyEmbed": "Playlist de Clareny en Spotify",
+      "creditsCount": "artistas",
+      "ctaTitle": "¿Querés este sonido en tu canción?",
+      "ctaBtn": "Ver producción"
+    },
+    "prod": {
+      "lead": "Elegí qué necesita tu canción. Un solo formulario y me llega directo.",
+      "pickKicker": "01 / elegí tu servicio",
+      "briefKicker": "02 / contame tu idea",
+      "processKicker": "03 / cómo trabajamos",
+      "choose": "Elegir",
+      "chosen": "Elegido",
+      "special": "Especial",
+      "s": {
+        "combo": {
+          "name": "Producción completa",
+          "line": "Tu canción de cero: beat, voces y mezcla con tu color."
+        },
+        "custom": {
+          "name": "Custom beat",
+          "line": "Un instrumental nuevo, hecho para tu idea."
+        },
+        "remake": {
+          "name": "Remake",
+          "line": "Recreo el beat que te gusta, con cambios sutiles."
+        },
+        "vocal": {
+          "name": "Mezcla vocal",
+          "line": "Grabación, edición o mezcla de tus voces."
+        }
+      },
+      "vocalWhat": "¿Qué necesitás?",
+      "sendWa": "Enviar por WhatsApp",
+      "sendMail": "o por correo",
+      "mailSubject": "Proyecto desde la web",
+      "toTraining": "¿Querés aprender a hacerlo vos?",
+      "toTrainingBtn": "Ver formación"
+    },
+    "training": {
+      "profileKicker": "01 / ¿quién sos?",
+      "topicsKicker": "02 / ¿qué querés aprender?",
+      "bookKicker": "03 / agendá tu clase",
+      "profiles": {
+        "artista": "Artista",
+        "productor": "Productor",
+        "sello": "Sello / industria"
+      },
+      "topics": {
+        "ipi": "Registro IPI y derechos de autor",
+        "royalties": "Regalías: cómo cobrarlas",
+        "buyBeats": "Cómo comprar beats y licencias",
+        "splits": "Porcentajes y splits",
+        "mixVocals": "Mezclar voces",
+        "tuneVocals": "Afinar voces",
+        "charge": "Cómo cobrar a tus clientes",
+        "workflow": "Flujo de trabajo en el estudio",
+        "openLabel": "Cómo abrir un sello",
+        "manageArtists": "Manejar artistas y contratos",
+        "release": "Lanzar y distribuir música"
+      },
+      "topicsHint": "Elegí uno o varios. También podés escribir otro tema abajo.",
+      "hours": "Duración",
+      "hour": "hora",
+      "hoursPlural": "horas",
+      "days": "Días que te sirven",
+      "dayNames": [
+        "Lun",
+        "Mar",
+        "Mié",
+        "Jue",
+        "Vie",
+        "Sáb",
+        "Dom"
+      ],
+      "time": "Horario",
+      "times": {
+        "morning": "Mañana",
+        "afternoon": "Tarde",
+        "night": "Noche"
+      },
+      "date": "Fecha preferida (opcional)",
+      "name": "Tu nombre",
+      "other": "Otro tema o detalle",
+      "price": "Videollamada 1 a 1 por Discord · horario de Montevideo (GMT-3)",
+      "sendWa": "Agendar por WhatsApp",
+      "sendMail": "o por correo",
+      "mailSubject": "Clase 1:1 con Clareny",
+      "waHi": "Hola Clareny, quiero agendar una clase 1:1 contigo.",
+      "waProfile": "Soy",
+      "waTopics": "Temas",
+      "waDuration": "Duración",
+      "waDays": "Días",
+      "waTime": "Horario",
+      "waDate": "Fecha",
+      "waName": "Nombre",
+      "waOther": "Además",
+      "pickTopic": "Elegí al menos un tema para agendar.",
+      "hoursOther": "Otra cantidad",
+      "daysHint": "Podés elegir hasta {n} {d}.",
+      "day": "día",
+      "daysWord": "días",
+      "estimate": "Tiempo estimado: {h} · 30 USD la hora = {t} USD",
+      "bookedTitle": "¡Listo! Ya me llegó tu pedido.",
+      "bookedCopy": "La clase es por videollamada en mi comunidad de Discord. Unite desde ahora para que estemos conectados el día de la clase.",
+      "joinDiscord": "Unirme al Discord"
+    }
   }
 }

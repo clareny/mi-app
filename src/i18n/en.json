@@ -320,5 +320,145 @@
     "ceo": "CEO Clareny",
     "top": "Back to top",
     "meta": "CEO Clareny"
+  },
+  "site": {
+    "nav": {
+      "inicio": "Home",
+      "musica": "Music",
+      "servicios": "Production",
+      "formacion": "Training",
+      "cta": "Message me",
+      "back": "Back to home"
+    },
+    "home": {
+      "kicker": "Music producer · Mix engineer · Montevideo",
+      "title1": "Your sound.",
+      "title2": "No molds.",
+      "choose": "Where do you want to go?"
+    },
+    "doors": {
+      "musica": {
+        "title": "Listen",
+        "copy": "My music, a mix before and after, and the artists I've worked with."
+      },
+      "servicios": {
+        "title": "Production",
+        "copy": "Custom beats, remakes, mixing and full production for your song."
+      },
+      "formacion": {
+        "title": "1:1 Training",
+        "copy": "Video-call lessons with me: industry, royalties, mixing and more."
+      },
+      "enter": "Enter"
+    },
+    "soon": "This world gets redesigned in the next phase.",
+    "footer": "© 2026 GRAYKIDS · Clareny",
+    "music": {
+      "spotifyEmbed": "Clareny playlist on Spotify",
+      "creditsCount": "artists",
+      "ctaTitle": "Want this sound on your song?",
+      "ctaBtn": "See production"
+    },
+    "prod": {
+      "lead": "Pick what your song needs. One form, straight to me.",
+      "pickKicker": "01 / pick your service",
+      "briefKicker": "02 / tell me your idea",
+      "processKicker": "03 / how we work",
+      "choose": "Choose",
+      "chosen": "Chosen",
+      "special": "Special",
+      "s": {
+        "combo": {
+          "name": "Full production",
+          "line": "Your song from scratch: beat, vocals and mix with your color."
+        },
+        "custom": {
+          "name": "Custom beat",
+          "line": "A brand-new instrumental, made for your idea."
+        },
+        "remake": {
+          "name": "Remake",
+          "line": "I recreate the beat you love, with subtle changes."
+        },
+        "vocal": {
+          "name": "Vocal mix",
+          "line": "Recording, editing or mixing your vocals."
+        }
+      },
+      "vocalWhat": "What do you need?",
+      "sendWa": "Send on WhatsApp",
+      "sendMail": "or by email",
+      "mailSubject": "Project from the website",
+      "toTraining": "Want to learn to do it yourself?",
+      "toTrainingBtn": "See training"
+    },
+    "training": {
+      "profileKicker": "01 / who are you?",
+      "topicsKicker": "02 / what do you want to learn?",
+      "bookKicker": "03 / book your lesson",
+      "profiles": {
+        "artista": "Artist",
+        "productor": "Producer",
+        "sello": "Label / industry"
+      },
+      "topics": {
+        "ipi": "IPI registration and copyright",
+        "royalties": "Royalties: how to collect them",
+        "buyBeats": "How to buy beats and licenses",
+        "splits": "Percentages and splits",
+        "mixVocals": "Mixing vocals",
+        "tuneVocals": "Tuning vocals",
+        "charge": "How to charge your clients",
+        "workflow": "Studio workflow",
+        "openLabel": "How to start a label",
+        "manageArtists": "Managing artists and contracts",
+        "release": "Releasing and distributing music"
+      },
+      "topicsHint": "Pick one or more. You can also write another topic below.",
+      "hours": "Duration",
+      "hour": "hour",
+      "hoursPlural": "hours",
+      "days": "Days that work for you",
+      "dayNames": [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+      ],
+      "time": "Time of day",
+      "times": {
+        "morning": "Morning",
+        "afternoon": "Afternoon",
+        "night": "Night"
+      },
+      "date": "Preferred date (optional)",
+      "name": "Your name",
+      "other": "Another topic or detail",
+      "price": "1-on-1 video call on Discord · Montevideo time (GMT-3)",
+      "sendWa": "Book on WhatsApp",
+      "sendMail": "or by email",
+      "mailSubject": "1:1 lesson with Clareny",
+      "waHi": "Hi Clareny, I want to book a 1:1 lesson with you.",
+      "waProfile": "I am",
+      "waTopics": "Topics",
+      "waDuration": "Duration",
+      "waDays": "Days",
+      "waTime": "Time",
+      "waDate": "Date",
+      "waName": "Name",
+      "waOther": "Also",
+      "pickTopic": "Pick at least one topic to book.",
+      "hoursOther": "Other amount",
+      "daysHint": "You can pick up to {n} {d}.",
+      "day": "day",
+      "daysWord": "days",
+      "estimate": "Estimated time: {h} · 30 USD per hour = {t} USD",
+      "bookedTitle": "Done! Your request is on its way.",
+      "bookedCopy": "The lesson is a video call in my Discord community. Join now so we're connected on lesson day.",
+      "joinDiscord": "Join the Discord"
+    }
   }
 }

@@ -1,0 +1,187 @@
+/* Mundo "Producción": elegir servicio → un solo brief → enviar */
+
+.prod-block {
+  display: grid;
+  gap: 1rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--linea);
+}
+
+/* ===== Tarjetas de servicio (cada una con su tratamiento) ===== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.service-card {
+  --card-bg: linear-gradient(160deg, #f7f6f3, var(--mate-blanco-2));
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  gap: 0.5rem;
+  min-height: 210px;
+  padding: 1.3rem;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radio);
+  background: var(--card-bg);
+  box-shadow: var(--sombra);
+  color: var(--tinta);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-hover);
+}
+
+/* Producción completa: el servicio destacado, en negro mate */
+.service-card--combo {
+  --card-bg: linear-gradient(160deg, var(--mate-negro-2), var(--mate-negro));
+  border-color: rgba(255, 255, 255, 0.06);
+  color: var(--mate-blanco);
+}
+
+/* Remake: textura rayada sutil */
+.service-card--remake::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(135deg, rgba(22, 22, 22, 0.04) 0 1px, transparent 1px 9px);
+}
+
+/* Mezcla vocal: solo contorno */
+.service-card--vocal {
+  --card-bg: linear-gradient(var(--mate-blanco), var(--mate-blanco));
+  border-color: var(--tinta);
+  box-shadow: none;
+}
+
+/* Elegida: borde con el degradado de marca (sin tapar el fondo de la tarjeta) */
+.service-card.is-active {
+  border-color: transparent;
+  background:
+    var(--card-bg) padding-box,
+    var(--iris) border-box;
+}
+
+.service-card__top {
+  display: flex;
+  justify-content: space-between;
+  color: var(--tinta-tenue);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+}
+
+.service-card--combo .service-card__top,
+.service-card--combo .service-card__line {
+  color: rgba(241, 240, 236, 0.62);
+}
+
+.service-card__flag {
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--iris-suave);
+  color: var(--mate-negro);
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.service-card__name {
+  align-self: end;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.service-card__line {
+  color: var(--tinta-suave);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.service-card__pick {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.service-card.is-active .service-card__pick {
+  background: var(--iris);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.service-card--combo.is-active .service-card__pick {
+  background: var(--iris-suave);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* ===== Proceso ===== */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+  list-style: none;
+}
+
+.steps li {
+  display: grid;
+  gap: 0.4rem;
+  counter-increment: step;
+}
+
+.steps li::before {
+  content: '0' counter(step);
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  background: var(--iris);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.steps strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+}
+
+.steps span {
+  color: var(--tinta-suave);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 960px) {
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .services-grid,
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    min-height: 0;
+  }
+}

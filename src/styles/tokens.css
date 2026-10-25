@@ -1,0 +1,135 @@
+/*
+  Sistema visual de Clareny
+  -------------------------
+  Base: blanco mate + negro mate. El color vive solo en el degradado
+  (cian → lavanda → celeste), sacado del background "CLU".
+*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Tektur:wght@500;700;900&display=swap');
+
+:root {
+  /* Superficies */
+  --mate-blanco: #f1f0ec;
+  --mate-blanco-2: #e8e7e2;
+  --mate-negro: #161616;
+  --mate-negro-2: #242424;
+
+  /* Texto */
+  --tinta: #161616;
+  --tinta-suave: #5f5f5b;
+  --tinta-tenue: #8d8c87;
+  --linea: rgba(22, 22, 22, 0.1);
+
+  /* Degradado de marca (texto sobre blanco) */
+  --iris: linear-gradient(95deg, #2cbfca 0%, #8a72ee 52%, #5a92ee 100%);
+  /* Versión pastel (brillos, fondos) */
+  --iris-suave: linear-gradient(95deg, #a9eef2 0%, #d2c9fb 52%, #bcd6fa 100%);
+  /* Versión intensa (texto chico, para que no se pierda sobre el blanco) */
+  --iris-fuerte: linear-gradient(95deg, #0e9aa6 0%, #6a4fe0 52%, #2f6fdc 100%);
+
+  /* Tipografía */
+  --font-display: 'Tektur', 'Arial Black', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Forma y profundidad */
+  --radio: 22px;
+  --radio-sm: 12px;
+  --sombra: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 18px 40px -18px rgba(22, 22, 22, 0.28);
+  --sombra-hover: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 30px 60px -24px rgba(22, 22, 22, 0.35);
+
+  /* Ritmo */
+  --gutter: clamp(16px, 4vw, 48px);
+  --ancho: 1180px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--mate-blanco);
+  color: var(--tinta);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+/* Contorno visible al navegar con teclado */
+:focus-visible {
+  outline: 2px solid #6a4fe0;
+  outline-offset: 3px;
+}
+
+/* Texto con el degradado de marca */
+.text-iris {
+  background: var(--iris);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.kicker {
+  margin: 0 0 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Subtítulos en degradado: más grandes, más gruesos y con colores intensos + una rayita */
+.kicker.text-iris {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  justify-self: start;
+  font-size: clamp(0.8rem, 2.2vw, 0.92rem);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  background: var(--iris-fuerte);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.kicker.text-iris::before {
+  content: '';
+  flex: none;
+  width: 1.6rem;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--iris-fuerte);
+}
+
+.fine-print {
+  color: var(--tinta-tenue);
+  font-size: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

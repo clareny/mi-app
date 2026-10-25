@@ -1,0 +1,110 @@
+/* Piezas de formulario compartidas (Producción y Formación) */
+
+.brief-card {
+  display: grid;
+  gap: 1.3rem;
+  max-width: 760px;
+  padding: clamp(1.3rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radio);
+  background: #f8f7f4;
+  box-shadow: var(--sombra);
+}
+
+.brief-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.field > span {
+  color: var(--tinta-suave);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--linea);
+  border-radius: var(--radio-sm);
+  background: #fff;
+  color: var(--tinta);
+  font: inherit;
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--tinta);
+  outline: none;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chips button {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--tinta);
+  font: 500 0.85rem var(--font-body);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.chips button:hover {
+  border-color: var(--tinta);
+}
+
+.chips button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.chips button.is-active {
+  border-color: var(--mate-negro);
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+}
+
+.brief-card__send {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-dark {
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s var(--ease);
+}
+
+.btn-dark:hover {
+  transform: translateY(-2px);
+}
+
+.btn-text {
+  color: var(--tinta-suave);
+  font-size: 0.9rem;
+}
+

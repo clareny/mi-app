@@ -1,0 +1,506 @@
+/* Layout del sitio rediseñado (blanco/negro mate). Tokens en tokens.css */
+
+/* ===== Fondo: background "CLU" muy sutil sobre blanco ===== */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 600px at 50% 0%, rgba(255, 255, 255, 0.9), transparent 70%),
+    var(--mate-blanco);
+}
+
+.site-bg img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.16;
+  filter: saturate(1.2);
+}
+
+/* Ciudad 3D: tapa la imagen cuando carga */
+.site-bg .city-canvas {
+  position: absolute !important;
+  inset: 0;
+  animation: city-in 1.2s var(--ease) both;
+}
+
+/* Velo blanco al centro para que el texto siempre se lea */
+.site-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 60% at 50% 45%, rgba(241, 240, 236, 0.55), rgba(241, 240, 236, 0.08) 80%);
+}
+
+@keyframes city-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.site {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-main {
+  flex: 1;
+  width: min(100% - var(--gutter) * 2, var(--ancho));
+  margin: 0 auto;
+}
+
+/* ===== Navegación ===== */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem var(--gutter);
+  background: color-mix(in srgb, var(--mate-blanco) 78%, transparent);
+  border-bottom: 1px solid var(--linea);
+  backdrop-filter: blur(14px);
+}
+
+.site-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.site-nav__brand img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.site-nav__worlds {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.site-nav__worlds a {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  color: var(--tinta-suave);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.site-nav__worlds a:hover {
+  color: var(--tinta);
+}
+
+.site-nav__worlds a.is-active {
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+}
+
+.site-nav__end {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.site-nav__lang {
+  padding: 0.4rem 0.6rem;
+  border: 0;
+  background: none;
+  color: var(--tinta-suave);
+  font: 600 0.78rem var(--font-body);
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+.site-nav__cta {
+  padding: 0.55rem 1.05rem;
+  border-radius: 999px;
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.2s var(--ease);
+}
+
+.site-nav__cta:hover {
+  transform: translateY(-1px);
+}
+
+/* ===== Inicio ===== */
+.home {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(2.5rem, 7vw, 5rem) 0 4rem;
+}
+
+.home__hero {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.home__logo {
+  width: clamp(240px, 34vw, 380px);
+  aspect-ratio: 1.15;
+  margin: -1rem 0 0.4rem;
+}
+
+/* ===== Logos 3D ===== */
+.logo3d {
+  width: 100%;
+  height: 100%;
+}
+
+.logo3d--drag {
+  cursor: grab;
+}
+
+.logo3d--drag:active {
+  cursor: grabbing;
+}
+
+.logo3d--flat {
+  display: grid;
+  place-items: center;
+  animation: float 6s ease-in-out infinite;
+}
+
+.logo3d--flat img {
+  width: 62%;
+  filter: drop-shadow(0 16px 14px rgba(22, 22, 22, 0.25));
+}
+
+.world__head {
+  position: relative;
+}
+
+/* Logo GRAYKIDS: columna propia al lado del título (nunca encima del texto) */
+.world--formacion .world__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(160px, 18vw, 230px);
+  grid-template-areas:
+    'title mark'
+    'lead mark';
+  align-items: center;
+  column-gap: 2rem;
+  max-width: 980px;
+}
+
+.world--formacion .world__title {
+  grid-area: title;
+}
+
+.world--formacion .world__lead {
+  grid-area: lead;
+  align-self: start;
+}
+
+.world__mark {
+  grid-area: mark;
+  aspect-ratio: 1;
+}
+
+@media (max-width: 860px) {
+  /* En celular va arriba, centrado y más chico */
+  .world--formacion .world__head {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'mark'
+      'title'
+      'lead';
+    justify-items: start;
+  }
+
+  .world__mark {
+    justify-self: center;
+    width: 130px;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.home__kicker {
+  color: var(--tinta-suave);
+}
+
+.home__title {
+  display: grid;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 8vw, 5.6rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.home__choose {
+  margin: 1.4rem 0 0;
+  color: var(--tinta-suave);
+}
+
+/* ===== Puertas a los mundos ===== */
+.doors {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.door {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  gap: 0.6rem;
+  min-height: 250px;
+  padding: 1.6rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radio);
+  background: linear-gradient(160deg, #f7f6f3, var(--mate-blanco-2));
+  box-shadow: var(--sombra);
+  text-decoration: none;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+
+.door::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  background: var(--iris);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+
+.door:hover,
+.door:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra-hover);
+}
+
+.door:hover::before,
+.door:focus-visible::before {
+  transform: scaleX(1);
+}
+
+/* La puerta de servicios va en negro mate para diferenciarla */
+.door--servicios {
+  border-color: rgba(255, 255, 255, 0.06);
+  background: linear-gradient(160deg, var(--mate-negro-2), var(--mate-negro));
+  color: var(--mate-blanco);
+}
+
+.door__n {
+  color: var(--tinta-tenue);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+}
+
+.door__mark {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  width: 64px;
+  opacity: 0.85;
+  animation: float 7s ease-in-out infinite;
+}
+
+.door__title {
+  align-self: end;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.door:hover .door__title {
+  background: var(--iris);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.door--servicios:hover .door__title {
+  background: var(--iris-suave);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.door__copy {
+  color: var(--tinta-suave);
+  font-size: 0.92rem;
+}
+
+.door--servicios .door__copy,
+.door--servicios .door__n {
+  color: rgba(241, 240, 236, 0.62);
+}
+
+.door__enter {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.door__enter span {
+  display: inline-block;
+  transition: transform 0.3s var(--ease);
+}
+
+.door:hover .door__enter span {
+  transform: translateX(5px);
+}
+
+/* ===== Mundos ===== */
+.world {
+  padding: clamp(1.5rem, 4vw, 3rem) 0 4rem;
+}
+
+.world__back {
+  display: inline-flex;
+  gap: 0.4rem;
+  color: var(--tinta-suave);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.world__head {
+  max-width: 720px;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.world__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7vw, 4.8rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.world__lead {
+  margin: 0.8rem 0 0;
+  color: var(--tinta-suave);
+  font-size: 1.05rem;
+}
+
+/* ===== Footer ===== */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem var(--gutter);
+  border-top: 1px solid var(--linea);
+}
+
+.site-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.site-footer__social a {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: var(--tinta-suave);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.site-footer__social a:hover {
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+}
+
+.site-footer__social svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.link-icon {
+  display: block;
+  width: 1.05rem;
+  height: 1.05rem;
+  background: currentColor;
+  -webkit-mask: var(--link-icon) center / contain no-repeat;
+  mask: var(--link-icon) center / contain no-repeat;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ===== Celular ===== */
+@media (max-width: 860px) {
+  /* backdrop-filter rompe position: fixed en los hijos */
+  .site-nav {
+    background: var(--mate-blanco);
+    backdrop-filter: none;
+  }
+
+  .site-nav__cta {
+    display: none;
+  }
+
+  .site-nav__worlds {
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    justify-content: space-around;
+    padding: 0.35rem;
+    border-radius: 999px;
+    background: var(--mate-negro);
+    box-shadow: 0 14px 30px -10px rgba(22, 22, 22, 0.5);
+  }
+
+  .site-nav__worlds a {
+    flex: 1;
+    color: rgba(241, 240, 236, 0.7);
+    text-align: center;
+  }
+
+  .site-nav__worlds a.is-active {
+    background: var(--mate-blanco);
+    color: var(--mate-negro);
+  }
+
+  .doors {
+    grid-template-columns: 1fr;
+  }
+
+  .door {
+    min-height: 0;
+  }
+
+  .site-footer {
+    padding-bottom: 5.5rem;
+  }
+}

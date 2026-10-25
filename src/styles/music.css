@@ -1,0 +1,352 @@
+/* Mundo "Escuchá": playlist, antes/después, artistas y reseñas */
+
+.music-block {
+  display: grid;
+  gap: 1.2rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--linea);
+}
+
+.music-block__head {
+  display: grid;
+  gap: 0.3rem;
+  max-width: 640px;
+}
+
+.music-block__head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.music-block__head p:not(.kicker) {
+  margin: 0.3rem 0 0;
+  color: var(--tinta-suave);
+}
+
+/* ===== Playlist ===== */
+.playlist-embed {
+  overflow: hidden;
+  border-radius: var(--radio);
+  background: var(--mate-negro);
+  box-shadow: var(--sombra);
+}
+
+.playlist-embed iframe {
+  display: block;
+  width: 100%;
+  height: 380px;
+  border: 0;
+}
+
+.pill-link {
+  justify-self: start;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--tinta);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.pill-link:hover {
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+}
+
+/* ===== Antes / después ===== */
+.mix-compare__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.mix-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radio);
+  background: linear-gradient(160deg, #f7f6f3, var(--mate-blanco-2));
+  box-shadow: var(--sombra);
+}
+
+/* El "después" va en negro mate: es el resultado de Clareny */
+.mix-card--after {
+  border-color: rgba(255, 255, 255, 0.06);
+  background: linear-gradient(160deg, var(--mate-negro-2), var(--mate-negro));
+  color: var(--mate-blanco);
+}
+
+.mix-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--tinta-tenue);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mix-card__top p {
+  margin: 0;
+}
+
+.mix-card__top svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mix-card__title h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.mix-card--after .mix-card__title h3 {
+  background: var(--iris-suave);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.mix-card__title p {
+  margin: 0.2rem 0 0;
+  color: var(--tinta-suave);
+  font-size: 0.88rem;
+}
+
+.mix-card--after .mix-card__title p,
+.mix-card--after .mix-card__top,
+.mix-card--after .mix-card__foot {
+  color: rgba(241, 240, 236, 0.6);
+}
+
+.mix-card__playrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.mix-card__play {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+  cursor: pointer;
+  transition: transform 0.2s var(--ease);
+}
+
+.mix-card--after .mix-card__play {
+  background: var(--mate-blanco);
+  color: var(--mate-negro);
+}
+
+.mix-card__play:hover {
+  transform: scale(1.06);
+}
+
+.mix-card__play svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mix-card__wave {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 2px;
+  height: 56px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.mix-card__wave span {
+  flex: 1;
+  min-width: 1px;
+  max-height: 100%;
+  border-radius: 2px;
+  background: rgba(22, 22, 22, 0.18);
+  transition: background 0.2s ease;
+}
+
+.mix-card--after .mix-card__wave span {
+  background: rgba(241, 240, 236, 0.18);
+}
+
+.mix-card__wave span.is-hot {
+  background: var(--mate-negro);
+}
+
+.mix-card--after .mix-card__wave span.is-hot {
+  background: linear-gradient(180deg, #a9eef2, #d2c9fb);
+}
+
+.mix-card__foot {
+  display: flex;
+  justify-content: space-between;
+  color: var(--tinta-tenue);
+  font-size: 0.78rem;
+}
+
+.mix-card__foot a {
+  text-decoration: none;
+}
+
+/* El reproductor de SoundCloud funciona oculto: la tarjeta es el control */
+.mix-sc__engine {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== Artistas (el degradado que te gusta) ===== */
+.credits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.credits li {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  transition: transform 0.3s var(--ease);
+}
+
+.credits li:hover {
+  transform: translateY(-3px);
+}
+
+/* ===== Reseñas de Google ===== */
+.music-block--reviews:not(:has(.g-reviews)) {
+  padding-top: 1rem;
+}
+
+.g-reviews {
+  padding: 1.4rem;
+  border-radius: var(--radio);
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+}
+
+.g-reviews__head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.g-reviews__head p {
+  margin: 0;
+}
+
+.g-reviews__viewport {
+  overflow: hidden;
+}
+
+.g-reviews__track {
+  display: flex;
+  transition: transform 0.6s var(--ease);
+}
+
+.g-reviews__card {
+  flex: 0 0 100%;
+  padding: 1rem 0 0;
+}
+
+.g-reviews__stars {
+  margin-left: 0.6rem;
+  letter-spacing: 0.1em;
+}
+
+.g-reviews__stars-empty {
+  opacity: 0.3;
+}
+
+.g-reviews__dots {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.g-reviews__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(241, 240, 236, 0.3);
+  cursor: pointer;
+}
+
+.g-reviews__dot.is-active {
+  background: var(--mate-blanco);
+}
+
+/* ===== Siguiente paso: ir a Producción ===== */
+.world-next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1.6rem 1.8rem;
+  border-radius: var(--radio);
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+  text-decoration: none;
+  transition: transform 0.3s var(--ease);
+}
+
+.world-next:hover {
+  transform: translateY(-4px);
+}
+
+.world-next > span {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.6vw, 1.7rem);
+  font-weight: 700;
+}
+
+.world-next strong {
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  background: var(--mate-blanco);
+  color: var(--mate-negro);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 860px) {
+  .mix-compare__list {
+    grid-template-columns: 1fr;
+  }
+
+  .playlist-embed iframe {
+    height: 352px;
+  }
+}

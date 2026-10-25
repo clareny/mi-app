@@ -1,0 +1,192 @@
+/* Mundo "Formación 1:1" (GRAYKIDS): perfil → temas → agendador */
+
+/* Perfil: interruptor segmentado blanco/negro */
+.profile-switch {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-self: start;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  border-radius: 999px;
+  background: var(--mate-blanco-2);
+  box-shadow: inset 0 1px 3px rgba(22, 22, 22, 0.12);
+}
+
+.profile-switch button {
+  padding: 0.65rem 1.2rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--tinta-suave);
+  font: 600 0.92rem var(--font-body);
+  cursor: pointer;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+.profile-switch button.is-active {
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+  box-shadow: 0 6px 16px -6px rgba(22, 22, 22, 0.5);
+}
+
+/* Temas: lista tipo índice, se marcan con un toque */
+.topics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.topic {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr) 1.6rem;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.1rem;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radio-sm);
+  background: linear-gradient(160deg, #f7f6f3, var(--mate-blanco-2));
+  box-shadow: var(--sombra);
+  color: var(--tinta);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease);
+}
+
+.topic:hover {
+  transform: translateY(-2px);
+}
+
+.topic.is-active {
+  border-color: transparent;
+  background:
+    linear-gradient(160deg, #f7f6f3, var(--mate-blanco-2)) padding-box,
+    var(--iris) border-box;
+}
+
+.topic__n {
+  color: var(--tinta-tenue);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+}
+
+.topic__name {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.topic__check {
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--mate-blanco-2);
+  font-weight: 700;
+}
+
+.topic.is-active .topic__check {
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+}
+
+/* Agendador */
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.hours-picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+}
+
+.hours-picker__other {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--tinta-suave);
+  font-size: 0.85rem;
+}
+
+.hours-picker__other input {
+  width: 4.5rem;
+  padding: 0.45rem 0.6rem;
+  text-align: center;
+}
+
+/* Detalle de precio debajo de la duración */
+.estimate {
+  margin: 0;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radio-sm);
+  background: var(--mate-blanco-2);
+  color: var(--tinta-suave);
+  font-size: 0.82rem;
+}
+
+/* Confirmación con el link de Discord (solo después de agendar) */
+.booked {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.2rem;
+  border-radius: var(--radio-sm);
+  background: var(--mate-negro);
+  color: var(--mate-blanco);
+  animation: booked-in 0.4s var(--ease);
+}
+
+.booked strong {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  background: var(--iris-suave);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.booked p {
+  margin: 0;
+  color: rgba(241, 240, 236, 0.72);
+  font-size: 0.9rem;
+}
+
+.btn-discord {
+  justify-self: start;
+  padding: 0.75rem 1.2rem;
+  border-radius: 999px;
+  background: var(--mate-blanco);
+  color: var(--mate-negro);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@keyframes booked-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (max-width: 640px) {
+  .topics,
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Los 3 perfiles en una sola fila */
+  .profile-switch {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-self: stretch;
+  }
+
+  .profile-switch button {
+    padding: 0.65rem 0.4rem;
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+}

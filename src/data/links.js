@@ -7,6 +7,11 @@ export const WHATSAPP_DISPLAY = '+598 97 989 368';
 export const waLink = (message) =>
   message ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}` : `https://wa.me/${WHATSAPP_NUMBER}`;
 
+export const CONTACT_EMAIL = 'contact@clareny.com';
+
+export const mailLink = (subject, body = '') =>
+  `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
 export const SPOTIFY_ARTIST = 'https://open.spotify.com/artist/1kS2GOJRVZeWbgeuNrdpaE';
 export const PLAYLIST_URL = 'https://open.spotify.com/playlist/0kHxXnOwz121HvCttid3Qt';
 export const GOOGLE_REVIEW_URL = 'https://g.page/r/CZ1T54gyvCjgEBM/review';
@@ -37,5 +42,8 @@ export const SOCIAL_LINKS = [
   { id: 'facebook', label: 'Facebook', sub: 'clarenymusic', url: 'https://www.facebook.com/clarenymusic/', smart: '', icon: 'facebook.svg', group: 'social' },
   { id: 'soundbetter', label: 'SoundBetter', subKey: 'links.soundbetter', url: 'https://soundbetter.com/profiles/265231-clareny', smart: '', group: 'work' },
 ];
+
+// Invitación de Discord para las clases 1:1 (se muestra solo después de agendar).
+export const DISCORD_CLASS_INVITE = 'https://discord.gg/cEgEPxs9Pm';
 
 export const linkHref = (item) => item.smart || item.url;
