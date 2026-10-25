@@ -46,11 +46,11 @@ export default function HomeView() {
       <section className="about-mini" aria-labelledby="about-mini-title">
         <img
           className="about-mini__photo"
-          src={`${base}fotoclarenyabout.jpg`}
+          src={`${base}brand/clareny-perfil.jpg`}
           alt={t('about.photoAlt')}
           loading="lazy"
-          width="1080"
-          height="1080"
+          width="720"
+          height="720"
         />
         <div className="about-mini__text">
           <p className="kicker text-iris">{t('site.about.kicker')}</p>
