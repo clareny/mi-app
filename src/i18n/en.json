@@ -459,6 +459,9 @@
       "bookedTitle": "Done! Your request is on its way.",
       "bookedCopy": "The lesson is a video call in my Discord community. Join now so we're connected on lesson day.",
       "joinDiscord": "Join the Discord"
+    },
+    "about": {
+      "kicker": "About me"
     }
   }
 }

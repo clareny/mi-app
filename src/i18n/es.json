@@ -459,6 +459,9 @@
       "bookedTitle": "¡Listo! Ya me llegó tu pedido.",
       "bookedCopy": "La clase es por videollamada en mi comunidad de Discord. Unite desde ahora para que estemos conectados el día de la clase.",
       "joinDiscord": "Unirme al Discord"
+    },
+    "about": {
+      "kicker": "Sobre mí"
     }
   }
 }

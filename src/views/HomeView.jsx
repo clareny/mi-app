@@ -41,6 +41,30 @@ export default function HomeView() {
           </a>
         ))}
       </nav>
+
+      {/* Sobre mí: corto, con foto */}
+      <section className="about-mini" aria-labelledby="about-mini-title">
+        <img
+          className="about-mini__photo"
+          src={`${base}fotoclarenyabout.jpg`}
+          alt={t('about.photoAlt')}
+          loading="lazy"
+          width="1080"
+          height="1080"
+        />
+        <div className="about-mini__text">
+          <p className="kicker text-iris">{t('site.about.kicker')}</p>
+          <h2 id="about-mini-title">
+            <span>{t('about.title1')} </span>
+            <span className="text-iris">{t('about.title2')}</span>
+          </h2>
+          <p>{t('about.p1')}</p>
+          <p>{t('about.p3')}</p>
+          <p className="about-mini__meta">
+            {t('about.posterPlace')} · {t('about.posterCeo')}
+          </p>
+        </div>
+      </section>
     </section>
   );
 }
