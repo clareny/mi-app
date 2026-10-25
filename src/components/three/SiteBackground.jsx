@@ -31,7 +31,8 @@ export default function SiteBackground({ route }) {
 
   return (
     <div className="site-bg" aria-hidden="true">
-      <img src={`${import.meta.env.BASE_URL}Backgroundprincipal.webp`} alt="" />
+      {/* Misma imagen que usa la ciudad 3D: se descarga una sola vez (291 KB) */}
+      <img src={`${import.meta.env.BASE_URL}brand/clu-texture.webp`} alt="" />
       {use3D && (
         <KeepImage>
           <Suspense fallback={null}>
