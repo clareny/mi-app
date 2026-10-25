@@ -21,7 +21,7 @@ function App() {
       <SiteBackground route={route} />
       <div className="site">
         <SiteNav route={route} />
-        <main className="site-main">
+        <main key={route} className="site-main">
           {route === 'inicio' && <HomeView />}
           {route === 'musica' && <MusicView />}
           {route === 'servicios' && <ProductionView />}

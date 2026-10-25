@@ -1,6 +1,6 @@
 // Envoltorio liviano: muestra la imagen 2D al instante y carga el 3D (Three.js) aparte.
 // Si el navegador no soporta WebGL o algo falla, se queda la imagen 2D.
-import { Component, lazy, Suspense, useState } from 'react';
+import { Component, lazy, Suspense, useEffect, useState } from 'react';
 
 const Logo3D = lazy(() => import('./Logo3D'));
 
@@ -27,13 +27,21 @@ class Fallback2D extends Component {
 
 export default function Brand3D({ svg, image, className = '', ...props }) {
   const [webgl] = useState(() => typeof window !== 'undefined' && hasWebGL());
+  // El 3D se monta después de la transición entre mundos, para que la animación no se trabe.
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (!webgl) return undefined;
+    const timer = window.setTimeout(() => setReady(true), 650);
+    return () => window.clearTimeout(timer);
+  }, [webgl]);
   const fallback = (
     <div className={`logo3d logo3d--flat ${className}`.trim()}>
       <img src={image} alt="" />
     </div>
   );
 
-  if (!webgl) return fallback;
+  if (!webgl || !ready) return fallback;
 
   return (
     <Fallback2D fallback={fallback}>

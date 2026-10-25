@@ -20,6 +20,7 @@ export default function WorldView({ id, children }) {
               svg={`${base}brand/graykids.svg`}
               image={`${base}brand/graykids.png`}
               depth={45}
+              detail="medium"
               spin={0.35}
               interactive={false}
               shadow={false}

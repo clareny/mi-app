@@ -5,8 +5,8 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Suspense, useRef } from 'react';
 import useExtrudedSvg from './useExtrudedSvg';
 
-function LogoMesh({ src, depth, spin, sway }) {
-  const geometry = useExtrudedSvg(src, depth);
+function LogoMesh({ src, depth, detail, spin, sway }) {
+  const geometry = useExtrudedSvg(src, depth, detail);
   const ref = useRef();
 
   useFrame((state, delta) => {
@@ -22,7 +22,7 @@ function LogoMesh({ src, depth, spin, sway }) {
   });
 
   return (
-    <mesh ref={ref} geometry={geometry} castShadow>
+    <mesh ref={ref} geometry={geometry} dispose={null} castShadow>
       <meshPhysicalMaterial color="#1a1a1a" roughness={0.22} metalness={0.35} clearcoat={1} clearcoatRoughness={0.12} />
     </mesh>
   );
@@ -42,12 +42,12 @@ function StudioLights() {
   );
 }
 
-export default function Logo3D({ src, depth = 90, spin = 0, interactive = true, shadow = true, className = '' }) {
+export default function Logo3D({ src, depth = 90, detail = 'high', spin = 0, interactive = true, shadow = true, className = '' }) {
   const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches;
   const canDrag = interactive && finePointer;
 
-  const mesh = <LogoMesh src={src} depth={depth} spin={reduceMotion ? 0 : spin} sway={!reduceMotion} />;
+  const mesh = <LogoMesh src={src} depth={depth} detail={detail} spin={reduceMotion ? 0 : spin} sway={!reduceMotion} />;
 
   return (
     <div className={`logo3d ${canDrag ? 'logo3d--drag' : ''} ${className}`.trim()}>

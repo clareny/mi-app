@@ -54,7 +54,7 @@ const GRAYKIDS_SVG = `${import.meta.env.BASE_URL}brand/graykids.svg`;
 const MARK_COLORS = ['#2cbfca', '#8a72ee', '#5a92ee'];
 
 function GraykidsMarks({ count, spread }) {
-  const geometry = useExtrudedSvg(GRAYKIDS_SVG, 40, true);
+  const geometry = useExtrudedSvg(GRAYKIDS_SVG, 40, 'lite');
   const marks = useMemo(
     () =>
       Array.from({ length: count }, (_, i) => ({
@@ -85,6 +85,7 @@ function GraykidsMarks({ count, spread }) {
       key={mark.key}
       ref={(el) => (refs.current[i] = el)}
       geometry={geometry}
+      dispose={null}
       position={mark.position}
       scale={mark.scale}
     >

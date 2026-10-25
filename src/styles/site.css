@@ -570,3 +570,93 @@
     padding-bottom: 5.5rem;
   }
 }
+
+/* ===== Transición entre mundos ===== */
+/* El menú y el fondo 3D quedan quietos; solo cambia el contenido. */
+.site-nav {
+  view-transition-name: site-nav;
+}
+
+.site-nav__worlds {
+  view-transition-name: world-tabs;
+}
+
+/* La pastilla del mundo activo se desliza a su nuevo lugar */
+.site-nav__worlds a.is-active {
+  view-transition-name: world-pill;
+}
+
+.site-bg {
+  view-transition-name: site-bg;
+}
+
+/* Deslizamiento lateral según la dirección; en pantallas grandes recorre más distancia */
+:root {
+  --vt-shift: 28px;
+}
+
+@media (min-width: 861px) {
+  :root {
+    --vt-shift: 72px;
+  }
+}
+
+::view-transition-old(root) {
+  animation: world-out 0.3s var(--ease) both;
+}
+
+::view-transition-new(root) {
+  animation: world-in 0.55s var(--ease) both;
+}
+
+html[data-vt-dir='back']::view-transition-old(root) {
+  animation-name: world-out-back;
+}
+
+html[data-vt-dir='back']::view-transition-new(root) {
+  animation-name: world-in-back;
+}
+
+::view-transition-group(world-pill) {
+  animation-duration: 0.45s;
+  animation-timing-function: var(--ease);
+}
+
+@keyframes world-out {
+  to {
+    opacity: 0;
+    transform: translateX(calc(var(--vt-shift) * -1));
+    filter: blur(4px);
+  }
+}
+
+@keyframes world-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--vt-shift));
+    filter: blur(6px);
+  }
+}
+
+@keyframes world-out-back {
+  to {
+    opacity: 0;
+    transform: translateX(var(--vt-shift));
+    filter: blur(4px);
+  }
+}
+
+@keyframes world-in-back {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--vt-shift) * -1));
+    filter: blur(6px);
+  }
+}
+
+/* Respaldo: navegadores sin View Transitions solo hacen aparecer el contenido suave */
+@supports not (view-transition-name: none) {
+  .site-main {
+    animation: world-in 0.5s var(--ease) both;
+  }
+}
