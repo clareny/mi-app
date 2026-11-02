@@ -1,4 +1,6 @@
-export const GOOGLE_REVIEWS_URL = 'https://share.google/FC1dC6WBRe29qIgUK';
+import { STUDIO_URL } from './links';
+
+export const GOOGLE_REVIEWS_URL = STUDIO_URL;
 export const GOOGLE_WRITE_URL = 'https://g.page/r/CZ1T54gyvCjgEBM/review';
 export const GOOGLE_PLACE_NAME = 'GRAYKIDS RECORDS';
 export const GOOGLE_PLACE_QUERY = 'GRAYKIDS RECORDS';

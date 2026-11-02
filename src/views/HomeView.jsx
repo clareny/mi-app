@@ -1,5 +1,7 @@
 import { useLanguage } from '../contexts/LanguageContext';
 import Brand3D from '../components/three/Brand3D';
+import { GOOGLE_PLACE_NAME } from '../data/googleReviews';
+import { STUDIO_URL } from '../data/links';
 import { routeHref } from '../hooks/useHashRoute';
 
 const base = import.meta.env.BASE_URL;
@@ -61,7 +63,10 @@ export default function HomeView() {
           <p>{t('about.p1')}</p>
           <p>{t('about.p3')}</p>
           <p className="about-mini__meta">
-            {t('about.posterPlace')} · {t('about.posterCeo')}
+            {t('about.posterCeo')} ·{' '}
+            <a href={STUDIO_URL} target="_blank" rel="noopener noreferrer">
+              {t('site.studio')}: {GOOGLE_PLACE_NAME} ↗
+            </a>
           </p>
         </div>
       </section>

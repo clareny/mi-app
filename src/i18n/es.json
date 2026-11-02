@@ -13,7 +13,7 @@
   },
   "home": {
     "role": "Productor musical / ingeniero de mezcla",
-    "place": "Montevideo · en remoto",
+    "place": "En estudio · en remoto",
     "line1": "Tu sonido.",
     "line2": "Sin moldes.",
     "lead": "Producción, grabación y mezcla con el color que te hace único. Música urbana, pop, R&B y alternativas.",
@@ -148,7 +148,7 @@
     "side1t": "Producción con tu color",
     "side1c": "Construimos el beat y la canción alrededor de la conexión que buscas.",
     "side2t": "Sesión virtual o presencial",
-    "side2c": "Trabajamos juntos en Montevideo o a distancia.",
+    "side2c": "Trabajamos juntos en el estudio o a distancia.",
     "side3t": "Si trabajamos en remoto",
     "side3c": "Grabas tus voces por tu cuenta o en un estudio. Yo me encargo de la producción y la mezcla vocal.",
     "recSide": "Registramos tus voces para su posterior edición y mezcla.",
@@ -244,7 +244,7 @@
     "posterRole": "Productor / ingeniero / artista",
     "posterLine1": "Conexión.",
     "posterLine2": "Color. Identidad.",
-    "posterPlace": "Montevideo / remoto",
+    "posterPlace": "Estudio / remoto",
     "posterCeo": "CEO · Graykids",
     "title1": "También estuve",
     "title2": "de tu lado del mic.",
@@ -263,7 +263,7 @@
     "title1": "Hagamos",
     "title2": "que suene",
     "title3": "a ti.",
-    "copy": "Desde Montevideo o desde donde estés. Cuéntame qué tienes en mente y qué necesitas para tu próxima canción.",
+    "copy": "Desde donde estés. Cuéntame qué tienes en mente y qué necesitas para tu próxima canción.",
     "formTitle": "Tu próximo proyecto empieza aquí.",
     "badge": "07 / comunidad",
     "discord": "Entrar al Discord",
@@ -331,7 +331,7 @@
       "back": "Volver al inicio"
     },
     "home": {
-      "kicker": "Productor musical · Ingeniero de mezcla · Montevideo",
+      "kicker": "Productor musical · Ingeniero de mezcla",
       "title1": "Tu sonido.",
       "title2": "Sin moldes.",
       "choose": "¿A dónde querés ir?"
@@ -352,6 +352,7 @@
       "enter": "Entrar"
     },
     "soon": "Este mundo se rediseña en la próxima fase.",
+    "studio": "Estudio",
     "footer": "© 2026 GRAYKIDS · Clareny",
     "music": {
       "spotifyEmbed": "Playlist de Clareny en Spotify",
@@ -437,7 +438,7 @@
       "date": "Fecha preferida (opcional)",
       "name": "Tu nombre",
       "other": "Otro tema o detalle",
-      "price": "Videollamada 1 a 1 por Discord · horario de Montevideo (GMT-3)",
+      "price": "Videollamada 1 a 1 por Discord · horario GMT-3",
       "sendWa": "Agendar por WhatsApp",
       "sendMail": "o por correo",
       "mailSubject": "Clase 1:1 con Clareny",

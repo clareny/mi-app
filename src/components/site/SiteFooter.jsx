@@ -1,5 +1,6 @@
 import { useLanguage } from '../../contexts/LanguageContext';
-import { linkHref, SOCIAL_LINKS } from '../../data/links';
+import { GOOGLE_PLACE_NAME } from '../../data/googleReviews';
+import { linkHref, SOCIAL_LINKS, STUDIO_URL } from '../../data/links';
 import LinkIcon from './LinkIcon';
 
 export default function SiteFooter() {
@@ -14,7 +15,12 @@ export default function SiteFooter() {
           </a>
         ))}
       </nav>
-      <p className="fine-print">{t('site.footer')}</p>
+      <p className="fine-print">
+        {t('site.footer')} ·{' '}
+        <a href={STUDIO_URL} target="_blank" rel="noopener noreferrer">
+          {t('site.studio')}: {GOOGLE_PLACE_NAME} ↗
+        </a>
+      </p>
     </footer>
   );
 }
