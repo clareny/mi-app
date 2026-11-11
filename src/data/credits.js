@@ -1,4 +1,4 @@
-// Artistas con los que trabajó Clareny (se muestran en Escuchá y en la bio).
+// Artistas con los que trabajó Clareny (se muestran en Escucha y en la bio).
 export const CREDITS = [
   'Red21',
   'Easy Mo',

@@ -59,7 +59,7 @@
   "reviews": {
     "label": "Opiniones de Google",
     "google": "Google",
-    "empty": "Todavía no hay opiniones en Google. La primera aparece acá y las siguientes se deslizan.",
+    "empty": "Todavía no hay opiniones en Google. La primera aparece aquí y las siguientes se deslizan.",
     "write": "Dejar opinión"
   },
   "mix": {
@@ -88,7 +88,7 @@
     "beatsTitle2": "O custom.",
     "combo": "Combo",
     "vocal": "mezcla",
-    "tabsAria": "Elegí combo, mezcla o beats",
+    "tabsAria": "Elige combo, mezcla o beats",
     "scaleAria": "Escala",
     "waHi": "Hola, estoy interesado en",
     "waCombo": "Combo: canción íntima, producción completa, virtual o presencial.",
@@ -110,7 +110,7 @@
     "focus": "El beat",
     "focusVal": "Modificable, como un puzzle",
     "delivery": "Si es virtual",
-    "deliveryVal": "Grabás vos o en un estudio",
+    "deliveryVal": "Grabas tú o en un estudio",
     "hireCombo": "Contratar combo / identidad",
     "comboPh": "Cuéntame qué quieres transmitir…",
     "vocalTag": "Mezcla vocal, grabación o upgrade beat.",
@@ -118,11 +118,11 @@
     "rec": "Grabación",
     "recCopy": "Registramos tus voces para su posterior edición y mezcla.",
     "edit": "Edición",
-    "editCopy": "Si ya tenés las voces y solo querés algo puntual: por secciones, afinación, tempo o limpieza vocal.",
+    "editCopy": "Si ya tienes las voces y solo quieres algo puntual: por secciones, afinación, tempo o limpieza vocal.",
     "mix": "Mezcla vocal",
-    "mixCopy": "Si ya tenés las voces, contratá mezcla vocal. Quedan con el color que querés sobre tu beat.",
+    "mixCopy": "Si ya tienes las voces, contrata mezcla vocal. Quedan con el color que quieres sobre tu beat.",
     "upgrade": "Upgrade beat",
-    "upgradeCopy": "Si el beat lo hiciste vos: se mejora la instrumental y viene con mezcla incluida.",
+    "upgradeCopy": "Si el beat lo hiciste tú: se mejora la instrumental y viene con mezcla incluida.",
     "vocalPh": "Qué tienes grabado y qué sonido buscas…",
     "hireMix": "Contratar mezcla",
     "beatsTag": "Remake o custom",
@@ -132,7 +132,7 @@
     "custom": "Custom beat",
     "customSpec": "Nuevo, a tu estilo e idea",
     "genre": "Género",
-    "genrePh": "Elegí el género",
+    "genrePh": "Elige el género",
     "key": "Tonalidad",
     "note": "Nota",
     "minor": "menor",
@@ -216,7 +216,7 @@
   "links": {
     "title": "Clareny",
     "tag": "Todo en un solo lugar",
-    "hook": "Escuchá lo último, seguime en redes o sumate a la comunidad.",
+    "hook": "Escucha lo último, sígueme en redes o únete a la comunidad.",
     "music": "Música",
     "social": "Redes",
     "community": "Comunidad",
@@ -224,18 +224,18 @@
     "youtube": "Canal de artista · @clareny",
     "beats": "Mis beats · @clarenyonthetrack",
     "discord": "Sesiones 1 a 1, cursos por videollamada y comunidad",
-    "cta": "escribime por WhatsApp",
+    "cta": "escríbeme por WhatsApp",
     "waHi": "Hola Clareny, te escribo desde tus links.",
     "kicker": "08 / Todo en un sitio",
     "heading": "Links",
     "copy": "Música, redes y comunidad. Todo lo de Clareny, ordenado en un solo lugar.",
     "work": "Trabajo",
     "soundbetter": "Reseñas y contrataciones",
-    "whatsapp": "Escribime directo",
+    "whatsapp": "Escríbeme directo",
     "rail": "Redes de Clareny",
     "casita": "Canal de enseñanza · @casitademadera",
-    "waCommunity": "Escuchá mis beats antes que nadie · artistas exclusivos",
-    "learn": "Aprendé conmigo",
+    "waCommunity": "Escucha mis beats antes que nadie · artistas exclusivos",
+    "learn": "Aprende conmigo",
     "quickTitle": "Encontrame en"
   },
   "about": {
@@ -282,12 +282,12 @@
     "sendMail": "Enviar correo",
     "sending": "Enviando...",
     "sendWa": "Enviar WhatsApp",
-    "needMsg": "Escribí un mensaje para enviarlo.",
+    "needMsg": "Escribe un mensaje para enviarlo.",
     "needMail": "Para el correo, dejame tu email así te puedo responder.",
     "badMail": "Ese correo no se ve válido.",
-    "wait": "Esperá unos segundos y volvé a intentar.",
-    "tooShort": "Contame un poco más el proyecto, sin links raros.",
-    "blocked": "Ese mensaje no se puede enviar. Sacá promociones o enlaces acortados y escribime el tema.",
+    "wait": "Espera unos segundos y vuelve a intentarlo.",
+    "tooShort": "Cuéntame un poco más sobre el proyecto, sin links raros.",
+    "blocked": "Ese mensaje no se puede enviar. Quita promociones o enlaces acortados y escríbeme el tema.",
     "openingWa": "Abriendo WhatsApp con tu mensaje...",
     "sent": "Listo. El mensaje ya salió por correo.",
     "sentKicker": "Mensaje enviado",
@@ -295,8 +295,8 @@
     "sentCopy": "Te respondo por correo para conversar sobre tu proyecto.",
     "replyTo": "Respuesta a",
     "writeAgain": "Escribir otro mensaje",
-    "confirmOnce": "FormSubmit te mandó un mail de confirmación. Abrilo y confirmá una sola vez. Después los mensajes llegan solos, no hace falta volver a enviar.",
-    "mailFallback": "Abrí tu correo con el mensaje listo para enviar.",
+    "confirmOnce": "FormSubmit te mandó un mail de confirmación. Ábrelo y confirma una sola vez. Después los mensajes llegan solos, no hace falta volver a enviar.",
+    "mailFallback": "Abre tu correo con el mensaje listo para enviar.",
     "note": "Elige el canal que prefieras para conversar sobre tu proyecto."
   },
   "process": {
@@ -327,18 +327,18 @@
       "musica": "Música",
       "servicios": "Producción",
       "formacion": "Formación",
-      "cta": "Escribime",
+      "cta": "Escríbeme",
       "back": "Volver al inicio"
     },
     "home": {
       "kicker": "Productor musical · Ingeniero de mezcla",
       "title1": "Tu sonido.",
       "title2": "Tus reglas.",
-      "choose": "¿A dónde querés ir?"
+      "choose": "¿A dónde quieres ir?"
     },
     "doors": {
       "musica": {
-        "title": "Escuchá",
+        "title": "Escucha",
         "copy": "Mi música, el antes y después de una mezcla y los artistas con los que trabajé."
       },
       "servicios": {
@@ -347,7 +347,7 @@
       },
       "formacion": {
         "title": "Formación 1:1",
-        "copy": "Clases por videollamada conmigo: industria, regalías, mezcla y más."
+        "copy": "Sube tu nivel de forma exponencial. Clases 1 a 1 conmigo, enfocadas en eso específico que sientes que te falta."
       },
       "enter": "Entrar"
     },
@@ -357,13 +357,13 @@
     "music": {
       "spotifyEmbed": "Playlist de Clareny en Spotify",
       "creditsCount": "artistas",
-      "ctaTitle": "¿Querés este sonido en tu canción?",
+      "ctaTitle": "¿Quieres este sonido en tu canción?",
       "ctaBtn": "Ver producción"
     },
     "prod": {
-      "lead": "Elegí qué necesita tu canción. Un solo formulario y me llega directo.",
-      "pickKicker": "01 / elegí tu servicio",
-      "briefKicker": "02 / contame tu idea",
+      "lead": "Elige qué necesita tu canción. Un solo formulario y me llega directo.",
+      "pickKicker": "01 / elige tu servicio",
+      "briefKicker": "02 / cuéntame tu idea",
       "processKicker": "03 / cómo trabajamos",
       "choose": "Elegir",
       "chosen": "Elegido",
@@ -390,13 +390,13 @@
       "sendWa": "Enviar por WhatsApp",
       "sendMail": "o por correo",
       "mailSubject": "Proyecto desde la web",
-      "toTraining": "¿Querés aprender a hacerlo vos?",
+      "toTraining": "¿Quieres aprender a hacerlo tú?",
       "toTrainingBtn": "Ver formación"
     },
     "training": {
-      "profileKicker": "01 / ¿quién sos?",
-      "topicsKicker": "02 / ¿qué querés aprender?",
-      "bookKicker": "03 / agendá tu clase",
+      "profileKicker": "01 / ¿quién eres?",
+      "topicsKicker": "02 / ¿qué quieres aprender?",
+      "bookKicker": "03 / agenda tu clase",
       "profiles": {
         "artista": "Artista",
         "productor": "Productor",
@@ -415,7 +415,7 @@
         "manageArtists": "Manejar artistas y contratos",
         "release": "Lanzar y distribuir música"
       },
-      "topicsHint": "Elegí uno o varios. También podés escribir otro tema abajo.",
+      "topicsHint": "Elige uno o varios. También puedes escribir otro tema abajo.",
       "hours": "Duración",
       "hour": "hora",
       "hoursPlural": "horas",
@@ -451,14 +451,14 @@
       "waDate": "Fecha",
       "waName": "Nombre",
       "waOther": "Además",
-      "pickTopic": "Elegí al menos un tema para agendar.",
+      "pickTopic": "Elige al menos un tema para agendar.",
       "hoursOther": "Otra cantidad",
-      "daysHint": "Podés elegir hasta {n} {d}.",
+      "daysHint": "Puedes elegir hasta {n} {d}.",
       "day": "día",
       "daysWord": "días",
       "estimate": "Tiempo estimado: {h} · 30 USD la hora = {t} USD",
       "bookedTitle": "¡Listo! Ya me llegó tu pedido.",
-      "bookedCopy": "La clase es por videollamada en mi comunidad de Discord. Unite desde ahora para que estemos conectados el día de la clase.",
+      "bookedCopy": "La clase es por videollamada en mi comunidad de Discord. Únete desde ahora para que estemos conectados el día de la clase.",
       "joinDiscord": "Unirme al Discord"
     },
     "about": {
