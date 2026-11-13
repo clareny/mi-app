@@ -53,7 +53,8 @@
     "mixCopy": "On this song I did the beat remake and the vocal mix. Compare the starting point with the result.",
     "mixBefore": "Before / original idea",
     "mixAfter": "After / Clareny",
-    "mixHint": "Listen with headphones · switch between both versions"
+    "mixHint": "Listen with headphones · switch between both versions",
+    "resultsTitle": "Start here."
   },
   "reviews": {
     "label": "Google reviews",

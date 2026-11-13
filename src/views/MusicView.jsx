@@ -18,6 +18,7 @@ export default function MusicView() {
       <section className="music-block">
         <header className="music-block__head">
           <p className="kicker text-iris">{t('home.resultsKicker')}</p>
+          <h2>{t('home.resultsTitle')}</h2>
           <p>{t('home.playlistCopy')}</p>
         </header>
         <div className="playlist-embed">
