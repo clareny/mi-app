@@ -2,7 +2,7 @@ import GoogleReviews from '../components/GoogleReviews';
 import MixCompare from '../components/MixCompare';
 import { useLanguage } from '../contexts/LanguageContext';
 import { CREDITS } from '../data/credits';
-import { PLAYLIST_URL } from '../data/links';
+import { BEATSTARS_URL, PLAYLIST_URL } from '../data/links';
 import { GOOGLE_WRITE_URL } from '../data/googleReviews';
 import { routeHref } from '../hooks/useHashRoute';
 import WorldView from './WorldView';
@@ -43,6 +43,18 @@ export default function MusicView() {
         </header>
         <MixCompare />
         <p className="fine-print">{t('home.mixHint')}</p>
+      </section>
+
+      {/* Beats a la venta: solo un acceso discreto a la tienda */}
+      <section className="music-block beats-mini">
+        <div className="music-block__head">
+          <p className="kicker text-iris">{t('site.beats.kicker')}</p>
+          <h2>{t('site.beats.title')}</h2>
+          <p>{t('site.beats.copy')}</p>
+        </div>
+        <a className="pill-link" href={BEATSTARS_URL} target="_blank" rel="noopener noreferrer">
+          {t('site.beats.btn')} ↗
+        </a>
       </section>
 
       {/* 03 · Artistas */}

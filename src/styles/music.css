@@ -350,3 +350,16 @@
     height: 352px;
   }
 }
+
+/* ===== Beats a la venta (acceso discreto a BeatStars) ===== */
+.beats-mini {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+}
+
+.beats-mini .pill-link {
+  justify-self: auto;
+}

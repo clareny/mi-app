@@ -38,7 +38,6 @@
     "genres": "Urbano / pop / R&B / alternativas",
     "modes": "Virtual + presencial",
     "resultsKicker": "01 / resultados",
-    "resultsTitle": "Primero, escucha.",
     "resultsCopy": "El trabajo habla por sí mismo. Escucha la playlist de Clareny en Spotify.",
     "playlistKicker": "Playlist Clareny",
     "playlistTitle1": "Canciones con",
@@ -463,6 +462,14 @@
     },
     "about": {
       "kicker": "Sobre mí"
+    },
+    "beats": {
+      "kicker": "Beats a la venta",
+      "title": "Beats listos para tu canción",
+      "copy": "Escúchalos y elige la licencia que necesitas en mi tienda.",
+      "btn": "Ver tienda en BeatStars",
+      "prodHint": "¿Prefieres un beat ya hecho?",
+      "prodLink": "Mira mi tienda en BeatStars"
     }
   }
 }

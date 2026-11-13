@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { mailLink, waLink } from '../data/links';
+import { BEATSTARS_URL, mailLink, waLink } from '../data/links';
 import Chips from '../components/site/Chips';
 import { routeHref } from '../hooks/useHashRoute';
 import WorldView from './WorldView';
@@ -76,6 +76,12 @@ export default function ProductionView() {
             );
           })}
         </div>
+        <p className="fine-print prod-store">
+          {t('site.beats.prodHint')}{' '}
+          <a href={BEATSTARS_URL} target="_blank" rel="noopener noreferrer">
+            {t('site.beats.prodLink')} ↗
+          </a>
+        </p>
       </section>
 
       {/* 02 · Un solo brief que se adapta al servicio elegido */}
