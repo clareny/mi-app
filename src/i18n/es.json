@@ -246,8 +246,8 @@
     "posterLine2": "Color. Identidad.",
     "posterPlace": "Estudio / remoto",
     "posterCeo": "CEO · Graykids",
-    "title1": "También estuve",
-    "title2": "de tu lado del mic.",
+    "title1": "La técnica sin criterio",
+    "title2": "es solo ruido.",
     "p1": "Soy Clareny, productor musical e ingeniero de mezcla. He trabajado con artistas, productores, compositores y escritores, y también he vivido la música como cantante.",
     "p2": "Esa experiencia me permite empatizar con lo que quieres decir y ayudarte a concretar tus ideas. Produzco buscando tu color, la conexión y ese corte que engancha.",
     "p3": "Como ingeniero de mezcla, mi búsqueda es la misma: que se escuche tu identidad.",
@@ -331,7 +331,7 @@
       "back": "Volver al inicio"
     },
     "home": {
-      "kicker": "Productor musical · Ingeniero de mezcla",
+      "kicker": "Más que técnica, construyo universos sonoros sin descuidar tu idea.",
       "title1": "Tu sonido.",
       "title2": "Tus reglas.",
       "choose": "¿A dónde quieres ir?"
@@ -462,7 +462,10 @@
       "joinDiscord": "Unirme al Discord"
     },
     "about": {
-      "kicker": "Sobre mí"
+      "kicker": "Sobre mí",
+      "factArtists": "{n} artistas en mis créditos",
+      "factTeach": "Canal Casita de Madera",
+      "bio": "Soy Clareny, productor musical, ingeniero de mezcla y educador. Llevo años trabajando junto a artistas, compositores y productores, y también he vivido la música como intérprete. Por eso abordo cada proyecto desde la dirección creativa y el criterio técnico. Mi objetivo en el estudio es traducir la intención artística en un sonido competitivo, sólido y con identidad propia."
     },
     "beats": {
       "kicker": "Beats a la venta",

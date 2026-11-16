@@ -1,7 +1,8 @@
 import { useLanguage } from '../contexts/LanguageContext';
 import Brand3D from '../components/three/Brand3D';
 import { GOOGLE_PLACE_NAME } from '../data/googleReviews';
-import { STUDIO_URL } from '../data/links';
+import { CREDITS } from '../data/credits';
+import { linkHref, SOCIAL_LINKS, STUDIO_URL } from '../data/links';
 import { routeHref } from '../hooks/useHashRoute';
 
 const base = import.meta.env.BASE_URL;
@@ -12,6 +13,8 @@ const DOORS = [
   { id: 'servicios', n: '02' },
   { id: 'formacion', n: '03', mark: `${base}brand/graykids.png` },
 ];
+
+const TEACHING = SOCIAL_LINKS.find((item) => item.id === 'casita');
 
 export default function HomeView() {
   const { t } = useLanguage();
@@ -60,14 +63,22 @@ export default function HomeView() {
             <span>{t('about.title1')} </span>
             <span className="text-iris">{t('about.title2')}</span>
           </h2>
-          <p>{t('about.p1')}</p>
-          <p>{t('about.p3')}</p>
-          <p className="about-mini__meta">
-            {t('about.posterCeo')} ·{' '}
-            <a href={STUDIO_URL} target="_blank" rel="noopener noreferrer">
-              {t('site.studio')}: {GOOGLE_PLACE_NAME} ↗
-            </a>
-          </p>
+          <p className="about-mini__bio">{t('site.about.bio')}</p>
+
+          {/* Datos reales, cortos */}
+          <ul className="about-facts">
+            <li>{t('site.about.factArtists').replace('{n}', CREDITS.length)}</li>
+            <li>
+              <a href={STUDIO_URL} target="_blank" rel="noopener noreferrer">
+                CEO · {GOOGLE_PLACE_NAME} ↗
+              </a>
+            </li>
+            <li>
+              <a href={linkHref(TEACHING)} target="_blank" rel="noopener noreferrer">
+                {t('site.about.factTeach')} ↗
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
     </section>

@@ -246,8 +246,8 @@
     "posterLine2": "Color. Identity.",
     "posterPlace": "Studio / remote",
     "posterCeo": "CEO · Graykids",
-    "title1": "I have also been",
-    "title2": "on your side of the mic.",
+    "title1": "Technique without judgment",
+    "title2": "is just noise.",
     "p1": "I’m Clareny, music producer and mix engineer. I have worked with artists, producers, composers and writers, and I have also lived music as a singer.",
     "p2": "That experience lets me empathize with what you want to say and help you make your ideas real. I produce looking for your color, the connection and the cut that sticks.",
     "p3": "As a mix engineer, the search is the same: that your identity is what gets heard.",
@@ -331,7 +331,7 @@
       "back": "Back to home"
     },
     "home": {
-      "kicker": "Music producer · Mix engineer",
+      "kicker": "More than technique, I build sonic universes without losing sight of your idea.",
       "title1": "Your sound.",
       "title2": "Your rules.",
       "choose": "Where do you want to go?"
@@ -462,7 +462,10 @@
       "joinDiscord": "Join the Discord"
     },
     "about": {
-      "kicker": "About me"
+      "kicker": "About me",
+      "factArtists": "{n} artists in my credits",
+      "factTeach": "Casita de Madera channel",
+      "bio": "I'm Clareny, a music producer, mix engineer and educator. I've spent years working alongside artists, songwriters and producers, and I've also lived music as a performer. That's why I approach every project through creative direction and technical judgment. My goal in the studio is to translate artistic intent into a sound that is competitive, solid and truly its own."
     },
     "beats": {
       "kicker": "Beats for sale",

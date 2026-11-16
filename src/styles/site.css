@@ -409,13 +409,41 @@
   color: var(--tinta-suave);
 }
 
-.about-mini__text .about-mini__meta {
-  margin-top: 1rem;
+.about-mini__text .about-mini__bio {
+  margin: 0;
+  color: var(--tinta-suave);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Datos reales en chips */
+.about-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-facts li {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: #fff;
   color: var(--tinta);
   font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+}
+
+.about-facts a {
+  text-decoration: none;
+}
+
+@media (max-width: 680px) {
+  .about-facts {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 680px) {
